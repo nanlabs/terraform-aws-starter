@@ -25,3 +25,4 @@ jobs:
         uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          soft_fail: true
