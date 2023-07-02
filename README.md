@@ -3,7 +3,7 @@
 This is a starter kit for creating AWS infrastructure using Terraform. It
 contains a VPC, RDS instance, and a bastion host.
 
-## Live
+## Live Infrastructure
 
 We keep our live infrastructure in the `live` directory. This is where we keep
 our Terraform variables, backend configuration, and our Terraform root modules.
