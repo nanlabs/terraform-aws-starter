@@ -25,7 +25,7 @@ keep them in the `modules` directory.
 
 ## Services
 
-We have some services that we run to maintain our infrastructure. Here we have some ideas
+We may have some services that run to maintain our infrastructure. Here we have some ideas
 you can have in there!
 
 | Service                                                                                                                                                                            | Description                                     |
