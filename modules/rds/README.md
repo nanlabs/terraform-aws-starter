@@ -7,7 +7,7 @@ Terraform module to bootstrap a RDS Postgres instance.
 ```hcl
 module "db" {
   source = "../../modules/rds"
-  region = "us-east-1"
+  region = "us-west-2"
 
   name = "exampled-rds-instance"
 
@@ -34,7 +34,7 @@ module "db" {
 | :------------------------- | :--------------------------------------------------- | :-------------------: | :------: |
 | name                       | Name to use for resources, tags, etc                 |          ""           |          |
 | tags                       | Any extra tags to assign to objects                  |          {}           |          |
-| region                     | Region to deploy to                                  |      "us-east-1"      |          |
+| region                     | Region to deploy to                                  |      "us-west-2"      |          |
 | vpc_id                     | VPC to use for resources                             |          ""           |    ✅    |
 | enable_multi_az            | Enable multi-az deployment                           |         false         |          |
 | db_subnet_group            | DB subnet group to use for resources                 |          ""           |    ✅    |
