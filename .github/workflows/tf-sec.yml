@@ -1,0 +1,27 @@
+name: Tfsec PR Comment
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tf-fmt-check:
+    name: Tfsec PR Comment
+
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Begin CI...
+        uses: actions/checkout@v3
+
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
