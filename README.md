@@ -28,6 +28,20 @@ keep them in the `modules` directory.
 We may have some services that run to maintain our infrastructure. Here we have some ideas
 you can have in there!
 
-| Service                                                                                                                                                                            | Description                                     |
-| :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
-| [Start and Stop EC2 Instance](<[./services/start-stop-ec2-instance/README.md](https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-start-stop-ec2-instance)>) | Lambda function to start and stop EC2 instance. |
+| Service                                                                                                                          | Description                                     |
+| :------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| [Start and Stop EC2 Instance](https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-start-stop-ec2-instance) | Lambda function to start and stop EC2 instance. |
+
+## Contributing
+
+- Contributions make the open source community such an amazing place to learn, inspire, and create.
+- Any contributions you make are **truly appreciated**.
+- Check out our [contribution guidelines](./CONTRIBUTING.md) for more information.
+
+## Contributors
+
+<a href="https://github.com/nanlabs/terraform-aws-starter/contributors">
+  <img src="https://contrib.rocks/image?repo=nanlabs/terraform-aws-starter"/>
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
