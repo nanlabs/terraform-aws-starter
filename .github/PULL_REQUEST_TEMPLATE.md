@@ -2,11 +2,9 @@
 
 _Summary of changes in this PR or what it accomplishes._
 
-@bccoleman
-
 <!--
 
-Please title your PR as follows: `feature: fix foo bar`. 
+Please title your PR as follows: `feature: fix foo bar`.
 Always start with the thing you are fixing, then describe the fix.
 Don't use past tense (e.g. "fixed foo bar").
 
