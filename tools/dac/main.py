@@ -5,11 +5,11 @@ from diagrams.aws.network import VPC, NATGateway, InternetGateway, APIGateway
 from diagrams.aws.security import SecretsManager
 from diagrams.aws.mobile import Amplify
 from diagrams.onprem.network import Internet
+from diagrams.aws.management import Cloudwatch
 
 with Diagram("AWS Infrastructure", show=False):
     with Cluster("AWS Region"):
         with Cluster("VPC"):
-
             with Cluster("Public Subnet"):
                 bastion_host = EC2("Bastion Host")
                 nat_gateway = NATGateway("NAT Gateway")
@@ -19,6 +19,9 @@ with Diagram("AWS Infrastructure", show=False):
                 rds = RDS("RDS Postgres")
 
                 lambda_func >> rds
+
+                cloudwatch_logs = Cloudwatch("CloudWatch")
+                lambda_func >> cloudwatch_logs
 
             lambda_func >> nat_gateway
 
