@@ -11,6 +11,18 @@ CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS :D
 
 </div> <!-- center -->
 
+## Features
+
+- Ready to use Terraform modules!
+- Store Terraform state in S3 bucket with DynamoDB table for locking.
+- VPC with public and private subnets (application and database subnets) in three availability zones.
+- Security groups for bastion host and RDS instance.
+- Bastion host to access private resources.
+- RDS Postgres instance.
+- AWS Secrets Manager to store RDS credentials.
+- SSM Parameter Store to store every parameter such as VPC ID, Subnet IDs, etc.
+- and more!
+
 ## Live Infrastructure
 
 We keep our live infrastructure in the `live` directory. This is where we keep
