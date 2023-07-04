@@ -41,3 +41,13 @@ module "bastion" {
 | instance_id          | ID of the bastion host                            |
 | ec2_ssh              | SSH command to connect to the bastion host        |
 | ec2_instance_profile | IAM instance profile attached to the bastion host |
+
+## EC2 Instance Provisioning
+
+The created EC2 instance is provisioned using [cloud-init](https://cloudinit.readthedocs.io/en/latest/). The following steps are performed:
+
+- Install the latest version of Docker
+- Setup AWS CloudWatch Logs agent
+- Setup SSH access for the specified key pair
+- Setup a user account for the specified key pair
+- Setup a user account for the specified IAM instance profile

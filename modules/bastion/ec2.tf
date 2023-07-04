@@ -4,7 +4,7 @@ locals {
 
 // Script to configure the server - this is where most of the magic occurs!
 data "template_file" "user_data" {
-  template = file("${path.module}/templates/bastion-host-init.yml")
+  template = file("${path.module}/templates/cloud-init.yml")
 }
 
 // EC2 instance for the server - tune instance_type to fit your performance and budget requirements
