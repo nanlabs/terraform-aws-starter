@@ -10,11 +10,11 @@ on:
       - main
 
 jobs:
-  tf-fmt-check:
+  tf-docs:
     permissions:
       contents: write
 
-    name: Check Formatting
+    name: Generate Terraform Docs
     runs-on: ubuntu-latest
     steps:
       - name: Begin CI...
