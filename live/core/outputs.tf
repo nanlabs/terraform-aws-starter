@@ -111,14 +111,14 @@ output "postgresql_db_enhanced_monitoring_iam_role_arn" {
   value       = module.rds.db_enhanced_monitoring_iam_role_arn
 }
 
-output "instance_id" {
+output "bastion_instance_id" {
   value = module.bastion.instance_id
 }
 
-output "ec2_ssh" {
-  value = module.bastion.ec2_ssh
+output "bastion_instance_profile" {
+  value = module.bastion.instance_profile
 }
 
-output "ec2_instance_profile" {
-  value = module.bastion.ec2_instance_profile
+output "bastion_ssh_command" {
+  value = module.bastion.ssh_command
 }

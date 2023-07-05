@@ -30,3 +30,22 @@ terraform apply ./staging.tfplan
 ```sh
 terraform destroy -var-file ./configs/staging.us-west-2.tfvars
 ```
+
+## Post Deployment
+
+We have a few steps to test our deployment after it has been deployed.
+Since we use Parameter Store to store some relevant information and AWS Secrets Manager to store the connection information for our database, we need to make sure that these are working as expected.
+
+Also we need to make sure that we can access to the created Bastion Host and that we can connect to the database
+from there.
+
+> NOTE: In this example, we are using the `staging` environment and the `us-west-2` region.
+
+### Connecting to the Bastion Host
+
+```sh
+# Get SSH Command from the terraform output
+ssh_command=$(terraform output -json | jq -r '.bastion_ssh_command.value')
+# Execute the SSH Command
+eval $ssh_command
+```

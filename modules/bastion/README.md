@@ -36,11 +36,11 @@ module "bastion" {
 
 ## Outputs
 
-| Name                 | Description                                       |
-| :------------------- | :------------------------------------------------ |
-| instance_id          | ID of the bastion host                            |
-| ec2_ssh              | SSH command to connect to the bastion host        |
-| ec2_instance_profile | IAM instance profile attached to the bastion host |
+| Name             | Description                                       |
+| :--------------- | :------------------------------------------------ |
+| instance_id      | ID of the bastion host                            |
+| instance_profile | IAM instance profile attached to the bastion host |
+| ssh_command      | SSH command to connect to the bastion host        |
 
 ## EC2 Instance Provisioning
 
