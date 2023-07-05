@@ -28,6 +28,17 @@ CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS :D
 - SSM Parameter Store to store every parameter such as VPC ID, Subnet IDs, etc.
 - and more!
 
+## Quick Start
+
+Go to the [`live/core`](./live/core) directory and follow the instructions in the
+[README](./live/core/README.md).
+
+There you will find the Terraform root module for our core infrastructure. This
+is where we keep our Terraform variables and backend configuration.
+
+We also have [Post deployment steps](./live/core/README.md#post-deployment-steps)
+to help you test the setup and get familiar with the infrastructure.
+
 ## Live Infrastructure
 
 We keep our live infrastructure in the `live` directory. This is where we keep
