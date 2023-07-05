@@ -1,4 +1,4 @@
-name: Terraform Check
+name: Terraform Docs
 
 on:
   push:
