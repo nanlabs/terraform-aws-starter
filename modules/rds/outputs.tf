@@ -84,7 +84,7 @@ output "db_parameter_group_arn" {
   value       = module.db.db_parameter_group_arn
 }
 
-output "db_enhanced_monitoring_iam_role_arn" {
+output "enhanced_monitoring_iam_role_arn" {
   description = "The Amazon Resource Name (ARN) specifying the monitoring role"
   value       = module.db.enhanced_monitoring_iam_role_arn
 }
@@ -92,4 +92,14 @@ output "db_enhanced_monitoring_iam_role_arn" {
 output "db_instance_cloudwatch_log_groups" {
   description = "Map of CloudWatch log groups created and their attributes"
   value       = module.db.db_instance_cloudwatch_log_groups
+}
+
+output "connection_secret_name" {
+  description = "The name of the AWS Secrets Manager secret created"
+  value       = aws_secretsmanager_secret.secret.name
+}
+
+output "connection_secret_arn" {
+  description = "The ARN of the AWS Secrets Manager secret created"
+  value       = aws_secretsmanager_secret.secret.arn
 }

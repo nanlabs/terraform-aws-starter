@@ -9,3 +9,7 @@ output "instance_profile" {
 output "ssh_command" {
   value = length(var.key_name) > 0 ? "" : "ssh -i ${path.module}/ec2-private-key.pem ubuntu@${module.bastion.public_ip}"
 }
+
+output "ssm_parameter_ssh_key" {
+  value = aws_ssm_parameter.ssh_key.name
+}

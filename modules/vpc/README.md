@@ -26,10 +26,19 @@ module "vpc" {
 
 ## Outputs
 
-| Name             | Description              |
-| :--------------- | :----------------------- |
-| vpc_id           | VPC ID for instance      |
-| public_subnets   | List of public subnets   |
-| private_subnets  | List of private subnets  |
-| database_subnets | List of database subnets |
-| app_subnets      | List of app subnets      |
+| Name                                | Description                             |
+| :---------------------------------- | :-------------------------------------- |
+| vpc_id                              | VPC ID for instance                     |
+| public_subnets                      | List of public subnets                  |
+| private_subnets                     | List of private subnets                 |
+| database_subnets                    | List of database subnets                |
+| database_subnet_group               | Database subnet group                   |
+| app_subnets                         | List of app subnets                     |
+| app_security_group                  | Security group for app instances        |
+| ssm_parameter_vpc_id                | SSM Parameter for VPC ID                |
+| ssm_parameter_public_subnets        | SSM Parameter for public subnets        |
+| ssm_parameter_private_subnets       | SSM Parameter for private subnets       |
+| ssm_parameter_app_subnets           | SSM Parameter for app subnets           |
+| ssm_parameter_app_security_group    | SSM Parameter for app security group    |
+| ssm_parameter_database_subnets      | SSM Parameter for database subnets      |
+| ssm_parameter_database_subnet_group | SSM Parameter for database subnet group |

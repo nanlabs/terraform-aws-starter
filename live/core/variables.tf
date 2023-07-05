@@ -44,7 +44,6 @@ variable "environment" {
 variable "stage" {
   description = "Stage, e.g. 'build', 'test', 'deploy', 'release'"
   type        = string
-  default     = "development"
 }
 
 variable "tags" {

@@ -36,11 +36,12 @@ module "bastion" {
 
 ## Outputs
 
-| Name             | Description                                       |
-| :--------------- | :------------------------------------------------ |
-| instance_id      | ID of the bastion host                            |
-| instance_profile | IAM instance profile attached to the bastion host |
-| ssh_command      | SSH command to connect to the bastion host        |
+| Name                  | Description                                       |
+| :-------------------- | :------------------------------------------------ |
+| instance_id           | ID of the bastion host                            |
+| instance_profile      | IAM instance profile attached to the bastion host |
+| ssh_command           | SSH command to connect to the bastion host        |
+| ssm_parameter_ssh_key | SSM Parameter for SSH key                         |
 
 ## EC2 Instance Provisioning
 

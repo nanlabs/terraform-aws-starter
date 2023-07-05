@@ -2,7 +2,7 @@ module "db" {
   source  = "terraform-aws-modules/rds/aws"
   version = "6.0.0"
 
-  identifier = "${var.name}-rds-${var.db_name}"
+  identifier = "${var.name}-rds"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   engine               = var.db_engine

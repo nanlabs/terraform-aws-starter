@@ -12,8 +12,8 @@ locals {
 }
 
 resource "aws_secretsmanager_secret" "secret" {
-  description = "RDS Postgres Credentials of ${var.db_name} service"
-  name        = "${var.name}/rds-postgresql-connection-secret"
+  description = "RDS Postgres Connection Credentials"
+  name        = "${var.name}-rds-postgresql-connection-secret"
 }
 
 resource "aws_secretsmanager_secret_version" "secret" {
@@ -30,7 +30,8 @@ resource "aws_secretsmanager_secret_version" "secret" {
   "engine": "${module.db.db_instance_engine}",
   "host": "${module.db.db_instance_address}",
   "port": ${module.db.db_instance_port},
-  "dbname" : "${var.db_name}"
+  "dbname" : "${var.db_name}",
+  "dbInstanceIdentifier": "${module.db.db_instance_identifier}"
 }
 EOF
 }

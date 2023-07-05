@@ -4,10 +4,16 @@ resource "aws_ssm_parameter" "vpc_id" {
   value = module.vpc.vpc_id
 }
 
-resource "aws_ssm_parameter" "db_subnets" {
-  name  = "/${var.name}/db_subnets"
+resource "aws_ssm_parameter" "database_subnets" {
+  name  = "/${var.name}/database_subnets"
   type  = "StringList"
   value = join(",", module.vpc.database_subnets)
+}
+
+resource "aws_ssm_parameter" "database_subnet_group" {
+  name  = "/${var.name}/database_subnet_group"
+  type  = "String"
+  value = module.vpc.database_subnet_group
 }
 
 resource "aws_ssm_parameter" "public_subnets" {

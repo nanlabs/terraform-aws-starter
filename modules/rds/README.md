@@ -59,25 +59,27 @@ module "db" {
 
 ## Outputs
 
-| Name                                | Description                               |
-| :---------------------------------- | :---------------------------------------- |
-| db_instance_address                 | Database instance address                 |
-| db_instance_arn                     | Database instance ARN                     |
-| db_instance_availability_zone       | Database instance availability zone       |
-| db_instance_endpoint                | Database instance endpoint                |
-| db_instance_engine                  | Database instance engine                  |
-| db_instance_engine_version_actual   | Database instance engine version actual   |
-| db_instance_hosted_zone_id          | Database instance hosted zone ID          |
-| db_instance_identifier              | Database instance ID                      |
-| db_instance_resource_id             | Database instance resource ID             |
-| db_instance_status                  | Database instance status                  |
-| db_instance_name                    | Database instance name                    |
-| db_instance_username                | Database instance username                |
-| db_instance_password                | Database instance password                |
-| db_instance_port                    | Database instance port                    |
-| db_subnet_group_id                  | Database subnet group ID                  |
-| db_subnet_group_arn                 | Database subnet group ARN                 |
-| db_parameter_group_id               | Database parameter group ID               |
-| db_parameter_group_arn              | Database parameter group ARN              |
-| db_enhanced_monitoring_iam_role_arn | Database enhanced monitoring IAM role ARN |
-| db_instance_cloudwatch_log_groups   | Database instance CloudWatch log groups   |
+| Name                              | Description                               |
+| :-------------------------------- | :---------------------------------------- |
+| db_instance_address               | Database instance address                 |
+| db_instance_arn                   | Database instance ARN                     |
+| db_instance_availability_zone     | Database instance availability zone       |
+| db_instance_endpoint              | Database instance endpoint                |
+| db_instance_engine                | Database instance engine                  |
+| db_instance_engine_version_actual | Database instance engine version actual   |
+| db_instance_hosted_zone_id        | Database instance hosted zone ID          |
+| db_instance_identifier            | Database instance ID                      |
+| db_instance_resource_id           | Database instance resource ID             |
+| db_instance_status                | Database instance status                  |
+| db_instance_name                  | Database instance name                    |
+| db_instance_username              | Database instance username                |
+| db_instance_password              | Database instance password                |
+| db_instance_port                  | Database instance port                    |
+| db_subnet_group_id                | Database subnet group ID                  |
+| db_subnet_group_arn               | Database subnet group ARN                 |
+| db_parameter_group_id             | Database parameter group ID               |
+| db_parameter_group_arn            | Database parameter group ARN              |
+| enhanced_monitoring_iam_role_arn  | Database enhanced monitoring IAM role ARN |
+| db_instance_cloudwatch_log_groups | Database instance CloudWatch log groups   |
+| db_aws_secretsmanager_secret_name | Database AWS SecretsManager secret name   |
+| db_aws_secretsmanager_secret_arn  | Database AWS SecretsManager secret ARN    |
