@@ -48,7 +48,7 @@ We use the Parameter Store to store values such us IDs of resources that we crea
 ```sh
 # Get the parameter value from the AWS Parameter Store
 vpc_id_parameter_name=$(terraform output -json | jq -r '.ssm_parameter_vpc_id')
-vpc_id=$(aws ssm get-parameter --name $vpc_id_parameter_name --query 'Parameter.Value' --output text)
+vpc_id=$(aws ssm get-parameter --name "$vpc_id_parameter_name" --query 'Parameter.Value' --output text)
 
 # Print the value
 echo $vpc_id
@@ -82,7 +82,9 @@ From the Bastion Host, we can connect to the database by accessing the AWS Secre
 
 ```sh
 # Get the connection information from the AWS Secrets Manager
-db_secret=$(aws secretsmanager get-secret-value --secret-id $(terraform output -json | jq -r '.example_db_connection_secret_arn.value') | jq -r '.SecretString')
+db_secret=$(aws secretsmanager get-secret-value --secret-id \
+  $(terraform output -json | jq -r '.db_secret_arn.value') \
+  --query 'SecretString' --output json)
 
 # Parse the connection information to get the username, password, host and port
 db_username=$(echo $db_secret | jq -r '.username')
