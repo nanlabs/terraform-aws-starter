@@ -63,7 +63,20 @@ ssh_command=$(terraform output -json | jq -r '.bastion_ssh_command.value')
 eval $ssh_command
 ```
 
-### Connecting to the Database
+Now we need to make sure that we can connect to the database from the Bastion Host!
+Also we need to make sure that we can use Docker and access to internet from there to download the Docker image that we need to connect to the database.
+
+#### Testing Docker and Internet Access
+
+```sh
+# Test Internet Access
+ping -c 3 google.com
+
+# Test Docker
+docker run -it --rm hello-world
+```
+
+#### Connecting to the Database
 
 From the Bastion Host, we can connect to the database by accessing the AWS Secrets Manager and getting the connection information.
 
