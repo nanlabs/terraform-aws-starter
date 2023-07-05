@@ -21,7 +21,7 @@ jobs:
           # If the event that triggered the workflow is a push, then the variable contains ${{ github.ref }}
           ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
-      - name: Render terraform docs inside the README.md and push changes back to PR branch
+      - name: Render terraform docs inside modules
         uses: terraform-docs/gh-actions@v1.0.0
         with:
           working-dir: modules/rds,modules/vpc,modules/bastion,live/core
