@@ -37,15 +37,15 @@ module "label" {
 # be bootstrapped according to the simple yet essential procedure in
 # https://github.com/cloudposse/terraform-aws-tfstate-backend#usage
 module "terraform_state_backend" {
-  source      = "cloudposse/tfstate-backend/aws"
-  version     = "1.1.1"
-  name        = var.name
-  namespace   = var.namespace
-  stage       = var.stage
-  environment = var.environment
-  attributes  = ["state"]
+  source     = "cloudposse/tfstate-backend/aws"
+  version    = "1.1.1"
+  name       = var.name
+  namespace  = var.namespace
+  attributes = ["state"]
 
-  terraform_state_file              = "${module.label.id}.tfstate"
+  terraform_backend_config_file_path = "."
+  terraform_backend_config_file_name = "backend.tf"
+  terraform_state_file               = "${module.label.id}.tfstate"
 
   bucket_enabled   = true
   dynamodb_enabled = true
