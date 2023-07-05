@@ -11,14 +11,15 @@ on:
 
 jobs:
   tf-docs:
-    permissions:
-      contents: write
-
     name: Generate Terraform Docs
     runs-on: ubuntu-latest
     steps:
       - name: Begin CI...
         uses: actions/checkout@v3
+        with:
+          # If the event that triggered the workflow is a pull request, then the variable contains ${{ github.event.pull_request.head.ref }}
+          # If the event that triggered the workflow is a push, then the variable contains ${{ github.ref }}
+          ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       - name: Render terraform docs inside the README.md and push changes back to PR branch
         uses: terraform-docs/gh-actions@v1.0.0
