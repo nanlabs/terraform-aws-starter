@@ -6,6 +6,12 @@ This is where we keep our infrastructure as code for our cloud infrastructure.
 
 - [Terraform](https://www.terraform.io/downloads.html)
 
+## Module Documentation
+
+The module documentation is generated with [terraform-docs](https://github.com/terraform-docs/terraform-docs) by running `terraform-docs md . > ./docs/MODULE.md` from the module directory.
+
+You can also view the latest version of the module documentation [here](./docs/MODULE.md).
+
 ## Initialize
 
 ```sh

@@ -18,30 +18,11 @@ module "bastion" {
 }
 ```
 
-## Inputs
+## Module Documentation
 
-| Name                         | Description                                                  |   Default   | Required |
-| :--------------------------- | :----------------------------------------------------------- | :---------: | :------: |
-| name                         | Name to use for resources, tags, etc                         |     ""      |          |
-| tags                         | Any extra tags to assign to objects                          |     {}      |          |
-| region                       | Region to deploy to                                          | "us-west-2" |          |
-| vpc_id                       | VPC to use for resources                                     |     ""      |    ✅    |
-| subnets                      | Subnets to use for resources                                 |     []      |    ✅    |
-| associate_public_ip_address  | Whether to associate a public IP address with the instance   |    true     |          |
-| associate_elastic_ip_address | Whether to associate an elastic IP address with the instance |    false    |          |
-| ami                          | AMI to use for the instance                                  |     ""      |          |
-| instance_type                | Instance type to use                                         | "t2.medium" |          |
-| allowed_cidrs                | List of CIDRs to allow SSH access from                       | "0.0.0.0/0" |          |
-| key_name                     | Name of the key pair to use for SSH access                   |     ""      |          |
+The module documentation is generated with [terraform-docs](https://github.com/terraform-docs/terraform-docs) by running `terraform-docs md . > ./docs/MODULE.md` from the module directory.
 
-## Outputs
-
-| Name                  | Description                                       |
-| :-------------------- | :------------------------------------------------ |
-| instance_id           | ID of the bastion host                            |
-| instance_profile      | IAM instance profile attached to the bastion host |
-| ssh_command           | SSH command to connect to the bastion host        |
-| ssm_parameter_ssh_key | SSM Parameter for SSH key                         |
+You can also view the latest version of the module documentation [here](./docs/MODULE.md).
 
 ## EC2 Instance Provisioning
 
