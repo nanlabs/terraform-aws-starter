@@ -25,6 +25,6 @@ jobs:
         with:
           working-dir: .
           recursive: true
-          recursive-path: modules,live
+          recursive-path: modules
           output-file: docs/MODULE.md
           git-push: "true"
