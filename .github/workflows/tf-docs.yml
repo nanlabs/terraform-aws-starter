@@ -1,0 +1,30 @@
+name: Terraform Check
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tf-fmt-check:
+    permissions:
+      contents: write
+
+    name: Check Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Begin CI...
+        uses: actions/checkout@v3
+
+      - name: Render terraform docs inside the README.md and push changes back to PR branch
+        uses: terraform-docs/gh-actions@v1.0.0
+        with:
+          working-dir: .
+          recursive: true
+          recursive-path: modules,live
+          output-file: docs/MODULE.md
+          git-push: "true"
