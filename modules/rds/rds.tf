@@ -47,6 +47,9 @@ module "db" {
   monitoring_role_use_name_prefix       = true
   monitoring_role_description           = "Monitoring role for ${var.name}"
 
+  # We will create our own secret and store it in AWS Secrets Manager
+  manage_master_user_password = false
+
   parameters = [
     {
       name  = "autovacuum"

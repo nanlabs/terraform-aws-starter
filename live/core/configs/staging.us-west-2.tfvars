@@ -1,5 +1,5 @@
 region             = "us-west-2"
-name               = "nanlabs"
+name               = "example"
 namespace          = "nan"
 environment        = "staging"
 vpc_cidr_block     = "10.0.0.0/16"

@@ -6,13 +6,39 @@ This is where we keep our infrastructure as code for our cloud infrastructure.
 
 - [Terraform](https://www.terraform.io/downloads.html)
 
-## Initialize
+## Bootstrap a new environment
+
+We have a few steps to bootstrap a new environment.
+
+First we will create all the resources that we need. They will remain in a separate state file.
+
+Then we will create the S3 Backend to store the state of our infrastructure.
+
+Finally we will copy the state of our infrastructure to the S3 Backend.
+
+> IMPORTANT: This step needs to be done only once per environment.
+
+### First time setup
+
+The first time that we deploy our infrastructure, we need to create the S3 Backend to store the state of our infrastructure along with the DynamoDB table to lock the state.
+
+#### Initialize
 
 ```sh
 terraform init
 ```
 
-## 🚀 Deploy
+### Create and Switch to a new workspace
+
+```sh
+# Create a new workspace if it doesn't exist
+terraform workspace new staging
+
+# Switch to the new workspace
+terraform workspace select staging
+```
+
+#### 🚀 Deploy
 
 > NOTE: In this example, we are using the `staging` environment and the `us-west-2` region.
 > You can change these values to match your environment and region.
@@ -22,7 +48,32 @@ terraform plan -var-file ./configs/staging.us-west-2.tfvars -out ./staging.tfpla
 terraform apply ./staging.tfplan
 ```
 
-## 💣 Destroy
+Then you can copy your state to the created S3 Backend.
+
+```sh
+terraform init -force-copy
+```
+
+### Update the infrastructure
+
+From now on, you can update your infrastructure by running the following commands:
+
+#### Initialize with the S3 Backend
+
+```sh
+terraform init
+```
+
+#### 🚀 Deploy your changes
+
+> NOTE: In this example, we are using the `staging` environment and the `us-west-2` region.
+
+```sh
+terraform plan -var-file ./configs/staging.us-west-2.tfvars -out ./staging.tfplan
+terraform apply ./staging.tfplan
+```
+
+### 💣 Destroy
 
 > NOTE: In this example, we are using the `staging` environment and the `us-west-2` region.
 > You can change these values to match your environment and region.
