@@ -24,8 +24,8 @@ output "database_subnet_group" {
 }
 
 output "app_subnets" {
-  description = "value of the app_subnets output from the vpc module"
-  value       = module.vpc.app_subnets
+  description = "value of the app_subnets output from the vpc module. It is an alias for the private_subnets output"
+  value       = module.vpc.private_subnets
 }
 
 output "app_security_group" {

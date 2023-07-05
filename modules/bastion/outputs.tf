@@ -11,5 +11,5 @@ output "ssh_command" {
 }
 
 output "ssm_parameter_ssh_key" {
-  value = aws_ssm_parameter.ssh_key.name
+  value = length(var.key_name) > 0 ? "" : aws_ssm_parameter.ssh_key[0].name
 }

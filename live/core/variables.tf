@@ -44,6 +44,8 @@ variable "environment" {
 variable "stage" {
   description = "Stage, e.g. 'build', 'test', 'deploy', 'release'"
   type        = string
+  # not required, so no default
+  default = null
 }
 
 variable "tags" {

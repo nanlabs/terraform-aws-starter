@@ -50,10 +50,10 @@ output "ssm_parameter_bastion_ssh_key" {
 # rds outputs
 output "example_db_connection_secret_name" {
   description = "The name of the secret containing the connection details for the RDS instance"
-  value       = module.rds.connection_secret_name
+  value       = module.exampledb.connection_secret_name
 }
 
 output "example_db_connection_secret_arn" {
   description = "The ARN of the secret containing the connection details for the RDS instance"
-  value       = module.rds.connection_secret_arn
+  value       = module.exampledb.connection_secret_arn
 }
