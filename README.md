@@ -11,14 +11,14 @@ CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS :D
 
 </div> <!-- center -->
 
+## Motivation
+
+The Terraform AWS Starter Boilerplate is designed to provide a simple and reliable starting point for creating a basic AWS infrastructure. It offers a ready-to-use root Terraform module that incorporates essential components and best practices to help you quickly set up a robust foundation for your applications.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" alt="" align="right" width="400px" srcset="./tools/dac/live_core_infrastructure.png"/>
   <img alt="" align="right" width="400px" src="./tools/dac/live_core_infrastructure.png"/>
 </picture>
-
-## Motivation
-
-The Terraform AWS Starter Boilerplate is designed to provide a simple and reliable starting point for creating a basic AWS infrastructure. It offers a ready-to-use root Terraform module that incorporates essential components and best practices to help you quickly set up a robust foundation for your applications.
 
 ### Key Features
 
