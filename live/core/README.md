@@ -4,14 +4,14 @@
 
 ## Features
 
-✨ Ready to use Root Terraform module!
-🗄️ Store Terraform state in an S3 bucket with a DynamoDB table for locking.
-🌐 VPC with public and private subnets (application and database subnets) in three availability zones.
-🔒 Security groups for bastion host and database.
-🔑 Bastion host to access private resources.
-🐘 RDS Postgres instance and other database resources.
-🔒 AWS Secrets Manager to store database credentials.
-🔧 SSM Parameter Store to store parameters such as VPC ID, Subnet IDs, etc.
+- ✨ Ready to use Root Terraform module!
+- 🗄️ Store Terraform state in an S3 bucket with a DynamoDB table for locking.
+- 🌐 VPC with public and private subnets (application and database subnets) in three availability zones.
+- 🔒 Security groups for bastion host and database.
+- 🔑 Bastion host to access private resources.
+- 🐘 RDS Postgres instance and other database resources.
+- 🔒 AWS Secrets Manager to store database credentials.
+- 🔧 SSM Parameter Store to store parameters such as VPC ID, Subnet IDs, etc.
 
 ## Prerequisites
 
