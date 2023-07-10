@@ -2,6 +2,18 @@
 
 This is where we keep our infrastructure as code for our cloud infrastructure.
 
+## Features
+
+Ready to use Root Terraform module!
+
+- Store Terraform state in S3 bucket with DynamoDB table for locking.
+- VPC with public and private subnets (application and database subnets) in three availability zones.
+- Security groups for bastion host and Database.
+- Bastion host to access private resources.
+- RDS Postgres instance and other Database resources.
+- AWS Secrets Manager to store Database credentials.
+- SSM Parameter Store to store every parameter such as VPC ID, Subnet IDs, etc.
+
 ## Prerequisites
 
 - [Terraform](https://www.terraform.io/downloads.html)
