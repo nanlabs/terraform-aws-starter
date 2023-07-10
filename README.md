@@ -35,8 +35,7 @@ The Terraform AWS Starter Boilerplate is designed to provide a simple and reliab
 
 - **GitHub Actions Integration:** The boilerplate comes with preconfigured GitHub Actions workflows that provide linting, security checks, and more. This integration enables automated checks and validation of your Terraform code, ensuring adherence to coding standards and identifying potential security vulnerabilities early in the development process.
 
-  - Pull Request validation with [Danger](https://danger.systems/js).
-  - Markdown linting.
+  - Pull Request validation with [Danger](https://danger.systems/js), markdown linting and more!
   - Shell Scripting linting with [ShellCheck](https://www.shellcheck.net).
   - Terraform Format validation with [Terraform Fmt](https://www.terraform.io/docs/commands/fmt.html).
   - Terraform Security validation with [Terraform Security](https://github.com/aquasecurity/tfsec).
