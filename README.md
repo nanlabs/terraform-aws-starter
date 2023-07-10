@@ -19,13 +19,21 @@ CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS :D
 ## Features
 
 - Ready to use Terraform modules!
-- Store Terraform state in S3 bucket with DynamoDB table for locking.
-- VPC with public and private subnets (application and database subnets) in three availability zones.
-- Security groups for bastion host and RDS instance.
-- Bastion host to access private resources.
-- RDS Postgres instance.
-- AWS Secrets Manager to store RDS credentials.
-- SSM Parameter Store to store every parameter such as VPC ID, Subnet IDs, etc.
+  - Store Terraform state in S3 bucket with DynamoDB table for locking.
+  - VPC with public and private subnets (application and database subnets) in three availability zones.
+  - Security groups for bastion host and Database.
+  - Bastion host to access private resources.
+  - RDS Postgres instance and other Database resources.
+  - AWS Secrets Manager to store Database credentials.
+  - SSM Parameter Store to store every parameter such as VPC ID, Subnet IDs, etc.
+- Continuous Integration with GitHub Actions!
+  - Pull Request validation with [Danger](https://danger.systems/js).
+  - Markdown linting.
+  - Shell Scripting linting with [ShellCheck](https://www.shellcheck.net).
+  - Terraform Format validation with [Terraform Fmt](https://www.terraform.io/docs/commands/fmt.html).
+  - Terraform Security validation with [Terraform Security](https://github.com/aquasecurity/tfsec).
+  - Terraform Docs update with [terraform-docs](https://terraform-docs.io/).
+  - TODOs to GitHub Issues with [TODOs to Issues](https://github.com/alstr/todo-to-issue-action).
 - and more!
 
 ## Quick Start
