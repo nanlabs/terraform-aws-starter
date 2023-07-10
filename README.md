@@ -1,6 +1,6 @@
 # Terraform AWS Starter Kit 🔥 🚀
 
-Get started quickly with AWS infrastructure using a robust Terraform starter kit incorporating secure state management, VPC configuration, security groups, RDS provisioning, secrets management, SSM parameter store, and GitHub Actions integration!
+Welcome to the Terraform AWS Starter Kit! This comprehensive and robust starter kit will empower you to quickly and confidently set up your AWS infrastructure. With secure state management, scalable VPC configuration, enhanced security features, database provisioning, secrets management, SSM parameter store integration, and GitHub Actions integration, this starter kit incorporates proven best practices for building reliable and maintainable AWS environments.
 
 <div align="center">
 
@@ -12,55 +12,61 @@ CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS :D
 
 ## Motivation
 
-The Terraform AWS Starter Boilerplate is a powerful solution designed to alleviate the most challenging aspect of building AWS infrastructure for our clients. With this comprehensive starter kit, we tackle the complex task of setting up a reliable and scalable AWS environment, allowing our clients to focus on what matters most—developing and deploying their applications swiftly and confidently.
+The Terraform AWS Starter Kit solves the most challenging aspect of AWS infrastructure building by providing a powerful solution for our clients. Our goal is to simplify the process of setting up a reliable and scalable AWS environment, allowing you to focus on developing and deploying your applications swiftly and confidently.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" alt="" align="right" width="400px" srcset="./tools/dac/live_core_infrastructure.png"/>
   <img alt="" align="right" width="400px" src="./tools/dac/live_core_infrastructure.png"/>
 </picture>
 
-### Key Features
+## Key Features
 
-- **Secure State Management:** The boilerplate includes the necessary configurations to store the Terraform state in an S3 bucket, along with a DynamoDB table for state locking. This ensures that your infrastructure's state is secure and can be easily managed and shared among team members.
+### Secure State Management
 
-- **Scalable VPC Configuration:** The starter kit provisions a Virtual Private Cloud (VPC) with public and private subnets across three availability zones. This setup enables the segregation of application and database resources and provides high availability for your infrastructure components.
+The Terraform AWS Starter Kit includes secure state management configurations. Your Terraform state is stored in an S3 bucket with a DynamoDB table for state locking. This ensures the security of your infrastructure's state and facilitates easy management and sharing among team members.
 
-- **Enhanced Security:** The boilerplate implements security groups for the bastion host and database instances, ensuring controlled access to your resources. The bastion host allows secure access to private resources within the VPC, providing an additional layer of security.
+### Scalable VPC Configuration
 
-- **Database Provisioning:** It includes the necessary configuration to provision an RDS PostgreSQL instance, as well as other database resources. This allows you to easily set up and manage your database infrastructure in a consistent and reproducible manner.
+Our starter kit provisions a Virtual Private Cloud (VPC) with public and private subnets across three availability zones. This scalable VPC configuration enables the segregation of application and database resources, providing high availability for your infrastructure components.
 
-- **Secrets Management:** AWS Secrets Manager is integrated into the boilerplate to securely store and manage your database credentials. This ensures that sensitive information, such as usernames and passwords, is not exposed in your Terraform code or version control system.
+### Enhanced Security
 
-- **Parameter Management:** The starter kit leverages AWS Systems Manager (SSM) Parameter Store to store and manage various parameters required for your infrastructure, such as VPC ID, subnet IDs, and other configuration details. This centralizes the management of configuration parameters, making it easier to update and maintain your infrastructure as it evolves.
+The starter kit implements security groups for the bastion host and database instances, ensuring controlled access to your resources. The bastion host allows secure access to private resources within the VPC, providing an additional layer of security.
 
-- **GitHub Actions Integration:** The boilerplate comes with preconfigured GitHub Actions workflows that provide linting, security checks, and more. This integration enables automated checks and validation of your Terraform code, ensuring adherence to coding standards and identifying potential security vulnerabilities early in the development process.
+### Database Provisioning
 
-  - Pull Request validation with [Danger](https://danger.systems/js), markdown linting and more!
-  - Shell Scripting linting with [ShellCheck](https://www.shellcheck.net).
-  - Terraform Format validation with [Terraform Fmt](https://www.terraform.io/docs/commands/fmt.html).
-  - Terraform Security validation with [Terraform Security](https://github.com/aquasecurity/tfsec).
-  - Terraform Docs update with [terraform-docs](https://terraform-docs.io/).
-  - TODOs to GitHub Issues with [TODOs to Issues](https://github.com/alstr/todo-to-issue-action).
+We have included configurations to provision an RDS PostgreSQL instance and other database resources. This allows you to easily set up and manage your database infrastructure in a consistent and reproducible manner.
 
-By using the Terraform AWS Starter Boilerplate, you can expedite the initial setup of your AWS infrastructure while incorporating proven best practices. It empowers you to focus on building and deploying your applications while providing a solid foundation for scalability, security, and maintainability.
+### Secrets Management
+
+The Terraform AWS Starter Kit integrates with AWS Secrets Manager to securely store and manage your database credentials. This ensures that sensitive information, such as usernames and passwords, is not exposed in your Terraform code or version control system.
+
+### Parameter Management
+
+Our starter kit leverages AWS Systems Manager (SSM) Parameter Store to store and manage various parameters required for your infrastructure, such as VPC ID, subnet IDs, and other configuration details. This centralizes the management of configuration parameters, making it easier to update and maintain your infrastructure as it evolves.
+
+### GitHub Actions Integration
+
+We have preconfigured GitHub Actions workflows that provide linting, security checks, and more for your Terraform code. This integration enables automated checks and validation, ensuring adherence to coding standards and identifying potential security vulnerabilities early in the development process.
+
+- Pull Request validation with [Danger](https://danger.systems/js), markdown linting, and more!
+- Shell Scripting linting with [ShellCheck](https://www.shellcheck.net).
+- Terraform Format validation with [Terraform Fmt](https://www.terraform.io/docs/commands/fmt.html).
+- Terraform Security validation with [Terraform Security](https://github.com/aquasecurity/tfsec).
+- Terraform Docs update with [terraform-docs](https://terraform-docs.io/).
+- TODOs to GitHub Issues with [TODOs to Issues](https://github.com/alstr/todo-to-issue-action).
+
+By using the Terraform AWS Starter Kit, you can expedite the initial setup of your AWS infrastructure while incorporating proven best practices. It empowers you to focus on building and deploying your applications while providing a solid foundation for scalability, security, and maintainability.
 
 We welcome contributions and feedback to improve this starter kit further, making it a valuable resource for the community.
 
 ## Quick Start
 
-Go to the [`live/core`](./live/core) directory and follow the instructions in the
-[README](./live/core/README.md).
-
-There you will find the Terraform root module for our core infrastructure. This
-is where we keep our Terraform variables and backend configuration.
-
-We also have [Post deployment steps](./live/core/README.md#post-deployment-steps)
-to help you test the setup and get familiar with the infrastructure.
+To get started quickly, navigate to the [`live/core`](./live/core) directory and follow the instructions in the [README](./live/core/README.md). This directory contains the Terraform root module for our core infrastructure, including Terraform variables and backend configuration. Additionally, we provide post-deployment steps in the [README](./live/core/README.md#post-deployment-steps) to help you test the setup and get familiar with the infrastructure.
 
 ## Live Infrastructure
 
-We keep our live infrastructure in the `live` directory. This is where we keep
-our Terraform variables, backend configuration, and our Terraform root modules.
+The `live` directory houses our live infrastructure. This is where you'll find our Terraform variables, backend configuration, and Terraform root modules.
 
 | Module                                       | Description                                        |
 | :------------------------------------------- | :------------------------------------------------- |
@@ -68,34 +74,28 @@ our Terraform variables, backend configuration, and our Terraform root modules.
 
 ## Terraform Modules
 
-We have custom Terraform modules that we use to bootstrap our infrastructure. We
-keep them in the `modules` directory.
+We have created custom Terraform modules to bootstrap our infrastructure, which are located in the `modules` directory.
 
-| Module                                             | Description                                                                 |
-| :------------------------------------------------- | :-------------------------------------------------------------------------- |
-| [VPC](./modules/vpc/README.md)                     | Terraform module to bootstrap a VPC for use with our shared infrastructure. |
-| [RDS Postgres](./modules/rds-postgresql/README.md) | Terraform module to bootstrap a RDS Postgres instance.                      |
-| [Bastion](./modules/bastion/README.md)             | Terraform module to bootstrap a bastion host.                               |
+| Module                                             | Description                                                                      |
+| :------------------------------------------------- | :------------------------------------------------------------------------------- |
+| [VPC](./modules/vpc/README.md)                     | Terraform module for bootstrapping a VPC for use with our shared infrastructure. |
+| [RDS Postgres](./modules/rds-postgresql/README.md) | Terraform module for bootstrapping an RDS Postgres instance.                     |
+| [Bastion](./modules/bastion/README.md)             | Terraform module for bootstrapping a bastion host.                               |
 
 ## Services
 
-We may have some services that run to maintain our infrastructure. Here we have some ideas
-you can have in there!
+In addition to infrastructure provisioning, we may have some services that run to maintain our infrastructure. Here are a few ideas:
 
-| Service                                                                                                                          | Description                                     |
-| :------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
-| [Start and Stop EC2 Instance](https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-start-stop-ec2-instance) | Lambda function to start and stop EC2 instance. |
+| Service                                                                                                                          | Description                                      |
+| :------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------- |
+| [Start and Stop EC2 Instance](https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-start-stop-ec2-instance) | Lambda function to start and stop EC2 instances. |
 
 ## Contributing
 
-- Contributions make the open source community such an amazing place to learn, inspire, and create.
-- Any contributions you make are **truly appreciated**.
-- Check out our [contribution guidelines](./CONTRIBUTING.md) for more information.
+We appreciate contributions from the open-source community. Any contributions you make are **truly appreciated**. Please refer to our [contribution guidelines](./CONTRIBUTING.md) for more information.
 
 ## Contributors
 
-<a href="https://github.com/nanlabs/terraform-aws-starter/contributors">
-  <img src="https://contrib.rocks/image?repo=nanlabs/terraform-aws-starter"/>
-</a>
+[![Contributors](https://contrib.rocks/image?repo=nanlabs/terraform-aws-starter)](https://github.com/nanlabs/terraform-aws-starter/graphs/contributors)
 
 Made with [contributors-img](https://contrib.rocks).
