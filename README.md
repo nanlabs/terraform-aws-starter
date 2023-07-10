@@ -18,7 +18,8 @@ CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS :D
 
 ## Features
 
-- Ready to use Terraform modules!
+- Production ready Terraform root module!
+- Ready to use Terraform modules with examples.
 - Pull Request validation with [Danger](https://danger.systems/js).
 - Markdown linting.
 - Shell Scripting linting with [ShellCheck](https://www.shellcheck.net).
