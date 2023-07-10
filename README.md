@@ -4,9 +4,7 @@ Welcome to the Terraform AWS Starter Kit! This comprehensive and robust starter 
 
 <div align="center">
 
-```ocaml
-CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS :D
-```
+📖 CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS 📖
 
 </div> <!-- center -->
 
@@ -21,40 +19,40 @@ The Terraform AWS Starter Kit solves the most challenging aspect of AWS infrastr
 
 ## Key Features
 
-### Secure State Management
+### Secure State Management 🔒
 
 The Terraform AWS Starter Kit includes secure state management configurations. Your Terraform state is stored in an S3 bucket with a DynamoDB table for state locking. This ensures the security of your infrastructure's state and facilitates easy management and sharing among team members.
 
-### Scalable VPC Configuration
+### Scalable VPC Configuration 🌐
 
 Our starter kit provisions a Virtual Private Cloud (VPC) with public and private subnets across three availability zones. This scalable VPC configuration enables the segregation of application and database resources, providing high availability for your infrastructure components.
 
-### Enhanced Security
+### Enhanced Security 🔐
 
 The starter kit implements security groups for the bastion host and database instances, ensuring controlled access to your resources. The bastion host allows secure access to private resources within the VPC, providing an additional layer of security.
 
-### Database Provisioning
+### Database Provisioning 🗃️
 
 We have included configurations to provision an RDS PostgreSQL instance and other database resources. This allows you to easily set up and manage your database infrastructure in a consistent and reproducible manner.
 
-### Secrets Management
+### Secrets Management 🔑
 
 The Terraform AWS Starter Kit integrates with AWS Secrets Manager to securely store and manage your database credentials. This ensures that sensitive information, such as usernames and passwords, is not exposed in your Terraform code or version control system.
 
-### Parameter Management
+### Parameter Management 🔧
 
 Our starter kit leverages AWS Systems Manager (SSM) Parameter Store to store and manage various parameters required for your infrastructure, such as VPC ID, subnet IDs, and other configuration details. This centralizes the management of configuration parameters, making it easier to update and maintain your infrastructure as it evolves.
 
-### GitHub Actions Integration
+### GitHub Actions Integration 🚀
 
 We have preconfigured GitHub Actions workflows that provide linting, security checks, and more for your Terraform code. This integration enables automated checks and validation, ensuring adherence to coding standards and identifying potential security vulnerabilities early in the development process.
 
-- Pull Request validation with [Danger](https://danger.systems/js), markdown linting, and more!
-- Shell Scripting linting with [ShellCheck](https://www.shellcheck.net).
-- Terraform Format validation with [Terraform Fmt](https://www.terraform.io/docs/commands/fmt.html).
-- Terraform Security validation with [Terraform Security](https://github.com/aquasecurity/tfsec).
-- Terraform Docs update with [terraform-docs](https://terraform-docs.io/).
-- TODOs to GitHub Issues with [TODOs to Issues](https://github.com/alstr/todo-to-issue-action).
+- Pull Request validation with [Danger](https://danger.systems/js), markdown linting, and more! ✅
+- Shell Scripting linting with [ShellCheck](https://www.shellcheck.net). 🐚
+- Terraform Format validation with [Terraform Fmt](https://www.terraform.io/docs/commands/fmt.html). 🔄
+- Terraform Security validation with [Terraform Security](https://github.com/aquasecurity/tfsec). 🔒
+- Terraform Docs update with [terraform-docs](https://terraform-docs.io/). 📝
+- TODOs to GitHub Issues with [TODOs to Issues](https://github.com/alstr/todo-to-issue-action). 📌
 
 By using the Terraform AWS Starter Kit, you can expedite the initial setup of your AWS infrastructure while incorporating proven best practices. It empowers you to focus on building and deploying your applications while providing a solid foundation for scalability, security, and maintainability.
 

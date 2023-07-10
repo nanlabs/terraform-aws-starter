@@ -1,78 +1,88 @@
 # Core Infrastructure
 
-This is where we keep our infrastructure as code for our cloud infrastructure.
+🏢 This directory contains the infrastructure as code for our cloud infrastructure. It provides a ready-to-use Terraform module with various features. Follow the steps below to get started.
 
 ## Features
 
-Ready to use Root Terraform module!
-
-- Store Terraform state in S3 bucket with DynamoDB table for locking.
-- VPC with public and private subnets (application and database subnets) in three availability zones.
-- Security groups for bastion host and Database.
-- Bastion host to access private resources.
-- RDS Postgres instance and other Database resources.
-- AWS Secrets Manager to store Database credentials.
-- SSM Parameter Store to store every parameter such as VPC ID, Subnet IDs, etc.
+✨ Ready to use Root Terraform module!
+🗄️ Store Terraform state in an S3 bucket with a DynamoDB table for locking.
+🌐 VPC with public and private subnets (application and database subnets) in three availability zones.
+🔒 Security groups for bastion host and database.
+🔑 Bastion host to access private resources.
+🐘 RDS Postgres instance and other database resources.
+🔒 AWS Secrets Manager to store database credentials.
+🔧 SSM Parameter Store to store parameters such as VPC ID, Subnet IDs, etc.
 
 ## Prerequisites
 
-- [Terraform](https://www.terraform.io/downloads.html)
+✔️ [Terraform](https://www.terraform.io/downloads.html)
 
 ## Module Documentation
 
-The module documentation is generated with [terraform-docs](https://github.com/terraform-docs/terraform-docs) by running `terraform-docs md . > ./docs/MODULE.md` from the module directory.
+The module documentation is generated with [terraform-docs](https://github.com/terraform-docs/terraform-docs) by running the following command from the module directory:
+
+```sh
+terraform-docs md . > ./docs/MODULE.md
+```
 
 You can also view the latest version of the module documentation [here](./docs/MODULE.md).
 
-## Initialize
+## Setup
+
+1. Initialize the Terraform working directory:
 
 ```sh
 terraform init
 ```
 
-## Switch to a Workspace
+2. Switch to a workspace:
 
 ```sh
 # Create a new workspace if it doesn't exist
 terraform workspace new staging
 
-# Switch to the another workspace
+# Switch to another workspace
 terraform workspace select staging
 ```
 
-## 🚀 Deploy
+## Deploy
 
-> NOTE: In this example, we are using the `staging` environment and the `us-west-2` region.
-> You can change these values to match your environment and region.
+🚀 **NOTE:** In this example, we are using the `staging` environment and the `us-west-2` region. Modify these values according to your environment and region.
+
+1. Plan the deployment:
 
 ```sh
 terraform plan -var-file ./configs/staging.us-west-2.tfvars -out ./staging.tfplan
+```
+
+2. Apply the deployment:
+
+```sh
 terraform apply ./staging.tfplan
 ```
 
-### Firt time deployment?
+### First Time Deployment?
 
-If this is the first time that you are deploying, you may notice that a file called `backend.tf` was created.
+If this is the first time you are deploying, a file called `s3-backend.tf` will be created. This file configures the backend for Terraform, using S3 to store the state of our infrastructure.
 
-This file is used to configure the backend for Terraform. In this case, we are using S3 as the backend to store the state of our infrastructure.
-
-You need to run `terraform init -force-copy` to copy the state to the S3 bucket.
+Run the following command to copy the state to the S3 bucket:
 
 ```sh
 terraform init -force-copy
 ```
 
-and then you can push the `backend.tf` file to the repository.
+Push the `s3-backend.tf` file to the repository:
 
 ```sh
-git add backend.tf && git commit -m "Add backend.tf file"
+git add s3-backend.tf && git commit -m "Add s3-backend.tf file"
 git push
 ```
 
-## 💣 Destroy
+## Destroy
 
-> NOTE: In this example, we are using the `staging` environment and the `us-west-2` region.
-> You can change these values to match your environment and region.
+💣 **NOTE:** In this example, we are using the `staging` environment and the `us-west-2` region. Modify these values according to your environment and region.
+
+To destroy the infrastructure, run the following command:
 
 ```sh
 terraform destroy -var-file ./configs/staging.us-west-2.tfvars
@@ -80,17 +90,11 @@ terraform destroy -var-file ./configs/staging.us-west-2.tfvars
 
 ## Post Deployment Steps
 
-We have a few steps to test our deployment after it has been deployed.
-Since we use Parameter Store to store some relevant information and AWS Secrets Manager to store the connection information for our database, we need to make sure that these are working as expected.
-
-Also we need to make sure that we can access to the created Bastion Host and that we can connect to the database
-from there.
-
-> NOTE: In this example, we are using the `staging` environment and the `us-west-2` region.
+After deploying the infrastructure, perform the following steps to test the deployment:
 
 ### Accessing the Parameter Store
 
-We use the Parameter Store to store values such us IDs of resources that we create. For example, the ID of the VPC that we create is stored in the Parameter Store.
+Use the Parameter Store to retrieve stored values, such as the VPC ID:
 
 ```sh
 # Get the parameter value from the AWS Parameter Store
@@ -103,17 +107,21 @@ echo $vpc_id
 
 ### Connecting to the Bastion Host
 
+To connect to the bastion host, execute the following commands:
+
 ```sh
 # Get SSH Command from the terraform output
 ssh_command=$(terraform output -json | jq -r '.bastion_ssh_command.value')
+
 # Execute the SSH Command
 eval $ssh_command
 ```
 
-Now we need to make sure that we can connect to the database from the Bastion Host!
-Also we need to make sure that we can use Docker and access to internet from there to download the Docker image that we need to connect to the database.
+Ensure that you can access the database from the bastion host and that Docker is working properly.
 
 #### Testing Docker and Internet Access
+
+To test internet access and Docker functionality, run the following commands:
 
 ```sh
 # Test Internet Access
@@ -125,15 +133,15 @@ docker run -it --rm hello-world
 
 #### Connecting to the Database
 
-From the Bastion Host, we can connect to the database by accessing the AWS Secrets Manager and getting the connection information.
+From the bastion host, you can connect to the database by accessing AWS Secrets Manager for the connection information. Run the following commands:
 
 ```sh
-# Get the connection information from the AWS Secrets Manager
+# Get the connection information from AWS Secrets Manager
 db_secret=$(aws secretsmanager get-secret-value --secret-id \
   $(terraform output -json | jq -r '.db_secret_arn.value') \
   --query 'SecretString' --output json)
 
-# Parse the connection information to get the username, password, host and port
+# Parse the connection information to get the username, password, host, port, and database name
 db_username=$(echo $db_secret | jq -r '.username')
 db_password=$(echo $db_secret | jq -r '.password')
 db_host=$(echo $db_secret | jq -r '.host')
@@ -144,21 +152,21 @@ db_name=$(echo $db_secret | jq -r '.dbname')
 docker run -it --rm postgres:14.0-alpine psql -h $db_host -p $db_port -U $db_username -d $db_name
 ```
 
-Then you can run some SQL commands to test the setup of the database. For example:
+You can now run SQL commands to test the setup of the database. For example:
 
-- Get the current date and time
+- Get the current date and time:
 
 ```sql
 > SELECT NOW();
 ```
 
-- Get the database version
+- Get the database version:
 
 ```sql
 > SELECT version();
 ```
 
-- Get the list of Tables
+- Get the list of tables:
 
 ```sql
 > SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
