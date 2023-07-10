@@ -1,7 +1,6 @@
 # Terraform AWS Starter Kit 🔥 🚀
 
-This is a starter kit for creating AWS infrastructure using Terraform. It
-contains a VPC, RDS instance, and a bastion host.
+Get started quickly with AWS infrastructure using a robust Terraform starter kit incorporating secure state management, VPC configuration, security groups, RDS provisioning, secrets management, SSM parameter store, and GitHub Actions integration!
 
 <div align="center">
 
