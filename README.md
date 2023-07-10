@@ -12,9 +12,9 @@ CLICK OR TAP ❲☰❳ TO SHOW TABLE-OF-CONTENTS :D
 </div> <!-- center -->
 
 <picture>
-    <source media="(prefers-color-scheme: dark)" alt="" align="right" width="400px" srcset="./tools/dac/aws_infrastructure.png"/>
-    <img alt="" align="right" width="400px" src="./tools/dac/aws_infrastructure.png"/>
-  </picture>
+  <source media="(prefers-color-scheme: dark)" alt="" align="right" width="400px" srcset="./tools/dac/live_core_infrastructure.png"/>
+  <img alt="" align="right" width="400px" src="./tools/dac/live_core_infrastructure.png"/>
+</picture>
 
 ## Features
 

@@ -7,7 +7,7 @@ from diagrams.aws.mobile import Amplify
 from diagrams.onprem.network import Internet
 from diagrams.aws.management import Cloudwatch
 
-with Diagram("AWS Infrastructure", show=False):
+with Diagram("Live Core Infrastructure", show=False):
     with Cluster("AWS Region"):
         with Cluster("VPC"):
             with Cluster("Public Subnet"):
