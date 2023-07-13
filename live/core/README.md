@@ -135,10 +135,18 @@ docker run -it --rm hello-world
 
 From the bastion host, you can connect to the database by accessing AWS Secrets Manager for the connection information. Run the following commands:
 
+- Outside the bastion host:
+
+```sh
+# Get the parameter value from the AWS Parameter Store
+SECRET_ID=$(terraform output -json | jq -r '.example_db_connection_secret_arn.value')
+```
+
+- Inside the bastion host:
+
 ```sh
 # Get the connection information from AWS Secrets Manager
-db_secret=$(aws secretsmanager get-secret-value --secret-id \
-  $(terraform output -json | jq -r '.db_secret_arn.value') \
+db_secret=$(aws secretsmanager get-secret-value --secret-id "{SECRET_ID}" \
   --query 'SecretString' --output json)
 
 # Parse the connection information to get the username, password, host, port, and database name
