@@ -90,40 +90,40 @@ terraform destroy -var-file ./configs/staging.us-west-2.tfvars
 
 ## Post Deployment Steps
 
-After deploying the infrastructure, perform the following steps to test the deployment:
+After successfully deploying the infrastructure, follow these steps to test the deployment and ensure everything is working as expected:
 
 ### Accessing the Parameter Store
 
-Use the Parameter Store to retrieve stored values, such as the VPC ID:
+Retrieve stored values, such as the VPC ID, using the AWS Parameter Store:
 
-```sh
-# Get the parameter value from the AWS Parameter Store
+```bash
+# Retrieve the parameter value from the AWS Parameter Store
 vpc_id_parameter_name=$(terraform output -json | jq -r '.ssm_parameter_vpc_id')
 vpc_id=$(aws ssm get-parameter --name "$vpc_id_parameter_name" --query 'Parameter.Value' --output text)
 
 # Print the value
-echo $vpc_id
+echo "VPC ID: $vpc_id"
 ```
 
 ### Connecting to the Bastion Host
 
-To connect to the bastion host, execute the following commands:
+To establish a connection with the bastion host, use the following commands:
 
-```sh
-# Get SSH Command from the terraform output
+```bash
+# Retrieve the SSH command from the Terraform output
 ssh_command=$(terraform output -json | jq -r '.bastion_ssh_command.value')
 
-# Execute the SSH Command
+# Execute the SSH command
 eval $ssh_command
 ```
 
-Ensure that you can access the database from the bastion host and that Docker is working properly.
+Ensure that you can access the database from the bastion host and verify that Docker is functioning correctly.
 
 #### Testing Docker and Internet Access
 
-To test internet access and Docker functionality, run the following commands:
+To verify internet access and Docker functionality, execute the following commands:
 
-```sh
+```bash
 # Test Internet Access
 ping -c 3 google.com
 
@@ -133,23 +133,23 @@ docker run -it --rm hello-world
 
 #### Connecting to the Database
 
-From the bastion host, you can connect to the database by accessing AWS Secrets Manager for the connection information. Run the following commands:
+To connect to the database from the bastion host, retrieve the connection information from AWS Secrets Manager. Follow these steps:
 
 - Outside the bastion host:
 
-```sh
-# Get the parameter value from the AWS Parameter Store
+```bash
+# Retrieve the parameter value from the AWS Parameter Store
 SECRET_ID=$(terraform output -json | jq -r '.example_db_connection_secret_arn.value')
 ```
 
 - Inside the bastion host:
 
-```sh
-# Get the connection information from AWS Secrets Manager
-db_secret=$(aws secretsmanager get-secret-value --secret-id "{SECRET_ID}" \
+```bash
+# Retrieve the connection information from AWS Secrets Manager
+db_secret=$(aws secretsmanager get-secret-value --secret-id "$SECRET_ID" \
   --query 'SecretString' --output json)
 
-# Parse the connection information to get the username, password, host, port, and database name
+# Parse the connection information to obtain the username, password, host, port, and database name
 db_username=$(echo $db_secret | jq -r '.username')
 db_password=$(echo $db_secret | jq -r '.password')
 db_host=$(echo $db_secret | jq -r '.host')
@@ -160,22 +160,24 @@ db_name=$(echo $db_secret | jq -r '.dbname')
 docker run -it --rm postgres:14.0-alpine psql -h $db_host -p $db_port -U $db_username -d $db_name
 ```
 
-You can now run SQL commands to test the setup of the database. For example:
+You can now execute SQL commands to test the database setup. For example:
 
-- Get the current date and time:
+- Retrieve the current date and time:
 
 ```sql
 > SELECT NOW();
 ```
 
-- Get the database version:
+- Check the database version:
 
 ```sql
 > SELECT version();
 ```
 
-- Get the list of tables:
+- List the tables in the database:
 
 ```sql
 > SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
 ```
+
+These steps will help you verify the successful setup of the database and ensure that the necessary connections and configurations are in place.
