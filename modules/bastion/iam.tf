@@ -1,5 +1,9 @@
 resource "aws_iam_role" "bastion_host_iam_role" {
   name = "${var.name}-bastion-host-iam-role"
+  managed_policy_arns = [
+    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+    "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  ]
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
