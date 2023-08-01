@@ -38,11 +38,8 @@ terraform init
 2. Switch to a workspace:
 
 ```sh
-# Create a new workspace if it doesn't exist
-terraform workspace new staging
-
-# Switch to another workspace
-terraform workspace select staging
+# Switch to the another workspace or create it if it doesn't exist
+terraform workspace select -or-create staging
 ```
 
 ## Deploy
