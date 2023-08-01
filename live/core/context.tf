@@ -49,6 +49,6 @@ module "label" {
   stage       = var.stage
 
   delimiter   = "-"
-  label_order = ["environment", "stage", "name", "attributes"]
+  label_order = ["namespace", "environment", "stage", "name", "attributes"]
   tags        = merge(var.tags, local.tf_tags)
 }
