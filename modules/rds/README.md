@@ -1,6 +1,6 @@
-# RDS Postgres Instance Module
+# RDS DB Instance Module
 
-Terraform module to bootstrap a RDS Postgres instance.
+Terraform module to bootstrap a RDS DB instance.
 
 ## Usage
 

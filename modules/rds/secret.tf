@@ -1,4 +1,4 @@
-# Create a random initial password for the RDS Postgres
+# Create a random initial password for the RDS DB Instance
 resource "random_password" "rds_password" {
   length           = 16
   special          = true
@@ -12,8 +12,8 @@ locals {
 }
 
 resource "aws_secretsmanager_secret" "secret" {
-  description = "RDS Postgres Connection Credentials"
-  name        = "${var.name}-rds-postgresql-connection-secret"
+  description = "RDS DB Instance Connection Credentials"
+  name        = "${var.name}-connection-secret"
 }
 
 resource "aws_secretsmanager_secret_version" "secret" {
@@ -30,8 +30,7 @@ resource "aws_secretsmanager_secret_version" "secret" {
   "engine": "${module.db.db_instance_engine}",
   "host": "${module.db.db_instance_address}",
   "port": ${module.db.db_instance_port},
-  "dbname" : "${var.db_name}",
-  "dbInstanceIdentifier": "${module.db.db_instance_identifier}"
+  "dbname" : "${var.db_name}"
 }
 EOF
 }
