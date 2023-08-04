@@ -3,5 +3,5 @@ resource "aws_ssm_parameter" "ssh_key" {
 
   name  = "/${var.name}/bastion_ssh"
   type  = "SecureString"
-  value = local_file.private_key[0].content
+  value = tls_private_key.ec2_ssh[0].private_key_pem
 }

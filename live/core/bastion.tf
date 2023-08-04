@@ -1,7 +1,14 @@
+variable "enable_bastion" {
+  type        = bool
+  description = "Enable bastion host"
+  default     = false
+}
+
 module "bastion" {
+  count = var.enable_bastion ? 1 : 0
+
   source                       = "../../modules/bastion"
-  name                         = module.label.id
-  region                       = var.region
+  name                         = "${module.label.id}-bastion"
   vpc_id                       = module.vpc.vpc_id
   subnets                      = module.vpc.public_subnets
   associate_public_ip_address  = true
@@ -10,18 +17,14 @@ module "bastion" {
 }
 
 output "bastion_instance_id" {
-  value = module.bastion.instance_id
+  value = var.enable_bastion ? module.bastion.instance_id : null
 }
 
 output "bastion_instance_profile" {
-  value = module.bastion.instance_profile
-}
-
-output "bastion_ssh_command" {
-  value = module.bastion.ssh_command
+  value = var.enable_bastion ? module.bastion.instance_profile : null
 }
 
 output "ssm_parameter_bastion_ssh_key" {
   description = "name of the ssm parameter for the bastion ssh key"
-  value       = module.bastion.ssm_parameter_ssh_key
+  value       = var.enable_bastion ? module.bastion.ssm_parameter_ssh_key : null
 }

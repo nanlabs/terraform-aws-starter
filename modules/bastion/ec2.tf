@@ -12,7 +12,7 @@ module "bastion" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 3.0"
 
-  name = "${var.name}-public"
+  name = var.name
 
   # instance
   key_name             = local._ssh_key_name

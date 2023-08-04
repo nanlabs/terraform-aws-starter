@@ -7,7 +7,6 @@ Terraform module to bootstrap a bastion host in AWS using EC2.
 ```hcl
 module "bastion" {
   source                       = "../../modules/bastion"
-  region = "us-west-2"
 
   name                         = "example-bastion"
 
