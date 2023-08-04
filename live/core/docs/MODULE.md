@@ -32,6 +32,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_enable_bastion"></a> [enable\_bastion](#input\_enable\_bastion) | Enable bastion host | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT' | `string` | `"development"` | no |
 | <a name="input_example_db_master_username"></a> [example\_db\_master\_username](#input\_example\_db\_master\_username) | The username for the master DB user | `string` | `"myuser"` | no |
 | <a name="input_example_db_name"></a> [example\_db\_name](#input\_example\_db\_name) | The name of the database to create | `string` | `"mydb"` | no |
@@ -48,7 +49,6 @@
 |------|-------------|
 | <a name="output_bastion_instance_id"></a> [bastion\_instance\_id](#output\_bastion\_instance\_id) | n/a |
 | <a name="output_bastion_instance_profile"></a> [bastion\_instance\_profile](#output\_bastion\_instance\_profile) | n/a |
-| <a name="output_bastion_ssh_command"></a> [bastion\_ssh\_command](#output\_bastion\_ssh\_command) | n/a |
 | <a name="output_example_db_connection_secret_arn"></a> [example\_db\_connection\_secret\_arn](#output\_example\_db\_connection\_secret\_arn) | The ARN of the secret containing the connection details for the RDS instance |
 | <a name="output_example_db_connection_secret_name"></a> [example\_db\_connection\_secret\_name](#output\_example\_db\_connection\_secret\_name) | The name of the secret containing the connection details for the RDS instance |
 | <a name="output_ssm_parameter_app_security_group"></a> [ssm\_parameter\_app\_security\_group](#output\_ssm\_parameter\_app\_security\_group) | name of the ssm parameter for the app security group |

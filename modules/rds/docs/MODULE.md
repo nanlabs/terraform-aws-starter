@@ -52,7 +52,6 @@
 | <a name="input_enable_public_access"></a> [enable\_public\_access](#input\_enable\_public\_access) | Enable public access for RDS. | `bool` | `true` | no |
 | <a name="input_enable_skip_final_snapshot"></a> [enable\_skip\_final\_snapshot](#input\_enable\_skip\_final\_snapshot) | When DB is deleted and If this variable is false, no final snapshot will be made. | `bool` | `true` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name to be used on all the resources as identifier | `string` | `""` | no |
-| <a name="input_region"></a> [region](#input\_region) | AWS region | `string` | `"us-west-2"` | no |
 | <a name="input_storage_encrypted"></a> [storage\_encrypted](#input\_storage\_encrypted) | Enable storage encryption. | `bool` | `true` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Any extra tags to assign to objects | `map(any)` | `{}` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC id in which the RDS instance is to be created. | `string` | n/a | yes |
