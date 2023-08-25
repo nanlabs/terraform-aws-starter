@@ -12,7 +12,6 @@ variable "example_db_master_username" {
 
 module "exampledb" {
   source = "../../modules/rds"
-  region = var.region
 
   name = "${module.label.id}-exampledb"
 
