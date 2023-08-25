@@ -35,7 +35,7 @@
 | <a name="input_db_allocated_storage"></a> [db\_allocated\_storage](#input\_db\_allocated\_storage) | Storage size in GB. | `number` | `20` | no |
 | <a name="input_db_backup_retention_period"></a> [db\_backup\_retention\_period](#input\_db\_backup\_retention\_period) | Backup retention period in days. | `string` | `"1"` | no |
 | <a name="input_db_backup_window"></a> [db\_backup\_window](#input\_db\_backup\_window) | Preferred backup window. | `string` | `"03:00-06:00"` | no |
-| <a name="input_db_engine"></a> [db\_engine](#input\_db\_engine) | The name of the database engine to be used for RDS. | `string` | `"postgres"` | no |
+| <a name="input_db_engine"></a> [db\_engine](#input\_db\_engine) | The name of the database engine to be used for RDS. | `string` | `"postgresql"` | no |
 | <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | The database engine version. | `string` | `"14"` | no |
 | <a name="input_db_family"></a> [db\_family](#input\_db\_family) | The family of the database engine to be used for RDS. | `string` | `"postgres14"` | no |
 | <a name="input_db_instance"></a> [db\_instance](#input\_db\_instance) | The instance class to use for RDS. | `string` | `"db.t4g.large"` | no |
