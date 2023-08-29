@@ -30,7 +30,7 @@ module "db" {
 
   maintenance_window              = var.db_maintenance_window
   backup_window                   = var.db_backup_window
-  enabled_cloudwatch_logs_exports = ["${var.db_engine}", "upgrade"]
+  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
   create_cloudwatch_log_group     = true
 
   backup_retention_period = var.db_backup_retention_period

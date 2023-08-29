@@ -48,7 +48,7 @@ variable "db_instance" {
 variable "db_engine" {
   description = "The name of the database engine to be used for RDS."
   type        = string
-  default     = "postgresql"
+  default     = "postgres"
 }
 
 variable "db_engine_version" {
