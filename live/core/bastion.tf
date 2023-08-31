@@ -17,14 +17,14 @@ module "bastion" {
 }
 
 output "bastion_instance_id" {
-  value = var.enable_bastion ? module.bastion.instance_id : null
+  value = var.enable_bastion ? module.bastion[0].instance_id : null
 }
 
 output "bastion_instance_profile" {
-  value = var.enable_bastion ? module.bastion.instance_profile : null
+  value = var.enable_bastion ? module.bastion[0].instance_profile : null
 }
 
 output "ssm_parameter_bastion_ssh_key" {
   description = "name of the ssm parameter for the bastion ssh key"
-  value       = var.enable_bastion ? module.bastion.ssm_parameter_ssh_key : null
+  value       = var.enable_bastion ? module.bastion[0].ssm_parameter_ssh_key : null
 }
