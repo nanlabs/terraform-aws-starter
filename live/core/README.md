@@ -95,7 +95,7 @@ Retrieve stored values, such as the VPC ID, using the AWS Parameter Store:
 
 ```bash
 # Retrieve the parameter value from the AWS Parameter Store
-vpc_id_parameter_name=$(terraform output -json | jq -r '.ssm_parameter_vpc_id')
+vpc_id_parameter_name=$(terraform output -json | jq -r '.ssm_parameter_vpc_id.value')
 vpc_id=$(aws ssm get-parameter --name "$vpc_id_parameter_name" --query 'Parameter.Value' --output text)
 
 # Print the value
