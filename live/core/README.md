@@ -17,16 +17,6 @@
 
 ✔️ [Terraform](https://www.terraform.io/downloads.html)
 
-## Module Documentation
-
-The module documentation is generated with [terraform-docs](https://github.com/terraform-docs/terraform-docs) by running the following command from the module directory:
-
-```sh
-terraform-docs md . > ./docs/MODULE.md
-```
-
-You can also view the latest version of the module documentation [here](./docs/MODULE.md).
-
 ## Setup
 
 1. Initialize the Terraform working directory:
@@ -178,3 +168,13 @@ You can now execute SQL commands to test the database setup. For example:
 ```
 
 These steps will help you verify the successful setup of the database and ensure that the necessary connections and configurations are in place.
+
+## Module Documentation
+
+The module documentation is generated with [terraform-docs](https://github.com/terraform-docs/terraform-docs) by running the following command from the module directory:
+
+```sh
+terraform-docs md . > ./docs/MODULE.md
+```
+
+You can also view the latest version of the module documentation [here](./docs/MODULE.md).

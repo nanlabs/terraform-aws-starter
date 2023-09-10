@@ -1,12 +1,18 @@
+variable "name" {
+  description = "Name to be used on all the resources as identifier"
+  type        = string
+  default     = ""
+}
+
+variable "tags" {
+  description = "Any extra tags to assign to objects"
+  type        = map(any)
+  default     = {}
+}
+
 variable "vpc_id" {
   description = "VPC id in which the RDS instance is to be created."
   type        = string
-}
-
-variable "enable_multi_az" {
-  description = "Create RDS instance in multiple availability zones."
-  type        = bool
-  default     = false
 }
 
 variable "db_subnet_group" {
@@ -42,7 +48,13 @@ variable "db_port" {
 variable "db_instance_class" {
   description = "The instance class to use for RDS."
   type        = string
-  default     = "db.t4g.large"
+  default     = "db.serverless"
+}
+
+variable "db_instances" {
+  description = "Map of cluster instances and any specific/overriding attributes to be created"
+  type        = any
+  default     = {}
 }
 
 variable "db_engine" {
@@ -63,12 +75,6 @@ variable "db_family" {
   default     = "postgres14"
 }
 
-variable "db_major_engine_version" {
-  description = "The major engine version."
-  type        = string
-  default     = "14"
-}
-
 variable "db_storage_type" {
   description = "Storage Type for RDS."
   type        = string
@@ -83,12 +89,6 @@ variable "storage_encrypted" {
 
 variable "db_allocated_storage" {
   description = "Storage size in GB."
-  type        = number
-  default     = null
-}
-
-variable "db_max_allocated_storage" {
-  description = "Maximum storage size in GB."
   type        = number
   default     = null
 }
@@ -121,16 +121,4 @@ variable "enable_public_access" {
   description = "Enable public access for RDS."
   type        = bool
   default     = true
-}
-
-variable "name" {
-  description = "Name to be used on all the resources as identifier"
-  type        = string
-  default     = ""
-}
-
-variable "tags" {
-  description = "Any extra tags to assign to objects"
-  type        = map(any)
-  default     = {}
 }
