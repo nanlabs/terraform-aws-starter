@@ -39,23 +39,23 @@ terraform init
 
 ```sh
 # Switch to the another workspace or create it if it doesn't exist
-terraform workspace select -or-create staging
+terraform workspace select -or-create prod
 ```
 
 ## Deploy
 
-🚀 **NOTE:** In this example, we are using the `staging` environment and the `us-west-2` region. Modify these values according to your environment and region.
+🚀 **NOTE:** In this example, we are using the `prod` environment and the `us-west-2` region. Modify these values according to your environment and region.
 
 1. Plan the deployment:
 
 ```sh
-terraform plan -var-file ./configs/staging.us-west-2.tfvars -out ./staging.tfplan
+terraform plan -var-file ./configs/prod.us-west-2.tfvars -out ./prod.tfplan
 ```
 
 2. Apply the deployment:
 
 ```sh
-terraform apply ./staging.tfplan
+terraform apply ./prod.tfplan
 ```
 
 ### First Time Deployment?
@@ -77,12 +77,12 @@ git push
 
 ## Destroy
 
-💣 **NOTE:** In this example, we are using the `staging` environment and the `us-west-2` region. Modify these values according to your environment and region.
+💣 **NOTE:** In this example, we are using the `prod` environment and the `us-west-2` region. Modify these values according to your environment and region.
 
 To destroy the infrastructure, run the following command:
 
 ```sh
-terraform destroy -var-file ./configs/staging.us-west-2.tfvars
+terraform destroy -var-file ./configs/prod.us-west-2.tfvars
 ```
 
 ## Post Deployment Steps

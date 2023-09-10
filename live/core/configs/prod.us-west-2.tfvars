@@ -3,10 +3,10 @@
 region      = "us-west-2"
 name        = "core"
 namespace   = "nan"
-environment = "staging"
+environment = "prod"
 tags = {
   "Terraform"   = "true"
-  "Environment" = "staging"
+  "Environment" = "prod"
 }
 
 # AWS settings
