@@ -94,14 +94,42 @@ echo "VPC ID: $vpc_id"
 
 ### Connecting to the Bastion Host
 
-To establish a connection with the bastion host, use the following commands:
+To establish a secure connection with the bastion host, follow these steps:
+
+#### Obtain Required Information
+
+First, you need to gather some essential information:
+
+- Bastion SSH Parameter Name
+- Bastion Instance ID
+
+You can retrieve these values using Terraform:
 
 ```bash
-# Retrieve the SSH command from the Terraform output
-ssh_command=$(terraform output -json | jq -r '.bastion_ssh_command.value')
+bastion_ssh_parameter_name=$(terraform output -json | jq -r '.ssm_parameter_bastion_ssh_key.value')
+bastion_instance_id=$(terraform output -json | jq -r '.bastion_instance_id.value')
+```
 
-# Execute the SSH command
-eval $ssh_command
+#### Generate .pem file with the ssh key
+
+```bash
+aws ssm get-parameter --name "$bastion_ssh_parameter_name" --with-decryption --query 'Parameter.Value' --output text > /tmp/ssh_key.pem
+chmod 400 /tmp/ssh_key.pem
+```
+
+#### Retrieve bastion's public IP
+
+```bash
+bastion_public_ip=$(aws ec2 describe-instances --instance-ids "$bastion_instance_id" --query 'Reservations[0].Instances[0].PublicIpAddress' --output text | tr '.' '-')
+
+# Print the value
+echo "Bastion IP: $bastion_public_ip"
+```
+
+#### Connect to Bastion Host
+
+```bash
+ssh -i "/tmp/ssh_key.pem" ubuntu@ec2-"$bastion_public_ip".us-west-2.compute.amazonaws.com
 ```
 
 Ensure that you can access the database from the bastion host and verify that Docker is functioning correctly.
