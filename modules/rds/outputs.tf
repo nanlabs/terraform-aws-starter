@@ -94,12 +94,7 @@ output "db_instance_cloudwatch_log_groups" {
   value       = module.db.db_instance_cloudwatch_log_groups
 }
 
-output "connection_secret_name" {
-  description = "The name of the AWS Secrets Manager secret created"
-  value       = aws_secretsmanager_secret.secret.name
-}
-
-output "connection_secret_arn" {
+output "db_instance_master_user_secret_arn" {
   description = "The ARN of the AWS Secrets Manager secret created"
-  value       = aws_secretsmanager_secret.secret.arn
+  value       = module.db.db_instance_master_user_secret_arn
 }

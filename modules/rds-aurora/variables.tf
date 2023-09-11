@@ -60,19 +60,19 @@ variable "db_instances" {
 variable "db_engine" {
   description = "The name of the database engine to be used for RDS."
   type        = string
-  default     = "postgres"
+  default     = "aurora-postgresql"
+}
+
+variable "db_engine_mode" {
+  description = "The database engine mode."
+  type        = string
+  default     = "provisioned"
 }
 
 variable "db_engine_version" {
   description = "The database engine version."
   type        = string
   default     = "14"
-}
-
-variable "db_family" {
-  description = "The family of the database engine to be used for RDS."
-  type        = string
-  default     = "postgres14"
 }
 
 variable "db_storage_type" {
@@ -87,7 +87,7 @@ variable "storage_encrypted" {
   default     = true
 }
 
-variable "db_allocated_storage" {
+variable "allocated_storage" {
   description = "Storage size in GB."
   type        = number
   default     = null

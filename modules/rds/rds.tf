@@ -1,6 +1,6 @@
 module "db" {
   source  = "terraform-aws-modules/rds/aws"
-  version = "6.0.0"
+  version = "6.1.1"
 
   identifier = "${var.name}-rds"
 
@@ -13,16 +13,18 @@ module "db" {
 
   storage_type          = var.db_storage_type
   storage_encrypted     = var.storage_encrypted
-  allocated_storage     = var.db_allocated_storage
-  max_allocated_storage = var.db_max_allocated_storage
+  allocated_storage     = var.allocated_storage
+  max_allocated_storage = var.max_allocated_storage
 
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
   # user cannot be used as it is a reserved word used by the engine"
-  db_name  = var.db_name
-  username = local.username
-  password = local.password
-  port     = var.db_port
+  db_name                       = var.db_name
+  username                      = var.db_master_username
+  password                      = var.db_master_password
+  manage_master_user_password   = var.manage_master_user_password
+  master_user_secret_kms_key_id = var.master_user_secret_kms_key_id
+  port                          = var.db_port
 
   multi_az               = var.enable_multi_az
   db_subnet_group_name   = var.db_subnet_group
@@ -46,9 +48,6 @@ module "db" {
   monitoring_role_name                  = "${var.name}-monitoring"
   monitoring_role_use_name_prefix       = true
   monitoring_role_description           = "Monitoring role for ${var.name}"
-
-  # We will create our own secret and store it in AWS Secrets Manager
-  manage_master_user_password = false
 
   parameters = [
     {

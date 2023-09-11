@@ -27,10 +27,22 @@ variable "db_master_username" {
   default     = "name"
 }
 
-variable "db_master_password" {
-  description = "Database password"
+variable "manage_master_user_password" {
+  description = "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if `master_password` is provided"
+  type        = bool
+  default     = true
+}
+
+variable "master_user_secret_kms_key_id" {
+  description = "The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key"
   type        = string
-  default     = ""
+  default     = null
+}
+
+variable "db_master_password" {
+  description = "Password for the master DB user. Note that this may show up in logs, and it will be stored in the state file. Required unless `manage_master_user_password` is set to `true` or unless `snapshot_identifier` or `replication_source_identifier` is provided or unless a `global_cluster_identifier` is provided when the cluster is the secondary cluster of a global database"
+  type        = string
+  default     = null
 }
 
 variable "db_port" {
@@ -81,13 +93,13 @@ variable "storage_encrypted" {
   default     = true
 }
 
-variable "db_allocated_storage" {
+variable "allocated_storage" {
   description = "Storage size in GB."
   type        = number
   default     = null
 }
 
-variable "db_max_allocated_storage" {
+variable "max_allocated_storage" {
   description = "Maximum storage size in GB."
   type        = number
   default     = null

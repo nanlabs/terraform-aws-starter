@@ -17,4 +17,4 @@ enable_bastion = false
 # RDS Database settings
 
 example_db_name            = "example"
-example_db_master_username = "master"
+example_db_master_username = "root"

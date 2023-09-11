@@ -6,12 +6,13 @@ module "db" {
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   engine         = var.db_engine
+  engine_mode    = var.db_engine_mode
   engine_version = var.db_engine_version
   instance_class = var.db_instance_class
 
   storage_type      = var.db_storage_type
   storage_encrypted = var.storage_encrypted
-  allocated_storage = var.db_allocated_storage
+  allocated_storage = var.allocated_storage
 
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
