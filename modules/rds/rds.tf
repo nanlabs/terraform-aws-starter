@@ -9,7 +9,7 @@ module "db" {
   engine_version       = var.db_engine_version
   family               = var.db_family
   major_engine_version = var.db_major_engine_version
-  instance_class       = var.db_instance
+  instance_class       = var.db_instance_class
 
   storage_type          = var.db_storage_type
   storage_encrypted     = var.storage_encrypted

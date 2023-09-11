@@ -1,14 +1,14 @@
-# RDS DB Instance Module
+# RDS Aurora Module
 
-Terraform module to bootstrap a RDS DB instance.
+Terraform module to bootstrap a RDS Aurora instances and other database resources.
 
 ## Usage
 
 ```hcl
 module "db" {
-  source = "../../modules/rds"
+  source = "../../modules/rds-aurora"
 
-  name = "examples-rds-instance"
+  name = "examples-rds-aurora"
 
   vpc_id          = "vpc-1234567890"
   db_subnet_group = "db-subnet-group-1234567890"
@@ -17,7 +17,11 @@ module "db" {
   db_master_username = "db_master_username"
   db_port            = 5432
 
-  db_instance_class       = "db.t2.micro"
+  db_instance_class       = "db.serverless"
+  instances = {
+    one = {}
+    two = {}
+  }
 }
 ```
 
