@@ -41,7 +41,7 @@
 | <a name="input_db_master_username"></a> [db\_master\_username](#input\_db\_master\_username) | Database username | `string` | `"name"` | no |
 | <a name="input_db_name"></a> [db\_name](#input\_db\_name) | Database name | `string` | `"name"` | no |
 | <a name="input_db_port"></a> [db\_port](#input\_db\_port) | Database port | `number` | `5432` | no |
-| <a name="input_db_storage_type"></a> [db\_storage\_type](#input\_db\_storage\_type) | Storage Type for RDS. | `string` | `"gp2"` | no |
+| <a name="input_db_storage_type"></a> [db\_storage\_type](#input\_db\_storage\_type) | Storage Type for RDS. | `string` | `null` | no |
 | <a name="input_db_subnet_group"></a> [db\_subnet\_group](#input\_db\_subnet\_group) | Database subnet group to use. Leave blank to create a new one. | `string` | `""` | no |
 | <a name="input_enable_multi_az"></a> [enable\_multi\_az](#input\_enable\_multi\_az) | Create RDS instance in multiple availability zones. | `bool` | `false` | no |
 | <a name="input_enable_public_access"></a> [enable\_public\_access](#input\_enable\_public\_access) | Enable public access for RDS. | `bool` | `true` | no |
