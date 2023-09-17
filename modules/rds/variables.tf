@@ -84,7 +84,7 @@ variable "db_major_engine_version" {
 variable "db_storage_type" {
   description = "Storage Type for RDS."
   type        = string
-  default     = "gp2"
+  default     = null
 }
 
 variable "storage_encrypted" {

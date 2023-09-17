@@ -78,7 +78,7 @@ variable "db_engine_version" {
 variable "db_storage_type" {
   description = "Storage Type for RDS."
   type        = string
-  default     = "gp2"
+  default     = null
 }
 
 variable "storage_encrypted" {
@@ -119,6 +119,12 @@ variable "enable_skip_final_snapshot" {
 
 variable "enable_public_access" {
   description = "Enable public access for RDS."
+  type        = bool
+  default     = true
+}
+
+variable "manage_master_user_password" {
+  description = "Set to true to allow RDS to manage the master user password in Secrets Manager. Cannot be set if `master_password` is provided"
   type        = bool
   default     = true
 }
