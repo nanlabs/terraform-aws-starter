@@ -11,7 +11,6 @@ module "vpc" {
   tags               = module.label.tags
   enable_nat_gateway = true
   single_nat_gateway = true
-  region             = var.region
 }
 
 output "ssm_parameter_vpc_id" {
