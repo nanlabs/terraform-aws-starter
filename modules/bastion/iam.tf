@@ -64,6 +64,13 @@ resource "aws_iam_role_policy" "bastion_host_iam_role" {
           "ssm:GetParameter"
         ],
         "Resource" : "arn:aws:ssm:*:*:parameter/AmazonCloudWatch-*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "secretsmanager:GetSecretValue"
+        ],
+        "Resource" : "arn:aws:secretsmanager:*:*:secret:*"
       }
     ]
   })
