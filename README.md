@@ -81,9 +81,11 @@ We have created custom Terraform modules to bootstrap our infrastructure, which 
 | [RDS Postgres](./modules/rds-postgresql/README.md) | Terraform module for bootstrapping an RDS Postgres instance.                     |
 | [Bastion](./modules/bastion/README.md)             | Terraform module for bootstrapping a bastion host.                               |
 
-## Services
+## Apps and Services
 
-In addition to infrastructure provisioning, we may have some services that run to maintain our infrastructure. Here are a few ideas:
+In addition to infrastructure provisioning, we may have some apps and services that run to maintain our infrastructure. Here are a few ideas for apps and services that you can run to maintain your infrastructure. You can use these as a starting point for your own apps and services.
+
+These apps and services can be placed in the `apps/` directory!
 
 | Service                                                                                                                          | Description                                      |
 | :------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------- |
