@@ -1,0 +1,67 @@
+service: ${env:SERVICE_NAME}
+
+frameworkVersion: "3"
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+useDotenv: true
+
+package:
+  individually: true
+  excludeDevDependencies: true
+
+custom:
+  serverless-offline:
+    httpPort: 3000
+    port: 3000
+    useChildProcesses: true
+    noPrependStageInUrl: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: local
+  region: us-east-2
+  deploymentBucket:
+    blockPublicAccess: true
+    versioning: true
+    serverSideEncryption: AES256
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ec2:DescribeInstanceStatus
+        - ec2:DescribeInstances
+      Resource:
+        - "*"
+    - Effect: Allow
+      Action:
+        - ec2:StartInstances
+        - ec2:StopInstances
+      Resource:
+        - Fn::Join:
+            - ":"
+            - - "arn:aws:ec2"
+              - Ref: AWS::Region
+              - Ref: AWS::AccountId
+              - "instance/${env:EC2_INSTANCE_ID}"
+
+functions:
+  startInstance:
+    handler: src/handlers/start.handler
+    timeout: 30
+    events:
+      - schedule: ${env:START_INSTANCE_CRON, 'cron(0 0 * * ? *)'}
+    environment:
+      EC2_INSTANCE_ID: ${env:EC2_INSTANCE_ID}
+      SLACK_WEBHOOK_URL: ${env:SLACK_WEBHOOK_URL, ''}
+      SLACK_MESSAGE_PREFIX: ${env:SLACK_MESSAGE_PREFIX, ''}
+  stopInstance:
+    handler: src/handlers/stop.handler
+    events:
+      - schedule: ${env:STOP_INSTANCE_CRON, 'cron(0 0 * * ? *)'}
+    environment:
+      EC2_INSTANCE_ID: ${env:EC2_INSTANCE_ID}
+      SLACK_WEBHOOK_URL: ${env:SLACK_WEBHOOK_URL, ''}
+      SLACK_MESSAGE_PREFIX: ${env:SLACK_MESSAGE_PREFIX, ''}

@@ -83,13 +83,13 @@ We have created custom Terraform modules to bootstrap our infrastructure, which 
 
 ## Apps and Services
 
-In addition to infrastructure provisioning, we may have some apps and services that run to maintain our infrastructure. Here are a few ideas for apps and services that you can run to maintain your infrastructure. You can use these as a starting point for your own apps and services.
+In addition to infrastructure provisioning, we have included a few apps and services to help you get started.
 
-These apps and services can be placed in the `apps/` directory!
+These apps and services are located in the `apps` directory. In there you can find useful examples of how to use the infrastructure we have provisioned.
 
-| Service                                                                                                                          | Description                                      |
-| :------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------- |
-| [Start and Stop EC2 Instance](https://github.com/nanlabs/devops-reference/tree/main/examples/serverless-start-stop-ec2-instance) | Lambda function to start and stop EC2 instances. |
+| Service                                                         | Description                                                                                       |
+| :-------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ |
+| [Start and Stop EC2 Instance](./apps/start-stop-ec2-instances/) | This is a Serverless Framework based project to start and stop EC2 instances based on a schedule. |
 
 ## Contributing
 
