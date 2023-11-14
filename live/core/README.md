@@ -15,11 +15,18 @@
 
 ## Prerequisites
 
-✔️ [Terraform](https://www.terraform.io/downloads.html)
+- [Terraform](https://www.terraform.io/downloads.html)
+- [TFswitch](https://tfswitch.warrensbox.com/)
 
 ## Setup
 
-1. Initialize the Terraform working directory:
+1. Switch to the correct Terraform version
+
+```sh
+tfswitch
+```
+
+2. Initialize the Terraform working directory:
 
 ```sh
 terraform init
