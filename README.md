@@ -77,10 +77,10 @@ We have created custom Terraform modules to bootstrap our infrastructure, which 
 | Module                                               | Description                                                                      |
 | :--------------------------------------------------- | :------------------------------------------------------------------------------- |
 | [Amplify App](./modules/amplify-app/README.md)       | Terraform module for bootstrapping an Amplify app.                               |
-| [VPC](./modules/vpc/README.md)                       | Terraform module for bootstrapping a VPC for use with our shared infrastructure. |
+| [Bastion](./modules/bastion/README.md)               | Terraform module for bootstrapping a bastion host.                               |
 | [RDS Instance](./modules/rds/README.md)              | Terraform module for bootstrapping an RDS Instance.                              |
 | [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Terraform module for bootstrapping an RDS Aurora Cluster.                        |
-| [Bastion](./modules/bastion/README.md)               | Terraform module for bootstrapping a bastion host.                               |
+| [VPC](./modules/vpc/README.md)                       | Terraform module for bootstrapping a VPC for use with our shared infrastructure. |
 
 ## Apps and Services
 
