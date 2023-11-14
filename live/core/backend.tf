@@ -11,7 +11,7 @@ module "terraform_state_backend" {
 
   terraform_backend_config_file_path = "."
   terraform_backend_config_file_name = "s3-backend.tf"
-  terraform_state_file               = "${module.label.id}.tfstate"
+  terraform_state_file               = "${module.label.namespace}-${module.label.name}.tfstate"
 
   bucket_enabled   = true
   dynamodb_enabled = true
