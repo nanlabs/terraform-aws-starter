@@ -3,8 +3,12 @@
 # be bootstrapped according to the simple yet essential procedure in
 # https://github.com/cloudposse/terraform-aws-tfstate-backend#usage
 module "terraform_state_backend" {
-  source     = "cloudposse/tfstate-backend/aws"
-  version    = "1.1.1"
+  source  = "cloudposse/tfstate-backend/aws"
+  version = "1.1.1"
+
+  # Avoid creating anything within if we are not in the workspace "default" and "prod".
+  count = contains(["default", "prod"], terraform.workspace) ? 1 : 0
+
   name       = module.label.name
   namespace  = module.label.namespace
   attributes = ["state"]
