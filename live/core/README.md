@@ -16,6 +16,13 @@
 ## Prerequisites
 
 ✔️ [Terraform](https://www.terraform.io/downloads.html)
+✔️ [TFswitch](https://tfswitch.warrensbox.com/)
+
+## Switch to the correct Terraform version
+
+```sh
+tfswitch
+```
 
 ## Setup
 
