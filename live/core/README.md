@@ -18,15 +18,15 @@
 - [Terraform](https://www.terraform.io/downloads.html)
 - [TFswitch](https://tfswitch.warrensbox.com/)
 
-## Switch to the correct Terraform version
+## Setup
+
+1. Switch to the correct Terraform version
 
 ```sh
 tfswitch
 ```
 
-## Setup
-
-1. Initialize the Terraform working directory:
+2. Initialize the Terraform working directory:
 
 ```sh
 terraform init
