@@ -7,7 +7,7 @@ module "terraform_state_backend" {
   version = "1.1.1"
 
   # Avoid creating anything within if we are not in the workspace "default" and "prod".
-  count = contains(["default", "prod"], terraform.workspace) ? 1 : 0
+  enabled = contains(["default", "prod"], terraform.workspace)
 
   name       = module.label.name
   namespace  = module.label.namespace
