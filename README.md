@@ -79,13 +79,14 @@ It is recommended to create a separate directory for each environment (e.g., `de
 
 We have created custom Terraform modules to bootstrap our infrastructure, which are located in the `modules` directory.
 
-| Module                                               | Description                                                                      |
-| :--------------------------------------------------- | :------------------------------------------------------------------------------- |
-| [Amplify App](./modules/amplify-app/README.md)       | Terraform module for bootstrapping an Amplify app.                               |
-| [Bastion](./modules/bastion/README.md)               | Terraform module for bootstrapping a bastion host.                               |
-| [RDS Instance](./modules/rds/README.md)              | Terraform module for bootstrapping an RDS Instance.                              |
-| [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Terraform module for bootstrapping an RDS Aurora Cluster.                        |
-| [VPC](./modules/vpc/README.md)                       | Terraform module for bootstrapping a VPC for use with our shared infrastructure. |
+| Module                                               | Description                                                                                                                                             |
+| :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Amplify App](./modules/amplify-app/README.md)       | Terraform module for bootstrapping an Amplify app.                                                                                                      |
+| [Bastion](./modules/bastion/README.md)               | Terraform module for bootstrapping a bastion host.                                                                                                      |
+| [MongoDB Atlas Cluster](./modules/mongodb/README.md) | Terraform module for bootstrapping a MongoDB Atlas Cluster. It makes it possible to create a VPC Peering between the VPC and the MongoDB Atlas Cluster. |
+| [RDS Instance](./modules/rds/README.md)              | Terraform module for bootstrapping an RDS Instance.                                                                                                     |
+| [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Terraform module for bootstrapping an RDS Aurora Cluster.                                                                                               |
+| [VPC](./modules/vpc/README.md)                       | Terraform module for bootstrapping a VPC for use with our shared infrastructure.                                                                        |
 
 ## Apps and Services
 
