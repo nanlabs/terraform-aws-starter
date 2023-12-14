@@ -6,10 +6,10 @@ module "terraform_state_backend" {
   source  = "cloudposse/tfstate-backend/aws"
   version = "1.1.1"
 
-  name       = module.label.name
-  namespace  = module.label.namespace
+  name        = module.label.name
+  namespace   = module.label.namespace
   environment = module.label.environment
-  attributes = ["state"]
+  attributes  = ["state"]
 
   terraform_backend_config_file_path = "."
   terraform_backend_config_file_name = "s3-backend.tf"
