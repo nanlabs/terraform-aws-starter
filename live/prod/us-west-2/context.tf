@@ -27,7 +27,6 @@ module "label" {
   name        = local.context.name
   environment = local.context.environment
   namespace   = local.context.namespace
-  stage       = local.context.stage
 
   delimiter   = "-"
   label_order = ["namespace", "environment", "stage", "name", "attributes"]
