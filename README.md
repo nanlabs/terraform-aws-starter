@@ -13,8 +13,8 @@ Welcome to the Terraform AWS Starter Kit! This comprehensive and robust starter 
 The Terraform AWS Starter Kit solves the most challenging aspect of AWS infrastructure building by providing a powerful solution for our clients. Our goal is to simplify the process of setting up a reliable and scalable AWS environment, allowing you to focus on developing and deploying your applications swiftly and confidently.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" alt="" align="right" width="400px" srcset="./tools/dac/live_core_infrastructure.png"/>
-  <img alt="" align="right" width="400px" src="./tools/dac/live_core_infrastructure.png"/>
+  <source media="(prefers-color-scheme: dark)" alt="" align="right" width="400px" srcset="./tools/dac/live_prod_infrastructure.png"/>
+  <img alt="" align="right" width="400px" src="./tools/dac/live_prod_infrastructure.png"/>
 </picture>
 
 ## Key Features
@@ -60,15 +60,20 @@ We welcome contributions and feedback to improve this starter kit further, makin
 
 ## Quick Start
 
-To get started quickly, navigate to the [`live/core`](./live/core) directory and follow the instructions in the [README](./live/core/README.md). This directory contains the Terraform root module for our core infrastructure, including Terraform variables and backend configuration. Additionally, we provide post-deployment steps in the [README](./live/core/README.md#post-deployment-steps) to help you test the setup and get familiar with the infrastructure.
+Check the [Live Infrastructure](#live-infrastructure) section for more information about existing infrastructure modules and how to use them.
+
+Once you have chosen the infrastructure module you want to use, move to the module directory and follow the instructions in the README file.
 
 ## Live Infrastructure
 
 The `live` directory houses our live infrastructure. This is where you'll find our Terraform variables, backend configuration, and Terraform root modules.
 
-| Module                                       | Description                                        |
-| :------------------------------------------- | :------------------------------------------------- |
-| [Core Infrastructure](./live/core/README.md) | Terraform root module for our core infrastructure. |
+It is recommended to create a separate directory for each environment (e.g., `dev`, `staging`, `prod`) and region (e.g., `us-east-1`, `us-west-2`, `eu-west-1`). This allows you to easily manage and deploy your infrastructure.
+
+| Module                                                                           | Description                                           |
+| :------------------------------------------------------------------------------- | :---------------------------------------------------- |
+| [Prod App Infrastructure (us-west-2)](./live/prod/us-west-2/app/README.md)       | Terraform root module for our prod infrastructure.    |
+| [Staging App Infrastructure (us-west-2)](./live/staging/us-west-2/app/README.md) | Terraform root module for our staging infrastructure. |
 
 ## Terraform Modules
 
