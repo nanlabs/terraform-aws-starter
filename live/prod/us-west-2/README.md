@@ -1,4 +1,4 @@
-# Core Infrastructure
+# Prod Infrastructure (us-west-2)
 
 🏢 This directory contains the infrastructure as code for our cloud infrastructure. It provides a ready-to-use Terraform module with various features. Follow the steps below to get started.
 
@@ -32,21 +32,12 @@ tfswitch
 terraform init
 ```
 
-2. Switch to a workspace:
-
-```sh
-# Switch to the another workspace or create it if it doesn't exist
-terraform workspace select -or-create prod
-```
-
 ## Deploy
-
-🚀 **NOTE:** In this example, we are using the `prod` environment and the `us-west-2` region. Modify these values according to your environment and region.
 
 1. Plan the deployment:
 
 ```sh
-terraform plan -var-file ./configs/prod.us-west-2.tfvars -out ./prod.tfplan
+terraform plan -out ./prod.tfplan
 ```
 
 2. Apply the deployment:
@@ -74,12 +65,10 @@ git push
 
 ## Destroy
 
-💣 **NOTE:** In this example, we are using the `prod` environment and the `us-west-2` region. Modify these values according to your environment and region.
-
 To destroy the infrastructure, run the following command:
 
 ```sh
-terraform destroy -var-file ./configs/prod.us-west-2.tfvars
+terraform destroy
 ```
 
 ## Post Deployment Steps
