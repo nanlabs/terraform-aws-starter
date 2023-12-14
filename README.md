@@ -70,10 +70,10 @@ The `live` directory houses our live infrastructure. This is where you'll find o
 
 It is recommended to create a separate directory for each environment (e.g., `dev`, `staging`, `prod`) and region (e.g., `us-east-1`, `us-west-2`, `eu-west-1`). This allows you to easily manage and deploy your infrastructure.
 
-| Module                                                                   | Description                                           |
-| :----------------------------------------------------------------------- | :---------------------------------------------------- |
-| [Prod Infrastructure (us-west-2)](./live/prod/us-west-2/README.md)       | Terraform root module for our prod infrastructure.    |
-| [Staging Infrastructure (us-west-2)](./live/staging/us-west-2/README.md) | Terraform root module for our staging infrastructure. |
+| Module                                                                           | Description                                           |
+| :------------------------------------------------------------------------------- | :---------------------------------------------------- |
+| [Prod App Infrastructure (us-west-2)](./live/prod/us-west-2/app/README.md)       | Terraform root module for our prod infrastructure.    |
+| [Staging App Infrastructure (us-west-2)](./live/staging/us-west-2/app/README.md) | Terraform root module for our staging infrastructure. |
 
 ## Terraform Modules
 

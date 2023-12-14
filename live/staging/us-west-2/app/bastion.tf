@@ -7,7 +7,7 @@ locals {
 module "bastion" {
   count = local.bastion.enable ? 1 : 0
 
-  source                       = "../../../modules/bastion"
+  source                       = "../../../../modules/bastion"
   name                         = "${module.label.id}-bastion"
   vpc_id                       = module.vpc.vpc_id
   subnets                      = module.vpc.public_subnets

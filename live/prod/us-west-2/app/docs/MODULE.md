@@ -16,11 +16,11 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_bastion"></a> [bastion](#module\_bastion) | ../../../modules/bastion | n/a |
-| <a name="module_exampledb"></a> [exampledb](#module\_exampledb) | ../../../modules/rds | n/a |
+| <a name="module_bastion"></a> [bastion](#module\_bastion) | ../../../../modules/bastion | n/a |
+| <a name="module_exampledb"></a> [exampledb](#module\_exampledb) | ../../../../modules/rds | n/a |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_terraform_state_backend"></a> [terraform\_state\_backend](#module\_terraform\_state\_backend) | cloudposse/tfstate-backend/aws | 1.1.1 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | ../../../modules/vpc | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | ../../../../modules/vpc | n/a |
 
 ## Resources
 

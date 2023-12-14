@@ -1,11 +1,11 @@
 locals {
   context = {
-    name        = "infra"
+    name        = "app"
     namespace   = "nan"
-    environment = "prod"
+    environment = "staging"
     tags = {
       "Terraform"   = "true"
-      "Environment" = "prod"
+      "Environment" = "staging"
     }
   }
 }

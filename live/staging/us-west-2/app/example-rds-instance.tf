@@ -6,7 +6,7 @@ locals {
 }
 
 module "exampledb" {
-  source = "../../../modules/rds"
+  source = "../../../../modules/rds"
 
   name = "${module.label.id}-exampledb"
 
