@@ -1,7 +1,7 @@
 module "vpc" {
   source             = "../../../../modules/vpc"
   name               = module.label.id
-  vpc_cidr_block     = "10.0.0.0/16"
+  vpc_cidr_block     = "10.1.0.0/16"
   tags               = module.label.tags
   enable_nat_gateway = true
   single_nat_gateway = true
