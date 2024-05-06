@@ -6,14 +6,16 @@ module "terraform_state_backend" {
   source  = "cloudposse/tfstate-backend/aws"
   version = "1.1.1"
 
-  name        = module.label.name
-  namespace   = module.label.namespace
-  environment = module.label.environment
-  attributes  = ["state"]
+  # Avoid creating anything within if we are not in the workspace "default" and "prod".
+  enabled = contains(["default", "prod"], terraform.workspace)
+
+  name       = module.label.name
+  namespace  = module.label.namespace
+  attributes = ["state"]
 
   terraform_backend_config_file_path = "."
   terraform_backend_config_file_name = "s3-backend.tf"
-  terraform_state_file               = "${module.label.id}.tfstate"
+  terraform_state_file               = "${module.label.namespace}-${module.label.name}.tfstate"
 
   bucket_enabled   = true
   dynamodb_enabled = true

@@ -66,14 +66,14 @@ Once you have chosen the infrastructure module you want to use, move to the modu
 
 ## Live Infrastructure
 
-The `live` directory houses our live infrastructure. This is where you'll find our Terraform variables, backend configuration, and Terraform root modules.
+The `live` directory houses our live infrastructure components. This is where you'll find our Terraform variables, backend configuration, and Terraform root modules.
 
-It is recommended to create a separate directory for each environment (e.g., `dev`, `staging`, `prod`) and region (e.g., `us-east-1`, `us-west-2`, `eu-west-1`). This allows you to easily manage and deploy your infrastructure.
+It is recommended to create a separate directory for each domain that you want to manage with Terraform. For example, you could have a `core-networking` directory for managing your VPC, subnets, and security groups, and a `common-infra` directory for managing your RDS instances, S3 buckets, and other shared resources.
 
-| Module                                                                           | Description                                           |
-| :------------------------------------------------------------------------------- | :---------------------------------------------------- |
-| [Prod App Infrastructure (us-west-2)](./live/prod/us-west-2/app/README.md)       | Terraform root module for our prod infrastructure.    |
-| [Staging App Infrastructure (us-west-2)](./live/staging/us-west-2/app/README.md) | Terraform root module for our staging infrastructure. |
+| Module                                                                | Description                                                                                                              |
+| :-------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| [Common Infrastructure](./live/common-infra/README.md)                | Terraform module for managing common infrastructure components such as VPC, subnets, security groups, and RDS instances. |
+| [Terraform Backend Configuration](./live/terraform-backend/README.md) | Terraform module for setting up the S3 backend.                                                                          |
 
 ## Terraform Modules
 

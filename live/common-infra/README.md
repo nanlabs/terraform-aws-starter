@@ -1,75 +1,92 @@
-# Prod Infrastructure (us-west-2)
+# Common Infrastructure
 
-🏢 This directory contains the infrastructure as code for our cloud infrastructure. It provides a ready-to-use Terraform module with various features. Follow the steps below to get started.
+🏢 This directory contains the Terraform configuration for our core cloud infrastructure. It provides a ready-to-use Terraform module with essential services and security features.
 
 ## Features
 
-- ✨ Ready to use Root Terraform module!
-- 🗄️ Store Terraform state in an S3 bucket with a DynamoDB table for locking.
-- 🌐 VPC with public and private subnets (application and database subnets) in three availability zones.
-- 🔒 Security groups for bastion host and database.
-- 🔑 Bastion host to access private resources.
-- 🐘 RDS Postgres instance and other database resources.
-- 🔒 AWS Secrets Manager to store database credentials.
-- 🔧 SSM Parameter Store to store parameters such as VPC ID, Subnet IDs, etc.
+- ✨ Comprehensive Root Terraform module for quick deployment.
+- 🗄️ Configured to use an external S3 bucket for Terraform state management with a DynamoDB table for state locking.
+- 🌐 Highly available VPC setup with public and private subnets across multiple availability zones.
+- 🔒 Configured security groups for bastion hosts and databases.
+- 🔑 Bastion host setup for secure access to internal services.
+- 🐘 RDS Postgres setup for reliable database services.
+- 🔒 Utilization of AWS Secrets Manager for secure storage of database credentials.
+- 🔧 Use of SSM Parameter Store for managing network and service parameters.
 
 ## Prerequisites
 
-- [Terraform](https://www.terraform.io/downloads.html)
-- [TFswitch](https://tfswitch.warrensbox.com/)
+- [Terraform](https://www.terraform.io/downloads.html) for infrastructure provisioning.
+- [TFswitch](https://tfswitch.warrensbox.com/) to switch between Terraform versions easily.
 
 ## Setup
 
-1. Switch to the correct Terraform version
+1. **Set Terraform Version:**
 
-```sh
-tfswitch
-```
+   Ensure you are using the correct Terraform version:
 
-2. Initialize the Terraform working directory:
+   ```sh
+   tfswitch
+   ```
 
-```sh
-terraform init
-```
+2. **Check the Terraform Backend Configuration:**
+
+   Verify that the backend configuration is set correctly in the `backend.tf` file.
+
+   ```hcl
+   terraform {
+     required_version = ">= 1.0.0"
+
+     backend "s3" {
+       region         = "us-west-2"
+       bucket         = "terraform-state"
+       key            = "terraform.tfstate"
+       dynamodb_table = "terraform-state-lock"
+       profile        = ""
+       role_arn       = ""
+       encrypt        = "true"
+     }
+   }
+
+   ```
+
+   Replace the placeholder values with the actual bucket name, key, region, and DynamoDB table name.
+
+3. **Initialize Terraform:**
+
+   Initialize the working directory with the required providers and modules:
+
+   ```sh
+   terraform init
+   ```
+
+4. **Workspace Management:**
+
+   Select or create a new workspace tailored to your deployment environment:
+
+   ```sh
+   # Switch to the another workspace or create it if it doesn't exist
+   terraform workspace select -or-create prod
+   ```
 
 ## Deploy
 
-1. Plan the deployment:
+🚀 **Deployment Instructions:**
 
-```sh
-terraform plan -out ./prod.tfplan
-```
+1. **Plan Your Deployment:**
 
-2. Apply the deployment:
+   Review and verify the deployment plan:
 
-```sh
-terraform apply ./prod.tfplan
-```
+   ```sh
+   terraform plan -var-file ./configs/prod.tfvars -out=prod.tfplan
+   ```
 
-### First Time Deployment?
+2. **Execute the Plan:**
 
-If this is the first time you are deploying, a file called `s3-backend.tf` will be created. This file configures the backend for Terraform, using S3 to store the state of our infrastructure.
+   Apply the planned configuration to provision the infrastructure:
 
-Run the following command to copy the state to the S3 bucket:
-
-```sh
-terraform init -force-copy
-```
-
-Push the `s3-backend.tf` file to the repository:
-
-```sh
-git add s3-backend.tf && git commit -m "Add s3-backend.tf file"
-git push
-```
-
-## Destroy
-
-To destroy the infrastructure, run the following command:
-
-```sh
-terraform destroy
-```
+   ```sh
+   terraform apply "prod.tfplan"
+   ```
 
 ## Post Deployment Steps
 
@@ -192,6 +209,16 @@ You can now execute SQL commands to test the database setup. For example:
 ```
 
 These steps will help you verify the successful setup of the database and ensure that the necessary connections and configurations are in place.
+
+## Destroy
+
+💣 **NOTE:** In this example, we are using the `prod` environment and the `us-west-2` region. Modify these values according to your environment and region.
+
+To destroy the infrastructure, run the following command:
+
+```sh
+terraform destroy -var-file ./configs/prod.tfvars
+```
 
 ## Module Documentation
 

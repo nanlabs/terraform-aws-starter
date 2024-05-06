@@ -1,20 +1,25 @@
-locals {
-  exampledb = {
-    db_name            = "mydb"
-    db_master_username = "myuser"
-  }
+variable "example_db_name" {
+  description = "The name of the database to create"
+  type        = string
+  default     = "mydb"
+}
+
+variable "example_db_master_username" {
+  description = "The username for the master DB user"
+  type        = string
+  default     = "root"
 }
 
 module "exampledb" {
-  source = "../../../../modules/rds"
+  source = "../../modules/rds"
 
   name = "${module.label.id}-exampledb"
 
   vpc_id          = module.vpc.vpc_id
   db_subnet_group = module.vpc.database_subnet_group
 
-  db_name            = local.exampledb.db_name
-  db_master_username = local.exampledb.db_master_username
+  db_name            = var.example_db_name
+  db_master_username = var.example_db_master_username
   db_port            = 5432
 
   allocated_storage = 20
