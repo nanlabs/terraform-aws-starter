@@ -24,7 +24,7 @@ jobs:
       - name: Render terraform docs inside modules
         uses: terraform-docs/gh-actions@v1.0.0
         with:
-          working-dir: modules/amplify-app,modules/bastion,modules/mongodb,modules/rds,modules/rds-aurora,modules/vpc,live/prod/us-west-2/app,live/staging/us-west-2/app
+          working-dir: modules/amplify-app,modules/bastion,modules/mongodb,modules/rds,modules/rds-aurora,modules/vpc,live/terraform-backend,live/common-infra
           output-file: docs/MODULE.md
           output-method: replace
           git-push: "true"
