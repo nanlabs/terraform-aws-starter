@@ -1,12 +1,10 @@
-name: Lint Code Base
-on:
-  push:
-    branches:
-      - main
+name: Super Linter
 
-  pull_request:
-    branches:
-      - main
+on:
+  workflow_call:
+
+permissions:
+  contents: read
 
 jobs:
   build:
@@ -14,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: read
-      statuses: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -23,9 +19,12 @@ jobs:
           # Full git history is needed to get a proper
           # list of changed files within `super-linter`
           fetch-depth: 0
+
       - name: Lint Code Base
-        uses: super-linter/super-linter/slim@v5
+        uses: super-linter/super-linter/slim@v6
         env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          LINTER_RULES_PATH: .
+          MARKDOWN_CONFIG_FILE: .markdownlint.json
