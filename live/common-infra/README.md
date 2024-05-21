@@ -170,7 +170,7 @@ db_port=$(terraform output -json | jq -r '.example_db_instance_port.value')
 db_name=$(terraform output -json | jq -r '.example_db_instance_name.value')
 
 # Retrieve the parameter value from the AWS Parameter Store
-SECRET_ID=$(terraform output -json | jq -r '.example_db_connection_secret_arn.value')
+SECRET_ID=$(terraform output -json | jq -r '.example_db_instance_master_user_secret_arn.value')
 
 # Print the values
 echo "DB Host: $db_host"
