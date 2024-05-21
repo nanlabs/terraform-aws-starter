@@ -27,6 +27,7 @@
 | Name | Type |
 |------|------|
 | [aws_caller_identity.aws](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_secretsmanager_secret.db_instance_master_user](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/secretsmanager_secret) | data source |
 
 ## Inputs
 
@@ -51,6 +52,8 @@
 | <a name="output_bastion_instance_profile"></a> [bastion\_instance\_profile](#output\_bastion\_instance\_profile) | n/a |
 | <a name="output_example_db_instance_address"></a> [example\_db\_instance\_address](#output\_example\_db\_instance\_address) | The address of the RDS instance |
 | <a name="output_example_db_instance_master_user_secret_arn"></a> [example\_db\_instance\_master\_user\_secret\_arn](#output\_example\_db\_instance\_master\_user\_secret\_arn) | The ARN of the secret containing the connection details for the RDS instance |
+| <a name="output_example_db_instance_master_user_secret_id"></a> [example\_db\_instance\_master\_user\_secret\_id](#output\_example\_db\_instance\_master\_user\_secret\_id) | The ID of the secret containing the connection details for the RDS instance |
+| <a name="output_example_db_instance_master_user_secret_name"></a> [example\_db\_instance\_master\_user\_secret\_name](#output\_example\_db\_instance\_master\_user\_secret\_name) | The name of the secret containing the connection details for the RDS instance |
 | <a name="output_example_db_instance_name"></a> [example\_db\_instance\_name](#output\_example\_db\_instance\_name) | The database name |
 | <a name="output_example_db_instance_port"></a> [example\_db\_instance\_port](#output\_example\_db\_instance\_port) | The database port |
 | <a name="output_ssm_parameter_app_security_group"></a> [ssm\_parameter\_app\_security\_group](#output\_ssm\_parameter\_app\_security\_group) | name of the ssm parameter for the app security group |
