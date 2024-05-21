@@ -165,8 +165,18 @@ To connect to the database from the bastion host, retrieve the connection inform
 - Outside the bastion host:
 
 ```bash
+db_host=$(terraform output -json | jq -r '.example_db_instance_address.value')
+db_port=$(terraform output -json | jq -r '.example_db_instance_port.value')
+db_name=$(terraform output -json | jq -r '.example_db_instance_name.value')
+
 # Retrieve the parameter value from the AWS Parameter Store
 SECRET_ID=$(terraform output -json | jq -r '.example_db_connection_secret_arn.value')
+
+# Print the values
+echo "DB Host: $db_host"
+echo "DB Port: $db_port"
+echo "DB Name: $db_name"
+echo "Secret ID: $SECRET_ID"
 ```
 
 - Inside the bastion host:
@@ -179,9 +189,6 @@ db_secret=$(aws secretsmanager get-secret-value --secret-id "$SECRET_ID" \
 # Parse the connection information to obtain the username, password, host, port, and database name
 db_username=$(echo $db_secret | jq -r '.username')
 db_password=$(echo $db_secret | jq -r '.password')
-db_host=$(echo $db_secret | jq -r '.host')
-db_port=$(echo $db_secret | jq -r '.port')
-db_name=$(echo $db_secret | jq -r '.dbname')
 
 # Connect to the database using Psql with Docker
 docker run -it --rm postgres:14.0-alpine psql -h $db_host -p $db_port -U $db_username -d $db_name
