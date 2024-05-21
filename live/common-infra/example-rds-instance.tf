@@ -48,3 +48,19 @@ output "example_db_instance_master_user_secret_arn" {
   description = "The ARN of the secret containing the connection details for the RDS instance"
   value       = module.exampledb.db_instance_master_user_secret_arn
 }
+
+# get the id of the secret containing the connection details for the RDS instance
+# and output it
+data "aws_secretsmanager_secret" "db_instance_master_user" {
+  arn = module.exampledb.db_instance_master_user_secret_arn
+}
+
+output "example_db_instance_master_user_secret_id" {
+  description = "The ID of the secret containing the connection details for the RDS instance"
+  value       = data.aws_secretsmanager_secret.db_instance_master_user.id
+}
+
+output "example_db_instance_master_user_secret_name" {
+  description = "The name of the secret containing the connection details for the RDS instance"
+  value       = data.aws_secretsmanager_secret.db_instance_master_user.name
+}
