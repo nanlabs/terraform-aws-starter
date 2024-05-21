@@ -42,7 +42,6 @@
        key            = "terraform.tfstate"
        dynamodb_table = "terraform-state-lock"
        profile        = ""
-       role_arn       = ""
        encrypt        = "true"
      }
    }
