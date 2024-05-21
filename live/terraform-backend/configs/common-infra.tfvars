@@ -1,7 +1,7 @@
 # General settings
 
 region    = "us-west-2"
-name      = "core"
+name      = "common-infra-tf-backend"
 namespace = "nan"
 tags = {
   "Terraform" = "true"

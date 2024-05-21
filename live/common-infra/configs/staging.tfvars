@@ -1,9 +1,9 @@
 # General settings
 
 region      = "us-west-2"
-name        = "core"
+name        = "common-infra"
 namespace   = "nan"
-environment = "prod"
+environment = "staging"
 tags = {
   "Terraform"   = "true"
   "Environment" = "prod"
