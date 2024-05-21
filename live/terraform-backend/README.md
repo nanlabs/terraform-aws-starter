@@ -31,7 +31,7 @@
    Generate an execution plan for Terraform:
 
    ```sh
-   terraform plan -var-file ./configs/common-infra.tfvars -out ./common-infra.tfplan
+   terraform plan -var-file ./configs/common-infra.tfvars -out ./terraform-backend.tfplan
    ```
 
 2. **Apply the Configuration:**
@@ -39,7 +39,7 @@
    Apply the configuration to set up the S3 bucket and DynamoDB table:
 
    ```sh
-   terraform apply "./common-infra.tfplan"
+   terraform apply "./terraform-backend.tfplan"
    ```
 
    🚀 **NOTE:** Confirm the actions before proceeding to ensure that the correct resources are being created or modified.
