@@ -141,7 +141,7 @@ echo "Bastion IP: $bastion_public_ip"
 #### Connect to Bastion Host
 
 ```bash
-ssh -i "/tmp/ssh_key.pem" ubuntu@ec2-"$bastion_public_ip".us-west-2.compute.amazonaws.com
+ssh -i "/tmp/ssh_key.pem" ubuntu@ec2-"$bastion_public_ip".compute.amazonaws.com
 ```
 
 Ensure that you can access the database from the bastion host and verify that Docker is functioning correctly.
