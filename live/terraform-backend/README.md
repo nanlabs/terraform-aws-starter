@@ -11,7 +11,6 @@
 ## Prerequisites
 
 - [Terraform](https://www.terraform.io/downloads.html) installed on your machine.
-- Proper AWS credentials configured that can access the necessary resources.
 - [TFswitch](https://tfswitch.warrensbox.com/) for managing Terraform versions.
 
 ## Setup

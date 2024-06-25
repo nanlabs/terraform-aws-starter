@@ -9,10 +9,9 @@ tags = {
   "Environment" = "prod"
 }
 
-# AWS settings
+# Core Networking settings
 
-vpc_cidr_block = "10.0.0.0/16"
-enable_bastion = false
+core_networking_ssm_parameter_prefix = "/nan-core-networking-prod"
 
 # RDS Database settings
 

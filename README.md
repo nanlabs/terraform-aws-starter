@@ -72,8 +72,9 @@ It is recommended to create a separate directory for each domain that you want t
 
 | Module                                                                | Description                                                                                                              |
 | :-------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
-| [Common Infrastructure](./live/common-infra/README.md)                | Terraform module for managing common infrastructure components such as VPC, subnets, security groups, and RDS instances. |
 | [Terraform Backend Configuration](./live/terraform-backend/README.md) | Terraform module for setting up the S3 backend.                                                                          |
+| [Core Networking](./live/core-networking/README.md)                   | Terraform module for managing core networking components such as VPC, subnets, and security groups.                     |
+| [Common Infrastructure](./live/common-infra/README.md)                | Terraform module for managing common infrastructure components such as RDS instances, S3 buckets, and IAM roles.        |
 
 ## Terraform Modules
 

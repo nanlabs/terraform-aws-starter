@@ -1,44 +1,16 @@
-variable "vpc_cidr_block" {
-  description = "CIDR block for the VPC"
+variable "core_networking_ssm_parameter_prefix" {
+  description = "The SSM parameter prefix for core networking parameters"
   type        = string
-  default     = "10.0.0.0/16"
 }
 
-module "vpc" {
-  source             = "../../modules/vpc"
-  name               = module.label.id
-  vpc_cidr_block     = var.vpc_cidr_block
-  tags               = module.label.tags
-  enable_nat_gateway = true
-  single_nat_gateway = true
+data "aws_ssm_parameter" "vpc_id" {
+  name = "${var.core_networking_ssm_parameter_prefix}/vpc_id"
 }
 
-output "ssm_parameter_vpc_id" {
-  description = "name of the ssm parameter for the vpc id"
-  value       = module.vpc.ssm_parameter_vpc_id
+data "aws_ssm_parameter" "app_subnets" {
+  name = "${var.core_networking_ssm_parameter_prefix}/app_subnets"
 }
 
-output "ssm_parameter_public_subnets" {
-  description = "name of the ssm parameter for the public subnets"
-  value       = module.vpc.ssm_parameter_public_subnets
-}
-
-output "ssm_parameter_private_subnets" {
-  description = "name of the ssm parameter for the private subnets"
-  value       = module.vpc.ssm_parameter_private_subnets
-}
-
-output "ssm_parameter_database_subnets" {
-  description = "name of the ssm parameter for the database subnets"
-  value       = module.vpc.ssm_parameter_database_subnets
-}
-
-output "ssm_parameter_app_subnets" {
-  description = "name of the ssm parameter for the app subnets"
-  value       = module.vpc.ssm_parameter_app_subnets
-}
-
-output "ssm_parameter_app_security_group" {
-  description = "name of the ssm parameter for the app security group"
-  value       = module.vpc.ssm_parameter_app_security_group
+data "aws_ssm_parameter" "database_subnets" {
+  name = "${var.core_networking_ssm_parameter_prefix}/database_subnets"
 }
