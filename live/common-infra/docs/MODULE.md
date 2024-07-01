@@ -16,7 +16,6 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_bastion"></a> [bastion](#module\_bastion) | ../../modules/bastion | n/a |
 | <a name="module_exampledb"></a> [exampledb](#module\_exampledb) | ../../modules/rds | n/a |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
 
@@ -35,7 +34,6 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_core_networking_ssm_parameter_prefix"></a> [core\_networking\_ssm\_parameter\_prefix](#input\_core\_networking\_ssm\_parameter\_prefix) | The SSM parameter prefix for core networking parameters | `string` | n/a | yes |
-| <a name="input_enable_bastion"></a> [enable\_bastion](#input\_enable\_bastion) | Enable bastion host | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT' | `string` | `"development"` | no |
 | <a name="input_example_db_master_username"></a> [example\_db\_master\_username](#input\_example\_db\_master\_username) | The username for the master DB user | `string` | `"root"` | no |
 | <a name="input_example_db_name"></a> [example\_db\_name](#input\_example\_db\_name) | The name of the database to create | `string` | `"mydb"` | no |
@@ -49,13 +47,10 @@
 
 | Name | Description |
 |------|-------------|
-| <a name="output_bastion_instance_id"></a> [bastion\_instance\_id](#output\_bastion\_instance\_id) | n/a |
-| <a name="output_bastion_instance_profile"></a> [bastion\_instance\_profile](#output\_bastion\_instance\_profile) | n/a |
 | <a name="output_example_db_instance_address"></a> [example\_db\_instance\_address](#output\_example\_db\_instance\_address) | The address of the RDS instance |
 | <a name="output_example_db_instance_master_user_secret_arn"></a> [example\_db\_instance\_master\_user\_secret\_arn](#output\_example\_db\_instance\_master\_user\_secret\_arn) | The ARN of the secret containing the connection details for the RDS instance |
 | <a name="output_example_db_instance_master_user_secret_id"></a> [example\_db\_instance\_master\_user\_secret\_id](#output\_example\_db\_instance\_master\_user\_secret\_id) | The ID of the secret containing the connection details for the RDS instance |
 | <a name="output_example_db_instance_master_user_secret_name"></a> [example\_db\_instance\_master\_user\_secret\_name](#output\_example\_db\_instance\_master\_user\_secret\_name) | The name of the secret containing the connection details for the RDS instance |
 | <a name="output_example_db_instance_name"></a> [example\_db\_instance\_name](#output\_example\_db\_instance\_name) | The database name |
 | <a name="output_example_db_instance_port"></a> [example\_db\_instance\_port](#output\_example\_db\_instance\_port) | The database port |
-| <a name="output_ssm_parameter_bastion_ssh_key"></a> [ssm\_parameter\_bastion\_ssh\_key](#output\_ssm\_parameter\_bastion\_ssh\_key) | name of the ssm parameter for the bastion ssh key |
 <!-- END_TF_DOCS -->
