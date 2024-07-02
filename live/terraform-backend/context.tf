@@ -20,7 +20,7 @@ data "aws_caller_identity" "aws" {}
 
 locals {
   tf_tags = {
-    Terraform = true,
+    ManagedBy = "Terraform",
     By        = data.aws_caller_identity.aws.arn
   }
 }
