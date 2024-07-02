@@ -5,7 +5,7 @@ name        = "common-infra"
 namespace   = "nan"
 environment = "prod"
 tags = {
-  "Terraform"   = "true"
+  "ManagedBy"   = "Terraform"
   "Environment" = "prod"
 }
 
