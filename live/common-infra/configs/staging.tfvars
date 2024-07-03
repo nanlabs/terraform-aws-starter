@@ -6,7 +6,7 @@ namespace   = "nan"
 environment = "staging"
 tags = {
   "ManagedBy"   = "Terraform"
-  "Environment" = "prod"
+  "Environment" = "staging"
 }
 
 # Core Networking settings

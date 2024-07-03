@@ -6,18 +6,17 @@ module "terraform_state_backend" {
   source  = "cloudposse/tfstate-backend/aws"
   version = "1.1.1"
 
-  name        = var.name
+  name        = "core-networking"
   namespace   = var.namespace
   environment = var.environment
-  stage       = var.stage
   attributes  = ["state"]
 
-  terraform_backend_config_file_path = "./configs"
+  terraform_backend_config_file_path = "../core-networking"
   terraform_backend_config_file_name = "${var.environment}-backend.tfvars"
-  terraform_state_file               = "${module.label.id}.tfstate"
+  terraform_state_file               = "${var.namespace}-core-networking-${var.environment}.tfstate"
 
   bucket_enabled   = true
-  dynamodb_enabled = false
+  dynamodb_enabled = true
 
   force_destroy = false
 }
