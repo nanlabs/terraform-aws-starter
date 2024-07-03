@@ -23,6 +23,15 @@
    terraform init
    ```
 
+2. **Workspace Management:**
+
+   Select or create a new workspace tailored to your deployment environment:
+
+   ```sh
+   # Switch to the another workspace or create it if it doesn't exist
+   terraform workspace select -or-create prod
+   ```
+
 ## Deploy
 
 1. **Plan the Deployment:**
@@ -30,7 +39,7 @@
    Generate an execution plan for Terraform:
 
    ```sh
-   terraform plan -var-file ./configs/common-infra.tfvars -out ./terraform-backend.tfplan
+   terraform plan -var-file ./configs/prod.tfvars -out ./prod.tfplan
    ```
 
 2. **Apply the Configuration:**
@@ -38,7 +47,7 @@
    Apply the configuration to set up the S3 bucket and DynamoDB table:
 
    ```sh
-   terraform apply "./terraform-backend.tfplan"
+   terraform apply "./prod.tfplan"
    ```
 
    🚀 **NOTE:** Confirm the actions before proceeding to ensure that the correct resources are being created or modified.

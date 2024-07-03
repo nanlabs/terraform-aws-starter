@@ -75,7 +75,7 @@
    Review and verify the deployment plan:
 
    ```sh
-   terraform plan -var-file ./configs/prod.tfvars -out=prod.tfplan
+   terraform plan -var-file ./configs/prod.tfvars -out prod.tfplan
    ```
 
 2. **Execute the Plan:**
