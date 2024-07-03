@@ -20,7 +20,7 @@
    Initialize the Terraform working directory which will download the necessary providers and modules:
 
    ```sh
-   terraform init
+   terraform init -backend-config="./configs/prod-backend.tfvars"
    ```
 
 2. **Workspace Management:**
