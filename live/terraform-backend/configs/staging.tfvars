@@ -1,7 +1,7 @@
 # General settings
 
 region      = "us-west-2"
-name        = "infra-tf-backend"
+name        = "tf-backend"
 namespace   = "nan"
 environment = "staging"
 tags = {
