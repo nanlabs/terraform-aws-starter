@@ -4,7 +4,7 @@
 # https://github.com/cloudposse/terraform-aws-tfstate-backend#usage
 module "terraform_state_backend" {
   source  = "cloudposse/tfstate-backend/aws"
-  version = "1.1.1"
+  version = "1.4.1"
 
   name        = var.name
   namespace   = var.namespace

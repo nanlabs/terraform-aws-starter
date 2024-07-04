@@ -13,18 +13,21 @@ jobs:
   tf-docs:
     name: Generate Terraform Docs
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Begin CI...
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # If the event that triggered the workflow is a pull request, then the variable contains ${{ github.event.pull_request.head.ref }}
           # If the event that triggered the workflow is a push, then the variable contains ${{ github.ref }}
           ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       - name: Render terraform docs inside modules
-        uses: terraform-docs/gh-actions@v1.0.0
+        uses: terraform-docs/gh-actions@v1.2.0
         with:
-          working-dir: modules/amplify-app,modules/bastion,modules/mongodb,modules/rds,modules/rds-aurora,modules/vpc,live/terraform-backend,live/core-networking,live/common-infra,live/terraform-backend
+          working-dir: modules/amplify-app,modules/bastion,modules/rds,modules/rds-aurora,modules/vpc,modules/vpc-endpoints,live/terraform-backend,live/core-networking,live/common-infra
           output-file: docs/MODULE.md
           output-method: replace
           git-push: "true"

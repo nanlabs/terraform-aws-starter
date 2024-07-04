@@ -5,8 +5,7 @@ name        = "core-networking"
 namespace   = "nan"
 environment = "staging"
 tags = {
-  "ManagedBy"   = "terraform"
-  "Environment" = "staging"
+  "ManagedBy" = "terraform"
 }
 
 # AWS settings

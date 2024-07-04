@@ -5,6 +5,5 @@ name        = "tf-backend"
 namespace   = "nan"
 environment = "prod"
 tags = {
-  "ManagedBy"   = "terraform"
-  "Environment" = "prod"
+  "ManagedBy" = "terraform"
 }

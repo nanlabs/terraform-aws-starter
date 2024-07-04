@@ -5,8 +5,7 @@ name        = "common-infra"
 namespace   = "nan"
 environment = "prod"
 tags = {
-  "ManagedBy"   = "terraform"
-  "Environment" = "prod"
+  "ManagedBy" = "terraform"
 }
 
 # Core Networking settings

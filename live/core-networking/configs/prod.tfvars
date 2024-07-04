@@ -5,8 +5,7 @@ name        = "core-networking"
 namespace   = "nan"
 environment = "prod"
 tags = {
-  "ManagedBy"   = "terraform"
-  "Environment" = "prod"
+  "ManagedBy" = "terraform"
 }
 
 # AWS settings

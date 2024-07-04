@@ -33,6 +33,21 @@ output "app_security_group" {
   value       = module.app_security_group.security_group_id
 }
 
+output "default_security_group_id" {
+  description = "value of the default_security_group_id output from the vpc module"
+  value       = module.vpc.default_security_group_id
+}
+
+output "public_route_table_ids" {
+  description = "List of IDs of public route tables"
+  value       = module.vpc.public_route_table_ids
+}
+
+output "private_route_table_ids" {
+  description = "List of IDs of private route tables"
+  value       = module.vpc.private_route_table_ids
+}
+
 output "ssm_parameter_vpc_id" {
   description = "name of the ssm parameter for the vpc id"
   value       = aws_ssm_parameter.vpc_id.name
