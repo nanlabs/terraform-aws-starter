@@ -3,10 +3,11 @@
 apt:
   sources:
     docker.list:
-      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
       keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
 
 package_update: true
+
 package_upgrade: true
 
 packages:
@@ -20,9 +21,8 @@ packages:
   - containerd.io
   - amazon-ecr-credential-helper
   - awscli
-  - amazon-ssm-agent
 
-# Enable IPv4 forwarding, required on CIS hardened machines
+# Enable ipv4 forwarding, required on CIS hardened machines
 write_files:
   - path: /etc/sysctl.d/enabled_ipv4_forwarding.conf
     content: |
@@ -94,5 +94,3 @@ runcmd:
   - rm -f amazon-cloudwatch-agent.deb
   - chmod 644 /var/log/cloud-init-output.log
   - /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
-  - systemctl enable amazon-ssm-agent
-  - systemctl start amazon-ssm-agent
