@@ -27,7 +27,7 @@
 
 2. **Check the Terraform Backend Configuration:**
 
-   Verify that the backend configuration is set correctly in the `configs/prod-backend.tfvars` file.
+   Verify that the backend configuration is set correctly in the `backend.tf` file.
 
    ```hcl
    terraform {
@@ -42,6 +42,7 @@
        encrypt        = "true"
      }
    }
+
    ```
 
    Replace the placeholder values with the actual bucket name, key, region, and DynamoDB table name.
@@ -51,7 +52,7 @@
    Initialize the working directory with the required providers and modules:
 
    ```sh
-   terraform init -backend-config="configs/prod-backend.tfvars"
+   terraform init
    ```
 
 4. **Workspace Management:**

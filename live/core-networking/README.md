@@ -29,7 +29,7 @@
 
 2. **Check the Terraform Backend Configuration:**
 
-   Verify that the backend configuration is set correctly in the `configs/prod-backend.tfvars` file.
+   Verify that the backend configuration is set correctly in the `backend.tf` file.
 
    ```hcl
    terraform {
@@ -44,6 +44,7 @@
        encrypt        = "true"
      }
    }
+
    ```
 
    Replace the placeholder values with the actual bucket name, key, region, and DynamoDB table name.
@@ -53,7 +54,7 @@
    Initialize the working directory with the required providers and modules:
 
    ```sh
-   terraform init -backend-config="configs/prod-backend.tfvars"
+   terraform init
    ```
 
 4. **Workspace Management:**
@@ -139,7 +140,7 @@ echo "Bastion IP: $bastion_public_ip"
 #### Connect to Bastion Host
 
 ```bash
-ssh -i "/tmp/ssh_key.pem" ubuntu@ec2-"$bastion_public_ip".compute.amazonaws.com
+ssh -i "/tmp/ssh_key.pem" "ubuntu@ec2-$bastion_public_ip.us-west-2.compute.amazonaws.com"
 ```
 
 Ensure that you can access the database from the bastion host and verify that Docker is functioning correctly.
