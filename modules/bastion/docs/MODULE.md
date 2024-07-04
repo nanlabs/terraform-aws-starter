@@ -44,6 +44,7 @@
 | <a name="input_ami"></a> [ami](#input\_ami) | AMI to use for the instance - will default to latest Ubuntu | `string` | `""` | no |
 | <a name="input_associate_elastic_ip_address"></a> [associate\_elastic\_ip\_address](#input\_associate\_elastic\_ip\_address) | Use an EIP for the instance | `bool` | `false` | no |
 | <a name="input_associate_public_ip_address"></a> [associate\_public\_ip\_address](#input\_associate\_public\_ip\_address) | By default, our server has a public IP | `bool` | `true` | no |
+| <a name="input_enable_ssh_connection"></a> [enable\_ssh\_connection](#input\_enable\_ssh\_connection) | Enable SSH connection to the server | `bool` | `false` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | EC2 instance type/size - the default is not part of free tier! | `string` | `"t2.medium"` | no |
 | <a name="input_key_name"></a> [key\_name](#input\_key\_name) | SSH key name to use for the instance | `string` | `""` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name to be used on all the resources as identifier | `string` | `""` | no |
