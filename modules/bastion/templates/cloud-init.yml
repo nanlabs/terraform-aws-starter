@@ -20,7 +20,7 @@ packages:
   - containerd.io
   - amazon-ecr-credential-helper
   - awscli
-  - amazon-ssm-agent  # Add SSM agent installation
+  - amazon-ssm-agent
 
 # Enable IPv4 forwarding, required on CIS hardened machines
 write_files:
