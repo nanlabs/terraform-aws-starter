@@ -39,6 +39,12 @@ variable "allowed_cidrs" {
   default     = "0.0.0.0/0"
 }
 
+variable "enable_ssh_connection" {
+  description = "Enable SSH connection to the server"
+  type        = bool
+  default     = false
+}
+
 variable "key_name" {
   description = "SSH key name to use for the instance"
   type        = string

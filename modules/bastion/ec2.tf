@@ -1,5 +1,7 @@
 locals {
-  _ssh_key_name = length(var.key_name) > 0 ? var.key_name : aws_key_pair.ec2_ssh[0].key_name
+  _ssh_key_name = var.enable_ssh_connection ? (
+    length(var.key_name) > 0 ? var.key_name : aws_key_pair.ec2_ssh[0].key_name
+  ) : null
 }
 
 // Script to configure the server - this is where most of the magic occurs!

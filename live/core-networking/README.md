@@ -16,6 +16,7 @@
 
 - [Terraform](https://www.terraform.io/downloads.html) for infrastructure provisioning.
 - [TFswitch](https://tfswitch.warrensbox.com/) to switch between Terraform versions easily.
+- AWS Session Manager Plugin for the AWS CLI.
 
 ## Setup
 
@@ -44,7 +45,6 @@
        encrypt        = "true"
      }
    }
-
    ```
 
    Replace the placeholder values with the actual bucket name, key, region, and DynamoDB table name.
@@ -62,7 +62,7 @@
    Select or create a new workspace tailored to your deployment environment:
 
    ```sh
-   # Switch to the another workspace or create it if it doesn't exist
+   # Switch to another workspace or create it if it doesn't exist
    terraform workspace select -or-create prod
    ```
 
@@ -103,59 +103,83 @@ vpc_id=$(aws ssm get-parameter --name "$vpc_id_parameter_name" --query 'Paramete
 echo "VPC ID: $vpc_id"
 ```
 
-### Connecting to the Bastion Host
+### Connecting to the Bastion Host Using Session Manager
 
-To establish a secure connection with the bastion host, follow these steps:
+AWS Session Manager provides secure and auditable instance management without needing to open inbound ports, manage SSH keys, or use bastion hosts.
+
+#### Prerequisites
+
+Ensure the following prerequisites are met:
+
+1. **SSM Agent**: Ensure the SSM agent is installed and running on your instance. For Amazon Linux, the SSM agent is pre-installed.
+2. **IAM Role**: The instance must have an IAM role attached with the necessary permissions for AWS Systems Manager. Typically, this includes the `AmazonSSMManagedInstanceCore` policy.
+3. **Session Manager Plugin**: Ensure the Session Manager Plugin is installed on your local machine. Check the [AWS Session Manager Plugin Installation Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) for more information.
 
 #### Obtain Required Information
 
-First, you need to gather some essential information:
+First, gather the necessary information:
 
-- Bastion SSH Parameter Name
 - Bastion Instance ID
 
-You can retrieve these values using Terraform:
+You can retrieve this value using Terraform:
 
 ```bash
-bastion_ssh_parameter_name=$(terraform output -json | jq -r '.ssm_parameter_bastion_ssh_key.value')
 bastion_instance_id=$(terraform output -json | jq -r '.bastion_instance_id.value')
 ```
 
-#### Generate .pem file with the ssh key
+#### Start a Session with the Bastion Host
+
+Use AWS Session Manager to start a session with your instance:
 
 ```bash
-aws ssm get-parameter --name "$bastion_ssh_parameter_name" --with-decryption --query 'Parameter.Value' --output text > /tmp/ssh_key.pem
-chmod 400 /tmp/ssh_key.pem
+aws ssm start-session --target "$bastion_instance_id"
 ```
 
-#### Retrieve bastion's public IP
+This command will open a new session in your terminal, allowing you to interact with your instance securely.
+
+### Additional Useful Commands
+
+#### List Active Sessions
+
+To list all active sessions:
 
 ```bash
-bastion_public_ip=$(aws ec2 describe-instances --instance-ids "$bastion_instance_id" --query 'Reservations[0].Instances[0].PublicIpAddress' --output text | tr '.' '-')
-
-# Print the value
-echo "Bastion IP: $bastion_public_ip"
+aws ssm describe-sessions --state "Active"
 ```
 
-#### Connect to Bastion Host
+#### Terminate a Session
+
+To terminate a specific session, you need the session ID. First, list the active sessions to get the session ID:
 
 ```bash
-ssh -i "/tmp/ssh_key.pem" "ubuntu@ec2-$bastion_public_ip.us-west-2.compute.amazonaws.com"
+aws ssm describe-sessions --state "Active"
 ```
 
-Ensure that you can access the database from the bastion host and verify that Docker is functioning correctly.
-
-#### Testing Docker and Internet Access
-
-To verify internet access and Docker functionality, execute the following commands:
+Then terminate the session using the session ID:
 
 ```bash
-# Test Internet Access
-ping -c 3 google.com
-
-# Test Docker
-docker run -it --rm hello-world
+aws ssm terminate-session --session-id <session-id>
 ```
+
+### Example Script for Complete Workflow
+
+Here's a complete example script to retrieve the VPC ID, Bastion instance ID, and start a Session Manager session:
+
+```bash
+# Retrieve VPC ID from Parameter Store
+vpc_id_parameter_name=$(terraform output -json | jq -r '.ssm_parameter_vpc_id.value')
+vpc_id=$(aws ssm get-parameter --name "$vpc_id_parameter_name" --query 'Parameter.Value' --output text)
+echo "VPC ID: $vpc_id"
+
+# Retrieve Bastion instance ID
+bastion_instance_id=$(terraform output -json | jq -r '.bastion_instance_id.value')
+echo "Bastion Instance ID: $bastion_instance_id"
+
+# Start Session Manager session with Bastion Host
+aws ssm start-session --target "$bastion_instance_id"
+```
+
+This approach leverages AWS Session Manager for secure and easy access to your instances, removing the need for SSH keys and open inbound ports. If you have any further questions or need additional assistance, please let me know!
 
 ## Destroy
 

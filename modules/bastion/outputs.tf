@@ -7,5 +7,5 @@ output "instance_profile" {
 }
 
 output "ssm_parameter_ssh_key" {
-  value = length(var.key_name) > 0 ? "" : aws_ssm_parameter.ssh_key[0].name
+  value = try(aws_ssm_parameter.ssh_key[0].name, null)
 }
