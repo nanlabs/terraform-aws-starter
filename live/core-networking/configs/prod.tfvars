@@ -5,7 +5,7 @@ name        = "core-networking"
 namespace   = "nan"
 environment = "prod"
 tags = {
-  "ManagedBy"   = "Terraform"
+  "ManagedBy"   = "terraform"
   "Environment" = "prod"
 }
 

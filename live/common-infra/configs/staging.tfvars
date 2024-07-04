@@ -5,7 +5,7 @@ name        = "common-infra"
 namespace   = "nan"
 environment = "staging"
 tags = {
-  "ManagedBy"   = "Terraform"
+  "ManagedBy"   = "terraform"
   "Environment" = "staging"
 }
 
