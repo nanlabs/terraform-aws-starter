@@ -3,21 +3,9 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "subnets" {
+variable "private_subnets" {
   description = "List of private subnets in which the EC2 instance is to be created."
   type        = list(string)
-}
-
-variable "associate_public_ip_address" {
-  description = "By default, our server has a public IP"
-  type        = bool
-  default     = true
-}
-
-variable "associate_elastic_ip_address" {
-  description = "Use an EIP for the instance"
-  type        = bool
-  default     = false
 }
 
 variable "ami" {
@@ -34,15 +22,9 @@ variable "instance_type" {
 }
 
 variable "allowed_cidrs" {
-  description = "Allow these CIDR blocks to the server - default is the Universe"
+  description = "Allow these CIDR blocks to instance"
   type        = string
-  default     = "0.0.0.0/0"
-}
-
-variable "enable_ssh_connection" {
-  description = "Enable SSH connection to the server"
-  type        = bool
-  default     = false
+  default     = null
 }
 
 variable "key_name" {

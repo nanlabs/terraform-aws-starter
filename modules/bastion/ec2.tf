@@ -1,7 +1,7 @@
 locals {
-  _ssh_key_name = var.enable_ssh_connection ? (
+  _ssh_key_name = (
     length(var.key_name) > 0 ? var.key_name : aws_key_pair.ec2_ssh[0].key_name
-  ) : null
+  )
 }
 
 // Script to configure the server - this is where most of the magic occurs!
@@ -24,9 +24,8 @@ module "bastion" {
   user_data            = data.template_file.user_data.rendered
 
   # network
-  subnet_id                   = element(var.subnets, 0)
-  vpc_security_group_ids      = [module.ec2_security_group.security_group_id]
-  associate_public_ip_address = var.associate_public_ip_address
+  subnet_id              = element(var.private_subnets, 0)
+  vpc_security_group_ids = [module.ec2_security_group.security_group_id]
 
   tags = var.tags
 }

@@ -7,14 +7,12 @@ variable "enable_bastion" {
 module "bastion" {
   count = var.enable_bastion ? 1 : 0
 
-  source                       = "../../modules/bastion"
-  name                         = "${module.label.id}-bastion"
-  vpc_id                       = module.vpc.vpc_id
-  subnets                      = module.vpc.public_subnets
-  instance_type                = "t2.micro"
-  associate_public_ip_address  = true
-  associate_elastic_ip_address = false
-  tags                         = module.label.tags
+  source          = "../../modules/bastion"
+  name            = "${module.label.id}-bastion"
+  vpc_id          = module.vpc.vpc_id
+  private_subnets = module.vpc.private_subnets
+  instance_type   = "t2.micro"
+  tags            = module.label.tags
 }
 
 output "bastion_instance_id" {

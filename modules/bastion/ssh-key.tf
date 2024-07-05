@@ -1,5 +1,5 @@
 locals {
-  disable_key_creation = !var.enable_ssh_connection || length(var.key_name) > 0
+  disable_key_creation = length(var.key_name) > 0
 }
 
 // Create EC2 ssh key pair
