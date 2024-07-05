@@ -1,3 +1,4 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -58,3 +59,4 @@
 | <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | n/a |
 | <a name="output_instance_profile"></a> [instance\_profile](#output\_instance\_profile) | n/a |
 | <a name="output_ssm_parameter_ssh_key"></a> [ssm\_parameter\_ssh\_key](#output\_ssm\_parameter\_ssh\_key) | n/a |
+<!-- END_TF_DOCS -->
