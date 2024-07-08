@@ -20,7 +20,7 @@
    Initialize the working directory with the required providers and modules:
 
    ```sh
-   terraform init -backend-config="./configs/prod-backend.tfvars"
+   terraform init
    ```
 
 4. **Workspace Management:**
@@ -66,7 +66,7 @@ If this is your first deployment, Terraform will prompt you to confirm the setup
   If migrating from a local state, use the following command to migrate the state to the S3 bucket safely:
 
   ```sh
-  terraform init -force-copy
+  terraform init -backend-config="./configs/prod-backend.tfvars" -force-copy
   ```
 
   Push the changes to your version control system:

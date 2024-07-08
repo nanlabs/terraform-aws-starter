@@ -25,29 +25,7 @@
    tfswitch
    ```
 
-2. **Check the Terraform Backend Configuration:**
-
-   Verify that the backend configuration is set correctly in the `backend.tf` file.
-
-   ```hcl
-   terraform {
-     required_version = ">= 1.0.0"
-
-     backend "s3" {
-       region         = "us-west-2"
-       bucket         = "terraform-state"
-       key            = "terraform.tfstate"
-       dynamodb_table = "terraform-state-lock"
-       profile        = ""
-       encrypt        = "true"
-     }
-   }
-
-   ```
-
-   Replace the placeholder values with the actual bucket name, key, region, and DynamoDB table name.
-
-3. **Initialize Terraform:**
+2. **Initialize Terraform:**
 
    Initialize the working directory with the required providers and modules:
 
@@ -55,7 +33,7 @@
    terraform init -backend-config="./configs/prod-backend.tfvars"
    ```
 
-4. **Workspace Management:**
+3. **Workspace Management:**
 
    Select or create a new workspace tailored to your deployment environment:
 
