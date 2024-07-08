@@ -15,8 +15,8 @@ module "exampledb" {
 
   name = "${module.label.id}-exampledb"
 
-  vpc_id          = module.vpc.vpc_id
-  db_subnet_group = module.vpc.database_subnet_group
+  vpc_id          = data.aws_ssm_parameter.vpc_id.value
+  db_subnet_group = data.aws_ssm_parameter.database_subnet_group.value
 
   db_name            = var.example_db_name
   db_master_username = var.example_db_master_username
