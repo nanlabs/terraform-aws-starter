@@ -18,7 +18,7 @@ variable "ami" {
 variable "instance_type" {
   description = "EC2 instance type/size - the default is not part of free tier!"
   type        = string
-  default     = "t2.medium"
+  default     = "t3.nano"
 }
 
 variable "allowed_cidrs" {

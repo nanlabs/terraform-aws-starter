@@ -99,6 +99,12 @@ These apps and services are located in the `apps` directory. In there you can fi
 | :-------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ |
 | [Start and Stop EC2 Instance](./apps/start-stop-ec2-instances/) | This is a Serverless Framework based project to start and stop EC2 instances based on a schedule. |
 
+## Best practices
+
+- We recommend using automated code scanning tools to improve security and quality of the code. This pattern was scanned using [Checkov](https://www.checkov.io/) - a static code analysis tool for infrastructure-as-code. It scans cloud infrastructure code defined using Terraform, CloudFormation, Kubernetes, Helm, ARM Templates and Serverless framework platforms and detects security and compliance misconfigurations.
+- Additionally, we recommend at minimum to perform basic validation and formatting checks using `terraform validate` and `terraform fmt -check -recursive` Terraform commands.
+- It’s a good practice to add automated tests for infrastructure code. You can refer to this Terraform Blog post to learn more about different approaches to testing Terraform code.
+
 ## Contributing
 
 We appreciate contributions from the open-source community. Any contributions you make are **truly appreciated**. Please refer to our [contribution guidelines](./CONTRIBUTING.md) for more information.

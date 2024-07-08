@@ -11,10 +11,10 @@ with Diagram("Live Prod Infrastructure", show=False):
     with Cluster("AWS Region"):
         with Cluster("VPC"):
             with Cluster("Public Subnet"):
-                bastion_host = EC2("Bastion Host")
                 nat_gateway = NATGateway("NAT Gateway")
 
             with Cluster("Private Subnet"):
+                bastion_host = EC2("Bastion Host")
                 lambda_func = Lambda("Lambda")
                 rds = RDS("RDS Postgres")
 

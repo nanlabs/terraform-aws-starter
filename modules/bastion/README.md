@@ -18,16 +18,40 @@ module "bastion" {
 }
 ```
 
-## EC2 Instance Provisioning
+## Architecture
 
-The created EC2 instance is provisioned using [cloud-init](https://cloudinit.readthedocs.io/en/latest/). The following steps are performed:
+### Target technology stack
 
-- Install the latest version of Docker
-- Setup AWS CloudWatch Logs agent
-- Setup SSH access for the specified key pair
-- Setup a user account for the specified key pair
-- Setup a user account for the specified IAM instance profile
-- Install AWS Session Manager Agent
+- VPC with at least one private subnet
+- 3 VPC (Interface) Endpoints with corresponding security groups and security group rules
+- EC2 instance (t3.nano) with Ubuntu 24.04 installed with associated:
+  - IAM role
+  - IAM instance profile
+  - security group
+
+### Target architecture
+
+![Architecture](docs/secure_bastion_host.png)
+
+We deploy single isolated EC2 instance (t3.nano) with Ubuntu 24.04 installed inside of the private subnet in created
+VPC. Instance does not expose any ports and does not have public IP assigned. It is fully isolated from the Internet and
+uses VPC (Interface) Endpoints to communicate with AWS services (Systems Manager and EC2). You are going to assume an
+IAM role with associated IAM policies that grant you required privileges to authenticate, authorize and connect to EC2
+instance.
+Following [the least privilege principle](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege),
+created EC2 instance does not have access to other resources in your AWS account. You have to explicitly grant it by
+assigning IAM policies to IAM role used by EC2 instance.
+
+### Automation and scale
+
+This pattern can be adopted to be a part of a larger infrastructure code and deployed in an automated way using CI/CD
+tools. You can modify the code to change the type of deployed EC2 instance to adjust its parameters to your specific
+needs.
+
+### EC2 Instance Provisioning
+
+The created EC2 instance is provisioned using [cloud-init](https://cloudinit.readthedocs.io/en/latest/). You can
+customize the instance provisioning by modifying the content of the `cloud_init` template file at `templates/cloud_init.tpl`.
 
 ## Connecting to the Bastion Host Using Session Manager
 
@@ -35,7 +59,8 @@ The created EC2 instance is provisioned using [cloud-init](https://cloudinit.rea
 
 Ensure the following prerequisites are met:
 
-1. **Session Manager Plugin**: Ensure the Session Manager Plugin is installed on your local machine. Check the [AWS Session Manager Plugin Installation Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) for more information.
+1. **AWS Command Line Interface v2**: Ensure the AWS CLI is installed on your local machine. Check the [AWS CLI Installation Guide](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) for more information.
+2. **Session Manager Plugin**: Ensure the Session Manager Plugin is installed on your local machine. Check the [AWS Session Manager Plugin Installation Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html) for more information.
 
 ### Setup Local Environment
 
