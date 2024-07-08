@@ -52,7 +52,7 @@
    Initialize the working directory with the required providers and modules:
 
    ```sh
-   terraform init
+   terraform init -backend-config="./configs/prod-backend.tfvars"
    ```
 
 4. **Workspace Management:**
@@ -60,8 +60,13 @@
    Select or create a new workspace tailored to your deployment environment:
 
    ```sh
-   # Switch to the another workspace or create it if it doesn't exist
-   terraform workspace select -or-create prod
+   # Select an existing workspace
+   terraform workspace select prod
+
+   # Create a new workspace if it doesn't exist
+   # and select it
+   terraform workspace new prod
+   terraform workspace select prod
    ```
 
 ## Deploy
