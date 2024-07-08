@@ -34,3 +34,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_TYPESCRIPT_STANDARD: false
           LINTER_RULES_PATH: .
+          MARKDOWN_CONFIG_FILE: .markdownlint.json
