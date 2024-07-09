@@ -66,19 +66,19 @@ variable "db_engine" {
 variable "db_engine_version" {
   description = "The database engine version."
   type        = string
-  default     = "14"
+  default     = "16.3"
 }
 
 variable "db_family" {
   description = "The family of the database engine to be used for RDS."
   type        = string
-  default     = "postgres14"
+  default     = "postgres16"
 }
 
 variable "db_major_engine_version" {
   description = "The major engine version."
   type        = string
-  default     = "14"
+  default     = "16"
 }
 
 variable "db_storage_type" {
