@@ -72,7 +72,7 @@ variable "db_engine_mode" {
 variable "db_engine_version" {
   description = "The database engine version."
   type        = string
-  default     = "14"
+  default     = "16.3"
 }
 
 variable "db_storage_type" {
