@@ -34,7 +34,7 @@
 | <a name="input_db_backup_window"></a> [db\_backup\_window](#input\_db\_backup\_window) | Preferred backup window. | `string` | `"03:00-06:00"` | no |
 | <a name="input_db_engine"></a> [db\_engine](#input\_db\_engine) | The name of the database engine to be used for RDS. | `string` | `"aurora-postgresql"` | no |
 | <a name="input_db_engine_mode"></a> [db\_engine\_mode](#input\_db\_engine\_mode) | The database engine mode. | `string` | `"provisioned"` | no |
-| <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | The database engine version. | `string` | `"14"` | no |
+| <a name="input_db_engine_version"></a> [db\_engine\_version](#input\_db\_engine\_version) | The database engine version. | `string` | `"16.3"` | no |
 | <a name="input_db_instance_class"></a> [db\_instance\_class](#input\_db\_instance\_class) | The instance class to use for RDS. | `string` | `"db.serverless"` | no |
 | <a name="input_db_instances"></a> [db\_instances](#input\_db\_instances) | Map of cluster instances and any specific/overriding attributes to be created | `any` | `{}` | no |
 | <a name="input_db_maintenance_window"></a> [db\_maintenance\_window](#input\_db\_maintenance\_window) | Preferred maintenance window. | `string` | `"Mon:00:00-Mon:03:00"` | no |
