@@ -29,12 +29,9 @@ variable "tags" {
   default     = {}
 }
 
-data "aws_caller_identity" "aws" {}
-
 locals {
   tf_tags = {
     ManagedBy = "terraform",
-    By        = data.aws_caller_identity.aws.arn
   }
 }
 

@@ -33,3 +33,21 @@ variable "tags" {
   type        = map(any)
   default     = {}
 }
+
+variable "azs_count" {
+  description = "Number of Availability Zones to use. This value is used to determine the number of public and private subnets to create."
+  type        = number
+  default     = 3
+}
+
+variable "public_subnet_tags" {
+  description = "Any extra tags to assign to public subnets"
+  type        = map(any)
+  default     = {}
+}
+
+variable "private_subnet_tags" {
+  description = "Any extra tags to assign to private subnets"
+  type        = map(any)
+  default     = {}
+}
