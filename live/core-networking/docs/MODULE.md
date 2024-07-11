@@ -8,9 +8,7 @@
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.6.2 |
+No providers.
 
 ## Modules
 
@@ -23,9 +21,7 @@
 
 ## Resources
 
-| Name | Type |
-|------|------|
-| [aws_caller_identity.aws](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+No resources.
 
 ## Inputs
 
