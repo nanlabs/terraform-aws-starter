@@ -4,7 +4,7 @@ provider "aws" {
   default_tags {
     tags = merge(module.label.tags, {
       ManagedBy      = "terraform"
-      Owner          = "Software-Platforms"
+      Owner          = "NaNLABS"
       Repository     = "https://github.com/Ionna-ev/terraform-infra"
       RepositoryPath = "live/common-infra"
     })
