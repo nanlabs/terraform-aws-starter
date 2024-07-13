@@ -4,6 +4,4 @@ region      = "us-west-2"
 name        = "tf-backend"
 namespace   = "nan"
 environment = "prod"
-tags = {
-  "ManagedBy" = "terraform"
-}
+tags = {}

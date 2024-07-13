@@ -4,9 +4,7 @@ region      = "us-west-2"
 name        = "common-infra"
 namespace   = "nan"
 environment = "staging"
-tags = {
-  "ManagedBy" = "terraform"
-}
+tags = {}
 
 # Core Networking settings
 
