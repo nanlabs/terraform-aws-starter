@@ -5,7 +5,7 @@ provider "aws" {
     tags = merge(module.label.tags, {
       ManagedBy      = "terraform"
       Owner          = "NaNLABS"
-      Repository     = "https://github.com/Ionna-ev/terraform-infra"
+      Repository     = "https://github.com/nanlabs/terraform-aws-starter"
       RepositoryPath = "live/core-networking"
     })
   }
