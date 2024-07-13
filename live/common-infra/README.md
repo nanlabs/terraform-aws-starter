@@ -71,6 +71,14 @@
 
 After successfully deploying the infrastructure, follow these steps to test the deployment and ensure everything is working as expected:
 
+### Connecting to the Bastion Host Using Session Manager
+
+AWS Session Manager provides secure and auditable instance management without needing to open inbound ports, manage SSH keys, or use bastion hosts. To connect to the bastion host using Session Manager, follow these steps:
+
+#### Follow the Connection Steps
+
+You can check the Bastion Host Module documentation for detailed steps on connecting to the bastion host using Session Manager: [Connect to Bastion Host Using Session Manager](../../modules/bastion/README.md#connecting-to-the-bastion-host-using-session-manager).
+
 ### Connecting to the Database
 
 To connect to the database from the bastion host, retrieve the connection information from AWS Secrets Manager. Follow these steps:
