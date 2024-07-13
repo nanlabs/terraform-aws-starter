@@ -29,12 +29,6 @@ variable "tags" {
   default     = {}
 }
 
-locals {
-  tf_tags = {
-    ManagedBy = "terraform",
-  }
-}
-
 // Keep labels, tags consistent
 module "label" {
   source  = "cloudposse/label/null"
@@ -47,5 +41,5 @@ module "label" {
 
   delimiter   = "-"
   label_order = ["namespace", "environment", "stage", "name", "attributes"]
-  tags        = merge(var.tags, local.tf_tags)
+  tags        = var.tags
 }
