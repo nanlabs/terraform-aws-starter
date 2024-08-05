@@ -71,6 +71,17 @@ resource "aws_iam_role_policy" "bastion_host_iam_role" {
           "secretsmanager:GetSecretValue"
         ],
         "Resource" : "arn:aws:secretsmanager:*:*:secret:*"
+      },
+      {
+        "Effect" : "Allow",
+        "Action" : [
+          "eks:ListClusters",
+          "eks:DescribeCluster",
+          "eks:ListNodegroups",
+          "eks:DescribeNodegroup",
+          "eks:AccessKubernetesApi"
+        ],
+        "Resource" : "*"
       }
     ]
   })

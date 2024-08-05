@@ -7,7 +7,6 @@ apt:
       keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
 
 package_update: true
-
 package_upgrade: true
 
 packages:
@@ -19,8 +18,7 @@ packages:
   - docker-ce
   - docker-ce-cli
   - containerd.io
-  - amazon-ecr-credential-helper
-  - awscli
+  - unzip
 
 # Enable ipv4 forwarding, required on CIS hardened machines
 write_files:
@@ -32,52 +30,6 @@ write_files:
     content: |
       ClientAliveInterval 600
       ClientAliveCountMax 0
-  - path: /opt/aws/amazon-cloudwatch-agent/bin/config.json
-    content: |
-      {
-          "agent": {
-              "metrics_collection_interval": 60,
-              "run_as_user": "cwagent"
-          },
-          "logs": {
-              "logs_collected": {
-                  "files": {
-                      "collect_list": [
-                          {
-                              "file_path": "/var/log/cloud-init-output.log",
-                              "log_group_name": "cloud-init",
-                              "log_stream_name": "{instance_id}"
-                          }
-                      ]
-                  }
-              }
-          },
-          "metrics": {
-              "append_dimensions": {
-                  "AutoScalingGroupName": "$${aws:AutoScalingGroupName}",
-                  "ImageId": "$${aws:ImageId}",
-                  "InstanceId": "$${aws:InstanceId}",
-                  "InstanceType": "$${aws:InstanceType}"
-              },
-              "metrics_collected": {
-                  "disk": {
-                      "measurement": [
-                          "used_percent"
-                      ],
-                      "metrics_collection_interval": 60,
-                      "resources": [
-                          "*"
-                      ]
-                  },
-                  "mem": {
-                      "measurement": [
-                          "mem_used_percent"
-                      ],
-                      "metrics_collection_interval": 60
-                  }
-              }
-          }
-      }
 
 # create the docker group
 groups:
@@ -89,8 +41,11 @@ system_info:
     groups: [docker]
 
 runcmd:
-  - curl -o amazon-cloudwatch-agent.deb https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
-  - dpkg -i -E amazon-cloudwatch-agent.deb
-  - rm -f amazon-cloudwatch-agent.deb
-  - chmod 644 /var/log/cloud-init-output.log
-  - /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
+  - sudo apt-get remove -y awscli
+  - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.17.14.zip" -o "awscliv2.zip"
+  - unzip awscliv2.zip
+  - sudo ./aws/install
+  - rm -rf awscliv2.zip aws
+  - curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  - sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+  - rm kubectl

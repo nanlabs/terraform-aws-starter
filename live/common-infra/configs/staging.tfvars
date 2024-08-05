@@ -4,7 +4,7 @@ region      = "us-west-2"
 name        = "common-infra"
 namespace   = "nan"
 environment = "staging"
-tags = {}
+tags        = {}
 
 # Core Networking settings
 

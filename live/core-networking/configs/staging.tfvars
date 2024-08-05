@@ -4,7 +4,7 @@ region      = "us-west-2"
 name        = "core-networking"
 namespace   = "nan"
 environment = "staging"
-tags = {}
+tags        = {}
 
 # AWS settings
 

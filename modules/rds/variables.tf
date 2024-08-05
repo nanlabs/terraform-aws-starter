@@ -54,7 +54,7 @@ variable "db_port" {
 variable "db_instance_class" {
   description = "The instance class to use for RDS."
   type        = string
-  default     = "db.t4g.small"
+  default     = "db.t4g.large"
 }
 
 variable "db_engine" {

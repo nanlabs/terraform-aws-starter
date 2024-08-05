@@ -4,7 +4,7 @@ region      = "us-west-2"
 name        = "common-infra"
 namespace   = "nan"
 environment = "prod"
-tags = {}
+tags        = {}
 
 # Core Networking settings
 

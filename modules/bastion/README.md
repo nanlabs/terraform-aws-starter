@@ -196,6 +196,41 @@ ssh -i /path/to/your/private/key ubuntu@$bastion_instance_id
 
 ### Optional Steps
 
+The following steps are optional and can be used to further secure the Bastion host
+or to streamline the connection process.
+
+#### Quick Connection Using Script
+
+To streamline the process of connecting to the Bastion host, you can use the provided `connect.sh` script. This script automates the steps of generating an SSH key, uploading it to the instance, and establishing a connection through AWS Systems Manager.
+
+```sh
+./scripts/connect.sh -i <instance-id>
+```
+
+Replace `<instance-id>` with the ID of the Bastion host instance. The script will generate an SSH key pair, upload the public key to the Bastion host, and establish an SSH connection using the private key.
+
+Use the `-h` or `--help` flag to see the available options:
+
+```sh
+$ ./scripts/connect.sh --help
+
+Script to connect to an AWS Bastion host. Usage:
+
+    connect.sh [option] ARGUMENTS...
+
+Options:
+    -h, --help                      Display this help message
+
+        --instance-id=INSTANCE_ID   EC2 instance ID of the Bastion host
+        --tag=TAG                   Tag to identify the Bastion host.
+                                    Will be used to retrieve the instance ID.
+                                    If not provided, instance ID must be provided.
+                                    Will be ignored if instance ID is provided.
+
+        --key-name=KEY_NAME         Name of the SSH key file (default: bastion_key)
+        --key-dir=KEY_DIR           Directory to store the SSH key (default: ~/.ssh)
+```
+
 #### Use Other SSH Options to Open Connection
 
 It is possible to use different options to open connection to bastion host. For example you can use -D 8888 option to open SSH connection with a local “dynamic” application-level port forwarding through 8888 port. See [this link](https://explainshell.com/explain?cmd=ssh+-i+%24PRIVATE_KEY_FILE+-D+8888+ubuntu%40%24INSTANCE_ID) for detailed explanation.
