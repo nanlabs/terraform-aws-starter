@@ -70,24 +70,25 @@ The `live` directory houses our live infrastructure components. This is where yo
 
 It is recommended to create a separate directory for each domain that you want to manage with Terraform. For example, you could have a `core-networking` directory for managing your VPC, subnets, and security groups, and a `common-infra` directory for managing your RDS instances, S3 buckets, and other shared resources.
 
-| Module                                                                | Description                                                                                                              |
-| :-------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
-| [Terraform Backend Configuration](./live/terraform-backend/README.md) | Terraform module for setting up the S3 backend.                                                                          |
-| [Core Networking](./live/core-networking/README.md)                   | Terraform module for managing core networking components such as VPC, subnets, and security groups.                     |
-| [Common Infrastructure](./live/common-infra/README.md)                | Terraform module for managing common infrastructure components such as RDS instances, S3 buckets, and IAM roles.        |
+| Module                                                                | Description                                                                                                      |
+| :-------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [Terraform Backend Configuration](./live/terraform-backend/README.md) | Terraform module for setting up the S3 backend.                                                                  |
+| [AWS IAM Management](./live/aws-iam-management/README.md)             | Terraform module for managing IAM roles and policies.                                                            |
+| [Core Networking](./live/core-networking/README.md)                   | Terraform module for managing core networking components such as VPC, subnets, and security groups.              |
+| [Common Infrastructure](./live/common-infra/README.md)                | Terraform module for managing common infrastructure components such as RDS instances, S3 buckets, and IAM roles. |
 
 ## Terraform Modules
 
 We have created custom Terraform modules to bootstrap our infrastructure, which are located in the `modules` directory.
 
-| Module                                               | Description                                                                                                                                             |
-| :--------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Amplify App](./modules/amplify-app/README.md)       | Terraform module for bootstrapping an Amplify app.                                                                                                      |
-| [Bastion](./modules/bastion/README.md)               | Terraform module for bootstrapping a bastion host.                                                                                                      |
-| [MongoDB Atlas Cluster](./modules/mongodb/README.md) | Terraform module for bootstrapping a MongoDB Atlas Cluster. It makes it possible to create a VPC Peering between the VPC and the MongoDB Atlas Cluster. |
-| [RDS Instance](./modules/rds/README.md)              | Terraform module for bootstrapping an RDS Instance.                                                                                                     |
-| [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Terraform module for bootstrapping an RDS Aurora Cluster.                                                                                               |
-| [VPC](./modules/vpc/README.md)                       | Terraform module for bootstrapping a VPC for use with our shared infrastructure.                                                                        |
+| Module                                               | Description                                                                      |
+| :--------------------------------------------------- | :------------------------------------------------------------------------------- |
+| [Amplify App](./modules/amplify-app/README.md)       | Terraform module for bootstrapping an Amplify app.                               |
+| [Bastion](./modules/bastion/README.md)               | Terraform module for bootstrapping a bastion host.                               |
+| [AWS IAM Role](./modules/iam-role/README.md)         | Terraform module for bootstrapping an AWS IAM role.                              |
+| [RDS Instance](./modules/rds/README.md)              | Terraform module for bootstrapping an RDS Instance.                              |
+| [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Terraform module for bootstrapping an RDS Aurora Cluster.                        |
+| [VPC](./modules/vpc/README.md)                       | Terraform module for bootstrapping a VPC for use with our shared infrastructure. |
 
 ## Apps and Services
 
