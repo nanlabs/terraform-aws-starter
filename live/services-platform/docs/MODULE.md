@@ -4,14 +4,12 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_akp"></a> [akp](#requirement\_akp) | >= 0.7.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_akp"></a> [akp](#provider\_akp) | 0.7.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 5.57.0 |
 
 ## Modules
@@ -20,21 +18,17 @@
 |------|--------|---------|
 | <a name="module_eks_cluster"></a> [eks\_cluster](#module\_eks\_cluster) | ../../modules/eks | n/a |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_msk"></a> [msk](#module\_msk) | ../../modules/msk | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [akp_cluster.akp-cluster](https://registry.terraform.io/providers/akuity/akp/latest/docs/resources/cluster) | resource |
 | [aws_eks_access_entry.access_entries](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_entry) | resource |
 | [aws_eks_access_policy_association.access_policies_associations](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_policy_association) | resource |
 | [aws_iam_policy.eks_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.eks_roles](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.attach_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
-| [akp_instance.argocd](https://registry.terraform.io/providers/akuity/akp/latest/docs/data-sources/instance) | data source |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
-| [aws_eks_cluster_auth.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster_auth) | data source |
 | [aws_iam_policy_document.eks_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_session_context.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_session_context) | data source |
 | [aws_security_group.bastion_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
@@ -49,8 +43,6 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_addons"></a> [addons](#input\_addons) | List of addons to be installed in the EKS cluster | <pre>list(object({<br>    addon_name                  = string<br>    addon_version               = string<br>    resolve_conflicts_on_create = optional(string)<br>    resolve_conflicts_on_update = optional(string)<br>    service_account_role_arn    = optional(string)<br>  }))</pre> | `[]` | no |
-| <a name="input_akp_instance_name"></a> [akp\_instance\_name](#input\_akp\_instance\_name) | The name of the AKP instance | `string` | n/a | yes |
-| <a name="input_akuity_org_name"></a> [akuity\_org\_name](#input\_akuity\_org\_name) | Organization name in Akuity Platform | `string` | n/a | yes |
 | <a name="input_bastion_security_group_name"></a> [bastion\_security\_group\_name](#input\_bastion\_security\_group\_name) | The name of the bastion security group | `string` | n/a | yes |
 | <a name="input_cluster_encryption_config_enabled"></a> [cluster\_encryption\_config\_enabled](#input\_cluster\_encryption\_config\_enabled) | Enable cluster encryption configuration | `bool` | `false` | no |
 | <a name="input_cluster_encryption_config_kms_key_deletion_window_in_days"></a> [cluster\_encryption\_config\_kms\_key\_deletion\_window\_in\_days](#input\_cluster\_encryption\_config\_kms\_key\_deletion\_window\_in\_days) | KMS key deletion window in days for cluster encryption | `number` | `10` | no |
