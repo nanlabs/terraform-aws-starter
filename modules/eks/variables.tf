@@ -65,6 +65,12 @@ variable "addons" {
   default = []
 }
 
+variable "addons_depends_on" {
+  description = "List of resources that the addons depend on"
+  type        = any
+  default     = []
+}
+
 variable "node_groups" {
   description = "List of node groups to create in the EKS cluster"
   type = list(object({

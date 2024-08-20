@@ -33,7 +33,7 @@
    Initialize the working directory with the required providers and modules:
 
    ```sh
-   terraform init -backend-config="./configs/prod-backend.tfvars"
+   terraform init -backend-config="./configs/sandbox-backend.tfvars"
    ```
 
 3. **Workspace Management:**
@@ -42,12 +42,12 @@
 
    ```sh
    # Select an existing workspace
-   terraform workspace select prod
+   terraform workspace select sandbox
 
    # Create a new workspace if it doesn't exist
    # and select it
-   terraform workspace new prod
-   terraform workspace select prod
+   terraform workspace new sandbox
+   terraform workspace select sandbox
    ```
 
 ## Deploy

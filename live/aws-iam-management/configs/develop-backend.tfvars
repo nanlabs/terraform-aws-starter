@@ -1,0 +1,5 @@
+region  = "us-west-2"
+bucket  = "nan-develop-tfbackend-state"
+key     = "nan-develop-aws-iam-management.tfstate"
+encrypt = "true"
+profile = ""

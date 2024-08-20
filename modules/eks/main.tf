@@ -38,7 +38,7 @@ module "eks_cluster" {
   cluster_encryption_config_resources                       = var.cluster_encryption_config_resources
 
   addons            = local.addons
-  addons_depends_on = [module.eks_node_groups]
+  addons_depends_on = concat(var.addons_depends_on, [module.eks_node_groups])
 
   access_entry_map           = var.access_entry_map
   access_entries             = var.access_entries

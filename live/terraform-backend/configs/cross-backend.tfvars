@@ -1,0 +1,5 @@
+region  = "us-west-2"
+bucket  = "nan-cross-tfbackend-state"
+key     = "nan-cross-tfbackend.tfstate"
+encrypt = "true"
+profile = ""

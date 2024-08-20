@@ -12,12 +12,22 @@ module "terraform_state_backend" {
   stage       = var.stage
   attributes  = ["state"]
 
-  terraform_backend_config_file_path = "./configs"
-  terraform_backend_config_file_name = "${var.environment}-backend.tfvars"
-  terraform_state_file               = "${module.label.id}.tfstate"
+  terraform_state_file = "${module.label.id}.tfstate"
 
   bucket_enabled   = true
   dynamodb_enabled = false
 
-  force_destroy = false
+  force_destroy = true
+}
+
+resource "local_file" "terraform_backend_config" {
+  filename        = "${path.module}/configs/${var.environment}-backend.tfvars"
+  file_permission = "0644"
+  content         = <<EOF
+region  = "${var.region}"
+bucket  = "${module.terraform_state_backend.s3_bucket_id}"
+key     = "${module.label.id}.tfstate"
+encrypt = "true"
+profile = ""
+EOF
 }

@@ -12,11 +12,6 @@ Welcome to the Terraform AWS Starter Kit! This comprehensive and robust starter 
 
 The Terraform AWS Starter Kit solves the most challenging aspect of AWS infrastructure building by providing a powerful solution for our clients. Our goal is to simplify the process of setting up a reliable and scalable AWS environment, allowing you to focus on developing and deploying your applications swiftly and confidently.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" alt="" align="right" width="400px" srcset="./tools/dac/live_prod_infrastructure.png"/>
-  <img alt="" align="right" width="400px" src="./tools/dac/live_prod_infrastructure.png"/>
-</picture>
-
 ## Key Features
 
 ### Secure State Management 🔒
@@ -33,7 +28,11 @@ The starter kit implements security groups for the bastion host and database ins
 
 ### Database Provisioning 🗃️
 
-We have included configurations to provision an RDS PostgreSQL instance and other database resources. This allows you to easily set up and manage your database infrastructure in a consistent and reproducible manner.
+We have included configurations to provision an RDS PostgreSQL instance, RDS Aurora cluster, MSK cluster, MongoDB Atlas cluster, and more. These configurations enable you to set up and manage your databases with ease, ensuring optimal performance and reliability for your applications.
+
+### Kubernetes Cluster Provisioning 🚢
+
+Our starter kit includes configurations to provision an Amazon Elastic Kubernetes Service (EKS) cluster. This enables you to deploy and manage containerized applications using Kubernetes, leveraging the scalability and flexibility of AWS for your workloads.
 
 ### Secrets Management 🔑
 
@@ -60,45 +59,55 @@ We welcome contributions and feedback to improve this starter kit further, makin
 
 ## Quick Start
 
-Check the [Live Infrastructure](#live-infrastructure) section for more information about existing infrastructure modules and how to use them.
-
-Once you have chosen the infrastructure module you want to use, move to the module directory and follow the instructions in the README file.
+To get started, explore the available modules and scripts, and follow the instructions provided in their respective README files. For a more hands-on introduction, you can start with the examples provided in the [**Live Infrastructure**](#live-infrastructure) and [**Infra Tools and Scripts**](#infra-tools-and-scripts) sections.
 
 ## Live Infrastructure
 
-The `live` directory houses our live infrastructure components. This is where you'll find our Terraform variables, backend configuration, and Terraform root modules.
+The `live` directory houses our active infrastructure configurations. These configurations are organized by domain, allowing you to manage different parts of your infrastructure separately.
 
-It is recommended to create a separate directory for each domain that you want to manage with Terraform. For example, you could have a `core-networking` directory for managing your VPC, subnets, and security groups, and a `common-infra` directory for managing your RDS instances, S3 buckets, and other shared resources.
-
-| Module                                                                | Description                                                                                                      |
-| :-------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
-| [Terraform Backend Configuration](./live/terraform-backend/README.md) | Terraform module for setting up the S3 backend.                                                                  |
-| [AWS IAM Management](./live/aws-iam-management/README.md)             | Terraform module for managing IAM roles and policies.                                                            |
-| [Core Networking](./live/core-networking/README.md)                   | Terraform module for managing core networking components such as VPC, subnets, and security groups.              |
-| [Common Infrastructure](./live/common-infra/README.md)                | Terraform module for managing common infrastructure components such as RDS instances, S3 buckets, and IAM roles. |
+| Module                                                                | Description                                                                             |
+| :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
+| [Terraform Backend Configuration](./live/terraform-backend/README.md) | Set up the Terraform backend with an S3 bucket and DynamoDB table for state management. |
+| [AWS IAM Management](./live/iam-management/README.md)                 | Manage IAM roles and policies.                                                          |
+| [Core Networking](./live/core-networking/README.md)                   | Manage core networking components such as VPCs, subnets, and security groups.           |
+| [Services Platform](./live/services-platform/README.md)               | Manage services platform components, including EKS clusters.                            |
 
 ## Terraform Modules
 
-We have created custom Terraform modules to bootstrap our infrastructure, which are located in the `modules` directory.
+Our custom Terraform modules are located in the `modules` directory. These modules are reusable and help you bootstrap various parts of your infrastructure.
 
-| Module                                               | Description                                                                      |
-| :--------------------------------------------------- | :------------------------------------------------------------------------------- |
-| [Amplify App](./modules/amplify-app/README.md)       | Terraform module for bootstrapping an Amplify app.                               |
-| [Bastion](./modules/bastion/README.md)               | Terraform module for bootstrapping a bastion host.                               |
-| [AWS IAM Role](./modules/iam-role/README.md)         | Terraform module for bootstrapping an AWS IAM role.                              |
-| [RDS Instance](./modules/rds/README.md)              | Terraform module for bootstrapping an RDS Instance.                              |
-| [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Terraform module for bootstrapping an RDS Aurora Cluster.                        |
-| [VPC](./modules/vpc/README.md)                       | Terraform module for bootstrapping a VPC for use with our shared infrastructure. |
+| Module                                               | Description                                                   |
+| :--------------------------------------------------- | :------------------------------------------------------------ |
+| [Amplify App](./modules/amplify-app/README.md)       | Bootstrap an Amplify app.                                     |
+| [Bastion](./modules/bastion/README.md)               | Bootstrap a bastion host.                                     |
+| [EKS](./modules/eks/README.md)                       | Bootstrap an EKS cluster.                                     |
+| [AWS IAM Role](./modules/iam-role/README.md)         | Bootstrap an AWS IAM role.                                    |
+| [MSK Cluster](./modules/msk/README.md)               | Bootstrap an MSK cluster.                                     |
+| [RDS Instance](./modules/rds/README.md)              | Bootstrap an RDS Instance.                                    |
+| [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Bootstrap an RDS Aurora Cluster.                              |
+| [VPC](./modules/vpc/README.md)                       | Bootstrap a VPC for shared infrastructure.                    |
+| [VPC Endpoint](./modules/vpc-endpoint/README.md)     | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |
 
 ## Apps and Services
 
-In addition to infrastructure provisioning, we have included a few apps and services to help you get started.
+In addition to infrastructure provisioning, we have included a few apps and services to help you get started. These are located in the `apps` directory and provide useful examples of how to use the infrastructure we have provisioned.
 
-These apps and services are located in the `apps` directory. In there you can find useful examples of how to use the infrastructure we have provisioned.
+| Service                                                         | Description                                                                               |
+| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
+| [Start and Stop EC2 Instance](./apps/start-stop-ec2-instances/) | A Serverless Framework-based project to start and stop EC2 instances based on a schedule. |
 
-| Service                                                         | Description                                                                                       |
-| :-------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ |
-| [Start and Stop EC2 Instance](./apps/start-stop-ec2-instances/) | This is a Serverless Framework based project to start and stop EC2 instances based on a schedule. |
+## Infra Tools and Scripts
+
+This section contains additional tools and scripts that complement our Terraform modules, helping you manage specific tasks.
+
+**What tools and scripts are available?**
+
+- Bastion Host Connection script: Connect to an AWS Bastion host securely.
+- Generate `kubeconfig` script: Generate a `kubeconfig` file for an EKS Cluster.
+- Tunnel to EKS Cluster script: Create a tunnel to an EKS Cluster for `kubectl` access.
+- and more!
+
+Refer to the [Infra Tools and Scripts README](./scripts/README.md) for more details and usage examples!
 
 ## Best practices
 

@@ -1,0 +1,5 @@
+region  = "us-west-2"
+bucket  = "nan-sandbox-tfbackend-state"
+key     = "nan-sandbox-tfbackend.tfstate"
+encrypt = "true"
+profile = ""

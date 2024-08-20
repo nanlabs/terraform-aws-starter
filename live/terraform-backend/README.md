@@ -17,24 +17,26 @@
 
 1. **Initialize Terraform:**
 
-   Initialize the working directory with the required providers and modules:
+   Initialize the Terraform working directory which will download the necessary providers and modules:
 
    ```sh
-   terraform init
+   [[ -f configs/sandbox-backend.tfvars ]] \
+     && terraform init -backend-config="./configs/sandbox-backend.tfvars" \
+     || terraform init
    ```
 
-4. **Workspace Management:**
+2. **Workspace Management:**
 
    Select or create a new workspace tailored to your deployment environment:
 
    ```sh
    # Select an existing workspace
-   terraform workspace select prod
+   terraform workspace select sandbox
 
    # Create a new workspace if it doesn't exist
    # and select it
-   terraform workspace new prod
-   terraform workspace select prod
+   terraform workspace new sandbox
+   terraform workspace select sandbox
    ```
 
 ## Deploy
@@ -44,7 +46,7 @@
    Generate an execution plan for Terraform:
 
    ```sh
-   terraform plan -var-file ./configs/prod.tfvars -out ./prod.tfplan
+   terraform plan -var-file ./configs/sandbox.tfvars -out ./sandbox.tfplan
    ```
 
 2. **Apply the Configuration:**
@@ -52,7 +54,7 @@
    Apply the configuration to set up the S3 bucket and DynamoDB table:
 
    ```sh
-   terraform apply "./prod.tfplan"
+   terraform apply "./sandbox.tfplan"
    ```
 
    🚀 **NOTE:** Confirm the actions before proceeding to ensure that the correct resources are being created or modified.
@@ -66,7 +68,7 @@ If this is your first deployment, Terraform will prompt you to confirm the setup
   If migrating from a local state, use the following command to migrate the state to the S3 bucket safely:
 
   ```sh
-  terraform init -backend-config="./configs/prod-backend.tfvars" -force-copy
+  terraform init -backend-config="./configs/sandbox-backend.tfvars" -force-copy
   ```
 
   Push the changes to your version control system:

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-##
 ## Script to connect to an AWS Bastion host or create a tunnel through the bastion host. Usage:
 ##
 ##     @script.name [option] ARGUMENTS...
@@ -40,9 +39,8 @@ DEFAULT_BASTION_USER="ubuntu"
 
 # Validate required arguments
 if [[ -z "$tag" && -z "$instance_id" ]]; then
-  echo "Error: Either Bastion host tag or instance ID must be provided."
-  show_help
-  exit 1
+    show_error "Either Bastion host tag or instance ID must be provided"
+    exit 1
 fi
 
 # Set default values if not provided
@@ -54,53 +52,53 @@ BASTION_USER="${bastion_user:-$DEFAULT_BASTION_USER}"
 
 # Check if AWS CLI and Session Manager Plugin are installed
 if ! command -v aws &>/dev/null; then
-  echo "AWS CLI could not be found. Please install it before running this script."
-  exit 1
+    echo "AWS CLI could not be found. Please install it before running this script."
+    exit 1
 fi
 
 if ! command -v session-manager-plugin &>/dev/null; then
-  echo "Session Manager Plugin could not be found. Please install it before running this script."
-  exit 1
+    echo "Session Manager Plugin could not be found. Please install it before running this script."
+    exit 1
 fi
 
 # Generate SSH key pair if not exists
 if [ ! -f "$SSH_KEY_PATH" ]; then
-  echo "Generating SSH key pair..."
-  ssh-keygen -t rsa -b 2048 -f "$SSH_KEY_PATH" -N ""
+    echo "Generating SSH key pair..."
+    ssh-keygen -t rsa -b 2048 -f "$SSH_KEY_PATH" -N ""
 fi
 
 # Retrieve Bastion instance ID if not provided
 if [[ -z "$instance_id" ]]; then
-  echo "Retrieving Bastion instance ID..."
-  instance_id=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$tag" --query "Reservations[*].Instances[*].InstanceId" --output text)
-  if [[ -z "$instance_id" ]]; then
-    echo "No Bastion host found with tag: $tag"
-    exit 1
-  fi
-  echo "Bastion Instance ID: $instance_id"
+    echo "Retrieving Bastion instance ID..."
+    instance_id=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$tag" --query "Reservations[*].Instances[*].InstanceId" --output text)
+    if [[ -z "$instance_id" ]]; then
+        echo "No Bastion host found with tag: $tag"
+        exit 1
+    fi
+    echo "Bastion Instance ID: $instance_id"
 fi
 
 # Send SSH Public Key
 echo "Sending SSH public key to Bastion host..."
-aws ec2-instance-connect send-ssh-public-key --instance-id "$instance_id" --instance-os-user "$BASTION_USER" --ssh-public-key file://"$SSH_PUBLIC_KEY_PATH"
+aws ec2-instance-connect send-ssh-public-key --instance-id "$instance_id" --instance-os-user "$BASTION_USER" --ssh-public-key file://"$SSH_PUBLIC_KEY_PATH" >/dev/null 2>&1 &
 
 # Connect to Bastion Host or create a tunnel using SSH through Session Manager
 ssh_proxy_command_option="ProxyCommand sh -c \"aws ssm start-session --target %h --document-name AWS-StartSSHSession --parameters 'portNumber=%p'\""
 
 if [[ -z "$tunnel" ]]; then
-  echo "Connecting to Bastion host using SSH through Session Manager..."
-  ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" "$BASTION_USER@$instance_id"
-  echo "Connection to Bastion host established."
-  exit 0
+    echo "Connecting to Bastion host using SSH through Session Manager..."
+    ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" "$BASTION_USER@$instance_id"
+    echo "Connection to Bastion host established."
+    exit 0
 fi
 
 echo "Creating tunnel through Bastion host to $tunnel..."
 if [[ -n "$tunnel_target_user" && -n "$tunnel_target_key" ]]; then
-  tunnel_host=$(echo "$tunnel" | cut -d':' -f2)
-  ssh_proxy_command_option="ProxyCommand ssh -i $tunnel_target_key -W %h:%p $tunnel_target_user@$tunnel_host"
-  ssh_tunnel_proxy_command_option="ProxyCommand ssh -i $tunnel_target_key -W %h:%p $tunnel_target_user@$tunnel_host"
-  ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -o "$ssh_tunnel_proxy_command_option" -N "$BASTION_USER@$instance_id"
+    tunnel_host=$(echo "$tunnel" | cut -d':' -f2)
+    ssh_proxy_command_option="ProxyCommand ssh -i $tunnel_target_key -W %h:%p $tunnel_target_user@$tunnel_host"
+    ssh_tunnel_proxy_command_option="ProxyCommand ssh -i $tunnel_target_key -W %h:%p $tunnel_target_user@$tunnel_host"
+    ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -o "$ssh_tunnel_proxy_command_option" -N "$BASTION_USER@$instance_id"
 else
-  ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -N "$BASTION_USER@$instance_id"
+    ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -N "$BASTION_USER@$instance_id"
 fi
 echo "Tunnel established through Bastion host."

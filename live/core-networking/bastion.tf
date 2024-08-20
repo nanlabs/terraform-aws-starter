@@ -12,7 +12,7 @@ module "bastion" {
   vpc_id          = module.vpc.vpc_id
   private_subnets = module.vpc.private_subnets
   instance_type   = "t2.micro"
-  tags            = module.label.tags
+  tags            = merge(module.label.tags, { "Name" = "${module.label.id}-bastion" })
 }
 
 output "bastion_instance_id" {
