@@ -77,19 +77,19 @@ The `live` directory houses our active infrastructure configurations. These conf
 
 Our custom Terraform modules are located in the `modules` directory. These modules are reusable and help you bootstrap various parts of your infrastructure.
 
-| Module                                                     | Description                                                   |
-| :--------------------------------------------------------- | :------------------------------------------------------------ |
-| [Amplify App](./modules/amplify-app/README.md)             | Bootstrap an Amplify app.                                     |
-| [Bastion](./modules/bastion/README.md)                     | Bootstrap a bastion host.                                     |
-| [DocumentDB Cluster](./modules/documentdb/README.md)       | Bootstrap a DocumentDB cluster.                               |
-| [EKS](./modules/eks/README.md)                             | Bootstrap an EKS cluster.                                     |
-| [AWS IAM Role](./modules/iam-role/README.md)               | Bootstrap an AWS IAM role.                                    |
-| [MongoDB Atlas Cluster](./modules/mongodb-atlas/README.md) | Bootstrap a MongoDB Atlas cluster.                            |
-| [MSK Cluster](./modules/msk/README.md)                     | Bootstrap an MSK cluster.                                     |
-| [RDS Instance](./modules/rds/README.md)                    | Bootstrap an RDS Instance.                                    |
-| [RDS Aurora Cluster](./modules/rds-aurora/README.md)       | Bootstrap an RDS Aurora Cluster.                              |
-| [VPC](./modules/vpc/README.md)                             | Bootstrap a VPC for shared infrastructure.                    |
-| [VPC Endpoint](./modules/vpc-endpoint/README.md)           | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |
+| Module                                               | Description                                                   |
+| :--------------------------------------------------- | :------------------------------------------------------------ |
+| [Amplify App](./modules/amplify-app/README.md)       | Bootstrap an Amplify app.                                     |
+| [Bastion](./modules/bastion/README.md)               | Bootstrap a bastion host.                                     |
+| [DocumentDB Cluster](./modules/docdb/README.md)      | Bootstrap a DocumentDB cluster.                               |
+| [EKS](./modules/eks/README.md)                       | Bootstrap an EKS cluster.                                     |
+| [AWS IAM Role](./modules/iam-role/README.md)         | Bootstrap an AWS IAM role.                                    |
+| [MongoDB Atlas Cluster](./modules/mongodb/README.md) | Bootstrap a MongoDB Atlas cluster.                            |
+| [MSK Cluster](./modules/msk/README.md)               | Bootstrap an MSK cluster.                                     |
+| [RDS Instance](./modules/rds/README.md)              | Bootstrap an RDS Instance.                                    |
+| [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Bootstrap an RDS Aurora Cluster.                              |
+| [VPC](./modules/vpc/README.md)                       | Bootstrap a VPC for shared infrastructure.                    |
+| [VPC Endpoint](./modules/vpc-endpoint/README.md)     | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |
 
 ## Apps and Services
 
