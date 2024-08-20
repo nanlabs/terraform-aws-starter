@@ -9,6 +9,14 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+    inputs:
+      validate_all_codebase:
+        description: 'Validate all code base'
+        required: false
+        default: false
+        type: boolean
+
 permissions:
   contents: read
 
@@ -29,7 +37,7 @@ jobs:
       - name: Lint Code Base
         uses: super-linter/super-linter/slim@v6
         env:
-          VALIDATE_ALL_CODEBASE: false
+          VALIDATE_ALL_CODEBASE: ${{ github.event.inputs.validate_all_codebase || false }}
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_TYPESCRIPT_STANDARD: false
