@@ -28,4 +28,12 @@ module "bastion" {
   vpc_security_group_ids = [module.ec2_security_group.security_group_id]
 
   tags = var.tags
+
+  root_block_device = [
+    {
+      encrypted   = true
+      volume_type = var.root_volume_type
+      volume_size = var.root_volume_size
+    },
+  ]
 }

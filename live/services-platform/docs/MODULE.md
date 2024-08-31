@@ -4,31 +4,43 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_akp"></a> [akp](#requirement\_akp) | >= 0.7.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
+| <a name="provider_akp"></a> [akp](#provider\_akp) | 0.7.0 |
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 5.57.0 |
 
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
+| <a name="module_doris_app_role"></a> [doris\_app\_role](#module\_doris\_app\_role) | ../../modules/iam-role | n/a |
 | <a name="module_eks_cluster"></a> [eks\_cluster](#module\_eks\_cluster) | ../../modules/eks | n/a |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
+| <a name="module_msk"></a> [msk](#module\_msk) | ../../modules/msk | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
+| [akp_cluster.akp-cluster](https://registry.terraform.io/providers/akuity/akp/latest/docs/resources/cluster) | resource |
 | [aws_eks_access_entry.access_entries](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_entry) | resource |
 | [aws_eks_access_policy_association.access_policies_associations](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_access_policy_association) | resource |
 | [aws_iam_policy.eks_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
 | [aws_iam_role.eks_roles](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.attach_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_kms_key.msk_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
+| [aws_kms_key_policy.msk_key_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key_policy) | resource |
+| [aws_secretsmanager_secret.msk_admin_secret](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
+| [aws_secretsmanager_secret_version.msk_admin_secret_version](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret_version) | resource |
+| [akp_instance.argocd](https://registry.terraform.io/providers/akuity/akp/latest/docs/data-sources/instance) | data source |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_eks_cluster_auth.default](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/eks_cluster_auth) | data source |
+| [aws_iam_policy_document.doris_service_account_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.eks_policies](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_session_context.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_session_context) | data source |
 | [aws_security_group.bastion_security_group](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/security_group) | data source |
@@ -43,7 +55,12 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_addons"></a> [addons](#input\_addons) | List of addons to be installed in the EKS cluster | <pre>list(object({<br>    addon_name                  = string<br>    addon_version               = string<br>    resolve_conflicts_on_create = optional(string)<br>    resolve_conflicts_on_update = optional(string)<br>    service_account_role_arn    = optional(string)<br>  }))</pre> | `[]` | no |
+| <a name="input_akp_instance_name"></a> [akp\_instance\_name](#input\_akp\_instance\_name) | The name of the AKP instance | `string` | n/a | yes |
+| <a name="input_akuity_org_name"></a> [akuity\_org\_name](#input\_akuity\_org\_name) | Organization name in Akuity Platform | `string` | n/a | yes |
 | <a name="input_bastion_security_group_name"></a> [bastion\_security\_group\_name](#input\_bastion\_security\_group\_name) | The name of the bastion security group | `string` | n/a | yes |
+| <a name="input_broker_instance_type"></a> [broker\_instance\_type](#input\_broker\_instance\_type) | The instance type to use for the Kafka brokers | `string` | `"kafka.t3.small"` | no |
+| <a name="input_broker_per_zone"></a> [broker\_per\_zone](#input\_broker\_per\_zone) | The number of brokers per zone | `number` | `1` | no |
+| <a name="input_broker_volume_size"></a> [broker\_volume\_size](#input\_broker\_volume\_size) | The size in GiB of the EBS volume for the data drive on each broker node | `number` | `10` | no |
 | <a name="input_cluster_encryption_config_enabled"></a> [cluster\_encryption\_config\_enabled](#input\_cluster\_encryption\_config\_enabled) | Enable cluster encryption configuration | `bool` | `false` | no |
 | <a name="input_cluster_encryption_config_kms_key_deletion_window_in_days"></a> [cluster\_encryption\_config\_kms\_key\_deletion\_window\_in\_days](#input\_cluster\_encryption\_config\_kms\_key\_deletion\_window\_in\_days) | KMS key deletion window in days for cluster encryption | `number` | `10` | no |
 | <a name="input_cluster_encryption_config_kms_key_enable_key_rotation"></a> [cluster\_encryption\_config\_kms\_key\_enable\_key\_rotation](#input\_cluster\_encryption\_config\_kms\_key\_enable\_key\_rotation) | Enable KMS key rotation for cluster encryption | `bool` | `true` | no |
@@ -63,12 +80,16 @@
 | <a name="input_private_ipv6_enabled"></a> [private\_ipv6\_enabled](#input\_private\_ipv6\_enabled) | Enable IPv6 for Kubernetes network | `bool` | `false` | no |
 | <a name="input_region"></a> [region](#input\_region) | AWS region | `string` | `"us-west-2"` | no |
 | <a name="input_stage"></a> [stage](#input\_stage) | Stage, e.g. 'build', 'test', 'deploy', 'release' | `string` | `null` | no |
+| <a name="input_storage_autoscaling_max_capacity"></a> [storage\_autoscaling\_max\_capacity](#input\_storage\_autoscaling\_max\_capacity) | The maximum storage capacity of the volume in GiB | `number` | `20` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Any extra tags to assign to objects | `map(any)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
+| <a name="output_doris_app_role_arn"></a> [doris\_app\_role\_arn](#output\_doris\_app\_role\_arn) | The Amazon Resource Name (ARN) specifying the role |
+| <a name="output_doris_app_role_id"></a> [doris\_app\_role\_id](#output\_doris\_app\_role\_id) | The stable and unique string identifying the role |
+| <a name="output_doris_app_role_name"></a> [doris\_app\_role\_name](#output\_doris\_app\_role\_name) | The name of the IAM role created |
 | <a name="output_eks_cluster_endpoint"></a> [eks\_cluster\_endpoint](#output\_eks\_cluster\_endpoint) | The endpoint for the EKS cluster |
 | <a name="output_eks_cluster_id"></a> [eks\_cluster\_id](#output\_eks\_cluster\_id) | The ID of the EKS cluster |
 <!-- END_TF_DOCS -->

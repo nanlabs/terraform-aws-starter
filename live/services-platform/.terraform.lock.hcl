@@ -1,29 +1,6 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
-provider "registry.terraform.io/akuity/akp" {
-  version     = "0.7.0"
-  constraints = ">= 0.7.0"
-  hashes = [
-    "h1:Sd3f8dqtFnQYF2F+dr6SfUF0FyGM1GwXc3kWCquti3I=",
-    "zh:0e367a059a3a4287ac7deb1adb6db8d355ff301bf1a46398a5b4eacb926c7ffd",
-    "zh:130cd7cbbf96a77e18fd84e91b7f290c33331263203b5d54d98e976488f3ec44",
-    "zh:1dcc1ec49f92cccac0320d9454f6a11ba250a019f8071c258aa253ed3906ec57",
-    "zh:20d448a7f73972c329efbc767730672a265aa367a2485d867b1fe7c100bf437b",
-    "zh:28622d79e72fce8abbd6db81ed883ef7fd260804390dc097c874abee93f6725c",
-    "zh:2d7384ed4a241a9dc2ce88d28bba5a089a6c21ff6043f1030a9cadf986e97347",
-    "zh:3209f3f66d1977f5b68d355725c049a3a4c7a69d4d884a53b5eb186f7cd526aa",
-    "zh:3492e4272caa41a290ac26a40ee6c98e2461044f7a04ab17c6af2001ab68ee73",
-    "zh:55ef796c0c4ddcd7aa1912f829ae6172ea58d873c0a2861c85c37a747a38b62a",
-    "zh:7aeb46214b0e133c77d7259d3d617f5ea30d13aa77f6e4585df2e693d11f4abf",
-    "zh:87d2bf8bbbd89931413c72ae7541972a9254c9761275dc880c93ceddb895fa8d",
-    "zh:890df766e9b839623b1f0437355032a3c006226a6c200cd911e15ee1a9014e9f",
-    "zh:b4fa7a4947bfd8f9811e26b5f76895b10c9950ee2da44686490bbd1b45767788",
-    "zh:be5a08686e896d1bb644a6a6ec20c5c2ac4034e81718ae8920041dff64aa266b",
-    "zh:d4022832c3c175eb3a0e57f8bd11867356c0999ca2bdc257b826243f48687c72",
-  ]
-}
-
 provider "registry.terraform.io/hashicorp/aws" {
   version     = "5.57.0"
   constraints = ">= 3.0.0, >= 4.0.0, >= 5.0.0, >= 5.8.0, >= 5.34.0"

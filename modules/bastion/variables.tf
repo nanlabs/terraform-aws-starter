@@ -21,6 +21,18 @@ variable "instance_type" {
   default     = "t3.nano"
 }
 
+variable "root_volume_size" {
+  description = "Size of the root volume in GB"
+  type        = number
+  default     = 8
+}
+
+variable "root_volume_type" {
+  description = "Type of the root volume"
+  type        = string
+  default     = "gp2"
+}
+
 variable "allowed_cidrs" {
   description = "Allow these CIDR blocks to instance"
   type        = string

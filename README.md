@@ -57,9 +57,34 @@ By using the Terraform AWS Starter Kit, you can expedite the initial setup of yo
 
 We welcome contributions and feedback to improve this starter kit further, making it a valuable resource for the community.
 
+## Prerequisites
+
+- [Direnv](https://direnv.net/) for loading environment variables.
+- [Terraform](https://www.terraform.io/downloads.html) for infrastructure provisioning.
+- [TFswitch](https://tfswitch.warrensbox.com/) to switch between Terraform versions easily.
+
 ## Quick Start
 
-To get started, explore the available modules and scripts, and follow the instructions provided in their respective README files. For a more hands-on introduction, you can start with the examples provided in the [**Live Infrastructure**](#live-infrastructure) and [**Infra Tools and Scripts**](#infra-tools-and-scripts) sections.
+To get started, clone this repository and navigate to the desired directory:
+
+```sh
+git clone git@github.com:nanlabs/terraform-aws-starter.git
+cd terraform-aws-starter
+```
+
+Then set up the environment variables using `direnv`:
+
+```sh
+# Create a new .envrc file in the root directory
+cp .envrc.example .envrc
+
+# Update the .envrc file with your environment variables
+
+# Load the environment variables
+direnv allow
+```
+
+After that, explore the available live modules and scripts, and follow the instructions provided in their respective README files. For a more hands-on introduction, you can start with the examples provided in the [**Live Infrastructure**](#live-infrastructure) and [**Infra Tools**](#infra-tools-and-scripts) sections.
 
 ## Live Infrastructure
 

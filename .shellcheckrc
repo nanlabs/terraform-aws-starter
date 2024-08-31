@@ -1,0 +1,5 @@
+disable=SC1090 # Non-constant source
+disable=SC1091 # Not specified as input
+disable=SC2034 # Unused variables (they are used but in other scripts)
+disable=SC2154 # Referenced, but not assigned
+disable=SC2155 # Declare and assign separately to avoid masking return values

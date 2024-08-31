@@ -1,5 +1,5 @@
 {
-  "name": "devops-reference",
+  "name": "terraform-aws-starter-danger",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,19 +7,23 @@
     "example": "examples"
   },
   "scripts": {
+    "tsc": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nanlabs/devops-reference.git"
+    "url": "git+https://github.com/nanlabs/terraform-aws-starter.git"
   },
   "author": "ulises-jeremias",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nanlabs/devops-reference/issues"
+    "url": "https://github.com/nanlabs/terraform-aws-starter/issues"
   },
-  "homepage": "https://github.com/nanlabs/devops-reference#readme",
-  "devDependencies": {
+  "homepage": "https://github.com/nanlabs/terraform-aws-starter#readme",
+  "dependencies": {
     "danger": "^11.2.6"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
   }
 }

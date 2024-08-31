@@ -10,51 +10,84 @@
 
 ## Prerequisites
 
-- [Terraform](https://www.terraform.io/downloads.html) installed on your machine.
-- [TFswitch](https://tfswitch.warrensbox.com/) for managing Terraform versions.
+- [Direnv](https://direnv.net/) for loading environment variables.
+- [Terraform](https://www.terraform.io/downloads.html) for infrastructure provisioning.
+- [TFswitch](https://tfswitch.warrensbox.com/) to switch between Terraform versions easily.
 
 ## Setup
 
-1. **Initialize Terraform:**
+1. **Change Directory:**
 
-   Initialize the Terraform working directory which will download the necessary providers and modules:
+   Navigate to the directory containing the Terraform configuration:
 
    ```sh
-   [[ -f configs/sandbox-backend.tfvars ]] \
-     && terraform init -backend-config="./configs/sandbox-backend.tfvars" \
-     || terraform init
+   cd live/terraform-backend
    ```
 
-2. **Workspace Management:**
+2. **Create .envrc file:**
+
+   Create a new `.envrc` file in this directory by copying the `.envrc.example` file:
+
+   ```sh
+   cp .envrc.example .envrc
+   ```
+
+   Then, update the `.envrc` file with the values for your environment!
+
+3. **Load Environment Variables:**
+
+   Load the environment variables using `direnv`:
+
+   ```sh
+   direnv allow
+   ```
+
+4. **Set Terraform Version:**
+
+   Ensure you are using the correct Terraform version:
+
+   ```sh
+   tfswitch
+   ```
+
+5. **Initialize Terraform:**
+
+   Initialize the working directory with the required providers and modules:
+
+   ```sh
+   terraform init -backend-config="./configs/${ENVIRONMENT}-backend.tfvars"
+   ```
+
+6. **Workspace Management:**
 
    Select or create a new workspace tailored to your deployment environment:
 
    ```sh
    # Select an existing workspace
-   terraform workspace select sandbox
+   terraform workspace select "${TF_WORKSPACE}"
 
-   # Create a new workspace if it doesn't exist
-   # and select it
-   terraform workspace new sandbox
-   terraform workspace select sandbox
+   # Create a new workspace if it doesn't exist and select it
+   terraform workspace new "${TF_WORKSPACE}"
    ```
 
 ## Deploy
 
-1. **Plan the Deployment:**
+🚀 **Deployment Instructions:**
 
-   Generate an execution plan for Terraform:
+1. **Plan Your Deployment:**
+
+   Review and verify the deployment plan:
 
    ```sh
-   terraform plan -var-file ./configs/sandbox.tfvars -out ./sandbox.tfplan
+   terraform plan -var-file "./configs/${ENVIRONMENT}.tfvars" -out "${ENVIRONMENT}.tfplan"
    ```
 
-2. **Apply the Configuration:**
+2. **Execute the Plan:**
 
-   Apply the configuration to set up the S3 bucket and DynamoDB table:
+   Apply the planned configuration to provision the infrastructure:
 
    ```sh
-   terraform apply "./sandbox.tfplan"
+   terraform apply "${ENVIRONMENT}.tfplan"
    ```
 
    🚀 **NOTE:** Confirm the actions before proceeding to ensure that the correct resources are being created or modified.
@@ -68,7 +101,7 @@ If this is your first deployment, Terraform will prompt you to confirm the setup
   If migrating from a local state, use the following command to migrate the state to the S3 bucket safely:
 
   ```sh
-  terraform init -backend-config="./configs/sandbox-backend.tfvars" -force-copy
+  terraform init -backend-config="./configs/${ENVIRONMENT}-backend.tfvars" -force-copy
   ```
 
   Push the changes to your version control system:
@@ -83,7 +116,7 @@ If this is your first deployment, Terraform will prompt you to confirm the setup
 To remove the backend infrastructure, you can run the following command. Be cautious as this will remove the S3 bucket and the DynamoDB table used for state locking:
 
 ```sh
-terraform destroy
+terraform destroy -var-file "./configs/${ENVIRONMENT}.tfvars"
 ```
 
 ## Additional Notes

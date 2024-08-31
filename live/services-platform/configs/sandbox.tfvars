@@ -72,4 +72,4 @@ cluster_encryption_config_kms_key_enable_key_rotation     = false
 cluster_encryption_config_kms_key_deletion_window_in_days = 10
 cluster_encryption_config_kms_key_policy                  = ""
 cluster_encryption_config_resources                       = ["secrets"]
-namespaces                                                = ["doris", "traefik"]
+namespaces                                                = []

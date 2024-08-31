@@ -14,13 +14,39 @@
 
 ## Prerequisites
 
+- [Direnv](https://direnv.net/) for loading environment variables.
 - [Terraform](https://www.terraform.io/downloads.html) for infrastructure provisioning.
 - [TFswitch](https://tfswitch.warrensbox.com/) to switch between Terraform versions easily.
-- AWS Session Manager Plugin for the AWS CLI.
 
 ## Setup
 
-1. **Set Terraform Version:**
+1. **Change Directory:**
+
+   Navigate to the directory containing the Terraform configuration:
+
+   ```sh
+   cd live/core-networking
+   ```
+
+2. **Create .envrc file:**
+
+   Create a new `.envrc` file in this directory by copying the `.envrc.example` file:
+
+   ```sh
+   cp .envrc.example .envrc
+   ```
+
+   Then, update the `.envrc` file with the values for your environment!
+
+3. **Load Environment Variables:**
+
+   Load the environment variables using `direnv`:
+
+   ```sh
+   direnv allow
+   ```
+
+4. **Set Terraform Version:**
 
    Ensure you are using the correct Terraform version:
 
@@ -28,26 +54,24 @@
    tfswitch
    ```
 
-2. **Initialize Terraform:**
+5. **Initialize Terraform:**
 
    Initialize the working directory with the required providers and modules:
 
    ```sh
-   terraform init -backend-config="./configs/sandbox-backend.tfvars"
+   terraform init -backend-config="./configs/${ENVIRONMENT}-backend.tfvars"
    ```
 
-3. **Workspace Management:**
+6. **Workspace Management:**
 
    Select or create a new workspace tailored to your deployment environment:
 
    ```sh
    # Select an existing workspace
-   terraform workspace select sandbox
+   terraform workspace select "${TF_WORKSPACE}"
 
-   # Create a new workspace if it doesn't exist
-   # and select it
-   terraform workspace new sandbox
-   terraform workspace select sandbox
+   # Create a new workspace if it doesn't exist and select it
+   terraform workspace new "${TF_WORKSPACE}"
    ```
 
 ## Deploy
@@ -59,7 +83,7 @@
    Review and verify the deployment plan:
 
    ```sh
-   terraform plan -var-file ./configs/sandbox.tfvars -out sandbox.tfplan
+   terraform plan -var-file "./configs/${ENVIRONMENT}.tfvars" -out "${ENVIRONMENT}.tfplan"
    ```
 
 2. **Execute the Plan:**
@@ -67,7 +91,7 @@
    Apply the planned configuration to provision the infrastructure:
 
    ```sh
-   terraform apply "sandbox.tfplan"
+   terraform apply "${ENVIRONMENT}.tfplan"
    ```
 
 ## Post Deployment Steps
@@ -107,12 +131,10 @@ You can check the Bastion Host Module documentation for detailed steps on connec
 
 ## Destroy
 
-💣 **NOTE:** In this example, we are using the `sandbox` environment and the `us-west-2` region. Modify these values according to your environment and region.
-
 To destroy the infrastructure, run the following command:
 
 ```sh
-terraform destroy -var-file ./configs/sandbox.tfvars
+terraform destroy -var-file "./configs/${ENVIRONMENT}.tfvars"
 ```
 
 ## Module Documentation

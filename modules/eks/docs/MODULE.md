@@ -71,4 +71,6 @@
 | <a name="output_eks_cluster_certificate_authority_data"></a> [eks\_cluster\_certificate\_authority\_data](#output\_eks\_cluster\_certificate\_authority\_data) | The base64 encoded certificate data required to communicate with your cluster |
 | <a name="output_eks_cluster_endpoint"></a> [eks\_cluster\_endpoint](#output\_eks\_cluster\_endpoint) | The endpoint for the EKS cluster |
 | <a name="output_eks_cluster_id"></a> [eks\_cluster\_id](#output\_eks\_cluster\_id) | The ID of the EKS cluster |
+| <a name="output_eks_cluster_managed_security_group_id"></a> [eks\_cluster\_managed\_security\_group\_id](#output\_eks\_cluster\_managed\_security\_group\_id) | The ID of the managed security group for the EKS cluster |
+| <a name="output_eks_cluster_node_group_roles_arns"></a> [eks\_cluster\_node\_group\_roles\_arns](#output\_eks\_cluster\_node\_group\_roles\_arns) | The ARNs of the IAM roles associated with the EKS cluster node groups |
 <!-- END_TF_DOCS -->

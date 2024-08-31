@@ -8,9 +8,20 @@ locals {
   # https://docs.aws.amazon.com/eks/latest/userguide/managing-vpc-cni.html#vpc-cni-latest-available-version
   vpc_cni_addon = {
     addon_name               = "vpc-cni"
-    addon_version            = "v1.18.2-eksbuild.1"
+    addon_version            = "v1.18.3-eksbuild.2"
     resolve_conflicts        = "OVERWRITE"
     service_account_role_arn = one(module.vpc_cni_eks_iam_role[*].service_account_role_arn)
+    # Specify the VPC CNI addon should be deployed before compute to ensure
+    # the addon is configured before data plane compute resources are created
+    before_compute = true
+    most_recent    = true # To ensure access to the latest settings provided
+    configuration_values = jsonencode({
+      env = {
+        # Reference docs https://docs.aws.amazon.com/eks/latest/userguide/cni-increase-ip-addresses.html
+        ENABLE_PREFIX_DELEGATION = "true"
+        WARM_PREFIX_TARGET       = "1"
+      }
+    })
   }
 
   addons = concat(var.addons, [

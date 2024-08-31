@@ -7,12 +7,13 @@ variable "enable_bastion" {
 module "bastion" {
   count = var.enable_bastion ? 1 : 0
 
-  source          = "../../modules/bastion"
-  name            = "${module.label.id}-bastion"
-  vpc_id          = module.vpc.vpc_id
-  private_subnets = module.vpc.private_subnets
-  instance_type   = "t2.micro"
-  tags            = merge(module.label.tags, { "Name" = "${module.label.id}-bastion" })
+  source           = "../../modules/bastion"
+  name             = "${module.label.id}-bastion"
+  vpc_id           = module.vpc.vpc_id
+  private_subnets  = module.vpc.private_subnets
+  instance_type    = "t2.medium"
+  root_volume_size = 32
+  tags             = merge(module.label.tags, { "Name" = "${module.label.id}-bastion" })
 }
 
 output "bastion_instance_id" {

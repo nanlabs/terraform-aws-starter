@@ -31,3 +31,8 @@ override.tf.json
 *tfplan*
 
 *.pem
+
+.kubeconfig
+.envrc
+
+megalinter-reports/

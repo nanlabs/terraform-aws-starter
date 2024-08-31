@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+ENVIRONMENT="sandbox"
+
+AWS_PROFILE="nan-${ENVIRONMENT}-admin"
+AWS_REGION="us-west-2"
+
+export ENVIRONMENT AWS_PROFILE AWS_REGION
+
+# Check if the AWS session is valid; otherwise, run the SSO login.
+if ! aws sts get-caller-identity > /dev/null 2>&1; then
+  echo "AWS session expired or not found. Logging in with SSO for profile $AWS_PROFILE..."
+  aws sso login
+fi
+
+KUBECONFIG="$(realpath .kubeconfig/nan-${ENVIRONMENT}-services-platform-cluster)"
+
+export KUBECONFIG

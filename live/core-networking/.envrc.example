@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+source_up
+
+# Validate that the config file exists for the environment
+if [ ! -f "./configs/${ENVIRONMENT}.tfvars" ] || [ ! -f "./configs/${ENVIRONMENT}-backend.tfvars" ]; then
+    echo "Error: Configuration file for environment '$ENVIRONMENT' not found."
+    return 1
+fi
+
+TF_WORKSPACE="${ENVIRONMENT}"
+
+export TF_WORKSPACE
