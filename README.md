@@ -116,6 +116,10 @@ Our custom Terraform modules are located in the `modules` directory. These modul
 | [VPC](./modules/vpc/README.md)                       | Bootstrap a VPC for shared infrastructure.                    |
 | [VPC Endpoint](./modules/vpc-endpoint/README.md)     | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |
 
+In case you need to create a new module, you can use the [Terraform Module Template](./modules/__template__/README.md) as a starting point.
+
+For reference, you can also check the [Terraform Registry](https://registry.terraform.io/) for additional modules.
+
 ## Apps and Services
 
 In addition to infrastructure provisioning, we have included a few apps and services to help you get started. These are located in the `apps` directory and provide useful examples of how to use the infrastructure we have provisioned.
