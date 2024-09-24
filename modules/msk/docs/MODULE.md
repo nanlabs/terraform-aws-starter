@@ -14,7 +14,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_kafka"></a> [kafka](#module\_kafka) | cloudposse/msk-apache-kafka-cluster/aws | v2.4.0 |
+| <a name="module_kafka"></a> [kafka](#module\_kafka) | cloudposse/msk-apache-kafka-cluster/aws | 2.4.0 |
 
 ## Resources
 

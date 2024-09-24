@@ -70,7 +70,7 @@ fi
 # Retrieve Bastion instance ID if not provided
 if [[ -z "$instance_id" ]]; then
     echo "Retrieving Bastion instance ID..."
-    instance_id=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$tag" --query "Reservations[*].Instances[*].InstanceId" --output text)
+    instance_id=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=$tag" "Name=instance-state-name,Values=running" --query "Reservations[*].Instances[*].InstanceId" --output text | head -n 1)
     if [[ -z "$instance_id" ]]; then
         echo "No Bastion host found with tag: $tag"
         exit 1

@@ -1,6 +1,6 @@
 module "kafka" {
   source  = "cloudposse/msk-apache-kafka-cluster/aws"
-  version = "v2.4.0"
+  version = "2.4.0"
   name    = var.name
 
   zone_id                  = var.zone_id

@@ -5,7 +5,7 @@ data "aws_ssm_parameter" "github_pat" {
 
 module "amplify_app" {
   source  = "cloudposse/amplify-app/aws"
-  version = "1.0.0"
+  version = "1.1.0"
 
   name = var.name
 

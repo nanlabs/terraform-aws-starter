@@ -78,7 +78,7 @@ module "eks_node_groups" {
   for_each = { for idx, node_group in var.node_groups : idx => node_group }
 
   cluster_name      = module.eks_cluster.eks_cluster_id
-  subnet_ids        = var.private_subnets
+  subnet_ids        = [var.private_subnets[0]]
   instance_types    = each.value.instance_types
   desired_size      = each.value.desired_size
   min_size          = each.value.min_size

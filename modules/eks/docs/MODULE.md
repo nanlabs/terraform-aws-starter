@@ -73,4 +73,5 @@
 | <a name="output_eks_cluster_id"></a> [eks\_cluster\_id](#output\_eks\_cluster\_id) | The ID of the EKS cluster |
 | <a name="output_eks_cluster_managed_security_group_id"></a> [eks\_cluster\_managed\_security\_group\_id](#output\_eks\_cluster\_managed\_security\_group\_id) | n/a |
 | <a name="output_eks_cluster_node_group_roles_arns"></a> [eks\_cluster\_node\_group\_roles\_arns](#output\_eks\_cluster\_node\_group\_roles\_arns) | The ARNs of the IAM roles associated with the EKS cluster node groups |
+| <a name="output_eks_cluster_node_group_roles_names"></a> [eks\_cluster\_node\_group\_roles\_names](#output\_eks\_cluster\_node\_group\_roles\_names) | The names of the IAM roles associated with the EKS cluster node groups |
 <!-- END_TF_DOCS -->
