@@ -28,7 +28,12 @@ module "exampledb" {
 
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 
-  tags = module.label.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "Name" = "${module.label.id}-exampledb"
+    }
+  )
 }
 
 module "security_group" {
@@ -51,7 +56,12 @@ module "security_group" {
 
   egress_rules = ["all-all"]
 
-  tags = var.tags
+  tags = merge(
+    module.label.tags,
+    {
+      "Name" = "${module.label.id}-exampledb-security-group"
+    }
+  )
 }
 
 output "example_db_instance_address" {
