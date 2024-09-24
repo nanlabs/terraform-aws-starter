@@ -9,6 +9,8 @@ on:
   # Comment this line to trigger action only on pull-requests
   # (not recommended if you don't pay for GH Actions)
   push:
+    branches:
+      - main
 
   pull_request:
     branches:
@@ -38,6 +40,8 @@ jobs:
   megalinter:
     name: MegaLinter
     runs-on: ubuntu-latest
+
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
 
     # Give the default GITHUB_TOKEN write permission to commit and push, comment
     # issues, and post new Pull Requests; remove the ones you do not need
