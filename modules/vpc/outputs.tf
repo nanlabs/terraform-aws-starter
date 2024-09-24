@@ -3,6 +3,11 @@ output "vpc_id" {
   value       = module.vpc.vpc_id
 }
 
+output "vpc_cidr_block" {
+  description = "value of the vpc_cidr_block output from the vpc module"
+  value       = module.vpc.vpc_cidr_block
+}
+
 output "public_subnets" {
   description = "value of the public_subnets output from the vpc module"
   value       = module.vpc.public_subnets

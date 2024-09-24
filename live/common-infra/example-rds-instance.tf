@@ -17,16 +17,17 @@ module "exampledb" {
 
   vpc_id          = data.aws_ssm_parameter.vpc_id.value
   db_subnet_group = data.aws_ssm_parameter.database_subnet_group.value
+  vpc_security_group_ids = [module.security_group.security_group_id]
 
   db_name            = var.example_db_name
   db_master_username = var.example_db_master_username
   db_port            = 5432
 
+  db_instance_class = "db.t4g.small"
+
   allocated_storage = 20
 
   manage_master_user_password = true
-
-  vpc_security_group_ids = [module.security_group.this_security_group_id]
 
   tags = merge(
     module.label.tags,
@@ -46,8 +47,8 @@ module "security_group" {
 
   ingress_with_cidr_blocks = [
     {
-      from_port   = module.exampledb.db_instance_port
-      to_port     = module.exampledb.db_instance_port
+      from_port   = 5432
+      to_port     = 5432
       protocol    = "tcp"
       description = "RDS DB Instance access from within VPC"
       cidr_blocks = data.aws_vpc.main.cidr_block
