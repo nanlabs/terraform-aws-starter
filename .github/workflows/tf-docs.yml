@@ -13,6 +13,7 @@ jobs:
   tf-docs:
     name: Generate Terraform Docs
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     permissions:
       contents: write
       pull-requests: write
