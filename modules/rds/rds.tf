@@ -28,7 +28,7 @@ module "db" {
 
   multi_az               = var.enable_multi_az
   db_subnet_group_name   = var.db_subnet_group
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = var.vpc_security_group_ids
 
   maintenance_window              = var.db_maintenance_window
   backup_window                   = var.db_backup_window

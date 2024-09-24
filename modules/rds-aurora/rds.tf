@@ -29,7 +29,7 @@ module "db" {
   port            = var.db_port
 
   db_subnet_group_name   = var.db_subnet_group
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = var.vpc_security_group_ids
   vpc_id                 = var.vpc_id
 
   preferred_maintenance_window    = var.db_maintenance_window
