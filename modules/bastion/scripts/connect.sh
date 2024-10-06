@@ -88,7 +88,6 @@ ssh_proxy_command_option="ProxyCommand sh -c \"aws ssm start-session --target %h
 if [[ -z "$tunnel" ]]; then
     echo "Connecting to Bastion host using SSH through Session Manager..."
     ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" "$BASTION_USER@$instance_id"
-    echo "Connection to Bastion host established."
     exit 0
 fi
 
@@ -97,8 +96,8 @@ if [[ -n "$tunnel_target_user" && -n "$tunnel_target_key" ]]; then
     tunnel_host=$(echo "$tunnel" | cut -d':' -f2)
     ssh_proxy_command_option="ProxyCommand ssh -i $tunnel_target_key -W %h:%p $tunnel_target_user@$tunnel_host"
     ssh_tunnel_proxy_command_option="ProxyCommand ssh -i $tunnel_target_key -W %h:%p $tunnel_target_user@$tunnel_host"
-    ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -o "$ssh_tunnel_proxy_command_option" -N "$BASTION_USER@$instance_id"
+    ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -o "$ssh_tunnel_proxy_command_option" -N "$BASTION_USER@$instance_id" &
 else
-    ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -N "$BASTION_USER@$instance_id"
+    ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -N "$BASTION_USER@$instance_id" &
 fi
 echo "Tunnel established through Bastion host."
