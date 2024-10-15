@@ -88,7 +88,6 @@ ssh_proxy_command_option="ProxyCommand sh -c \"aws ssm start-session --target %h
 if [[ -z "$tunnel" ]]; then
     echo "Connecting to Bastion host using SSH through Session Manager..."
     ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" "$BASTION_USER@$instance_id"
-    echo "Connection to Bastion host established."
     exit 0
 fi
 
