@@ -26,6 +26,10 @@ data "aws_ssm_parameter" "public_subnets" {
   name = "${var.core_networking_ssm_parameter_prefix}/public_subnets"
 }
 
+data "aws_ssm_parameter" "app_security_group" {
+  name = "${var.core_networking_ssm_parameter_prefix}/app_security_group"
+}
+
 data "aws_security_group" "default" {
   vpc_id = local.vpc_id
 
@@ -41,5 +45,10 @@ data "aws_vpc" "vpc" {
 
 data "aws_security_group" "bastion_security_group" {
   name   = var.bastion_security_group_name
-  vpc_id = local.vpc_id
+  vpc_id = data.aws_vpc.vpc.id
+}
+
+data "aws_security_group" "app_security_group" {
+  id     = data.aws_ssm_parameter.app_security_group.value
+  vpc_id = data.aws_vpc.vpc.id
 }

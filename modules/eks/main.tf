@@ -92,7 +92,7 @@ module "eks_node_groups" {
 
 resource "aws_autoscaling_schedule" "stop_at_night" {
   for_each = { for idx, node_group in var.node_groups : idx => node_group
-    if node_group.start_stop_schedule_enabled
+    if node_group.start_stop_schedule_enabled == true
   }
 
   scheduled_action_name  = "${each.key}-stop-at-night"
@@ -106,7 +106,7 @@ resource "aws_autoscaling_schedule" "stop_at_night" {
 resource "aws_autoscaling_schedule" "start_in_morning" {
 
   for_each = { for idx, node_group in var.node_groups : idx => node_group
-    if node_group.start_stop_schedule_enabled
+    if node_group.start_stop_schedule_enabled == true
   }
 
   scheduled_action_name  = "${each.key}-start-in-morning"

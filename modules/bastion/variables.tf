@@ -51,6 +51,18 @@ variable "name" {
   default     = ""
 }
 
+variable "create_vpc_endpoints" {
+  description = "Create VPC endpoints for SSM, EC2 Messages, and SSM Messages"
+  type        = bool
+  default     = true
+}
+
+variable "vpc_endpoint_security_group_ids" {
+  description = "List of security group IDs to attach to the VPC endpoints. Will be ignored if create_vpc_endpoints is false."
+  type        = list(string)
+  default     = []
+}
+
 variable "tags" {
   description = "Any extra tags to assign to objects"
   type        = map(any)

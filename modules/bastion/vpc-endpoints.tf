@@ -3,11 +3,13 @@ module "vpc_endpoints" {
 
   vpc_id = var.vpc_id
 
+  count = var.create_vpc_endpoints ? 1 : 0
+
   endpoints = {
     ssm = {
       service             = "ssm"
       service_type        = "Interface"
-      security_group_ids  = [module.ssm_vpce_sg.security_group_id]
+      security_group_ids  = [module.ssm_vpce_sg[0].security_group_id]
       private_dns_enabled = true
       subnet_ids          = var.private_subnets
       policy              = null
@@ -16,7 +18,7 @@ module "vpc_endpoints" {
     ec2messages = {
       service             = "ec2messages"
       service_type        = "Interface"
-      security_group_ids  = [module.ec2messages_vpce_sg.security_group_id]
+      security_group_ids  = [module.ec2messages_vpce_sg[0].security_group_id]
       private_dns_enabled = true
       subnet_ids          = var.private_subnets
       policy              = null
@@ -25,7 +27,7 @@ module "vpc_endpoints" {
     ssmmessages = {
       service             = "ssmmessages"
       service_type        = "Interface"
-      security_group_ids  = [module.ssmmessages_vpce_sg.security_group_id]
+      security_group_ids  = [module.ssmmessages_vpce_sg[0].security_group_id]
       private_dns_enabled = true
       subnet_ids          = var.private_subnets
       policy              = null

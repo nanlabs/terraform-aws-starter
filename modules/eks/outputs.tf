@@ -19,10 +19,10 @@ output "eks_cluster_managed_security_group_id" {
 
 output "eks_cluster_node_group_roles_arns" {
   description = "The ARNs of the IAM roles associated with the EKS cluster node groups"
-  value       = tolist([for ng in module.eks_node_groups : ng.eks_node_group_role_arn])
+  value       = [for ng in module.eks_node_groups : ng.eks_node_group_role_arn]
 }
 
 output "eks_cluster_node_group_roles_names" {
   description = "The names of the IAM roles associated with the EKS cluster node groups"
-  value       = tolist([for ng in module.eks_node_groups : ng.eks_node_group_role_name])
+  value       = [for ng in module.eks_node_groups : ng.eks_node_group_role_name]
 }

@@ -30,8 +30,8 @@ variable "node_groups" {
     max_size                       = number
     desired_size                   = number
     health_check_type              = string
-    start_stop_schedule_enabled    = bool
     ami_image_id                   = optional(string)
+    start_stop_schedule_enabled    = optional(bool)
     start_schedule_recurrence_cron = optional(string)
     stop_schedule_recurrence_cron  = optional(string)
     kubernetes_labels              = optional(map(string))

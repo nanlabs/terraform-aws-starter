@@ -97,8 +97,9 @@ if [[ -n "$tunnel_target_user" && -n "$tunnel_target_key" ]]; then
     tunnel_host=$(echo "$tunnel" | cut -d':' -f2)
     ssh_proxy_command_option="ProxyCommand ssh -i $tunnel_target_key -W %h:%p $tunnel_target_user@$tunnel_host"
     ssh_tunnel_proxy_command_option="ProxyCommand ssh -i $tunnel_target_key -W %h:%p $tunnel_target_user@$tunnel_host"
+    echo "Tunnel established. Press Ctrl+C to close the tunnel."
     ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -o "$ssh_tunnel_proxy_command_option" -N "$BASTION_USER@$instance_id"
 else
+    echo "Tunnel established. Press Ctrl+C to close the tunnel."
     ssh -i "$SSH_KEY_PATH" -o "$ssh_proxy_command_option" -L "$tunnel" -N "$BASTION_USER@$instance_id"
 fi
-echo "Tunnel established through Bastion host."

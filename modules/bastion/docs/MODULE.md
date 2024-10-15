@@ -46,6 +46,7 @@
 |------|-------------|------|---------|:--------:|
 | <a name="input_allowed_cidrs"></a> [allowed\_cidrs](#input\_allowed\_cidrs) | Allow these CIDR blocks to instance | `string` | `null` | no |
 | <a name="input_ami"></a> [ami](#input\_ami) | AMI to use for the instance - will default to latest Ubuntu | `string` | `""` | no |
+| <a name="input_create_vpc_endpoints"></a> [create\_vpc\_endpoints](#input\_create\_vpc\_endpoints) | Create VPC endpoints for SSM, EC2 Messages, and SSM Messages | `bool` | `true` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | EC2 instance type/size - the default is not part of free tier! | `string` | `"t3.nano"` | no |
 | <a name="input_key_name"></a> [key\_name](#input\_key\_name) | SSH key name to use for the instance | `string` | `""` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name to be used on all the resources as identifier | `string` | `""` | no |
@@ -53,6 +54,7 @@
 | <a name="input_root_volume_size"></a> [root\_volume\_size](#input\_root\_volume\_size) | Size of the root volume in GB | `number` | `8` | no |
 | <a name="input_root_volume_type"></a> [root\_volume\_type](#input\_root\_volume\_type) | Type of the root volume | `string` | `"gp2"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Any extra tags to assign to objects | `map(any)` | `{}` | no |
+| <a name="input_vpc_endpoint_security_group_ids"></a> [vpc\_endpoint\_security\_group\_ids](#input\_vpc\_endpoint\_security\_group\_ids) | List of security group IDs to attach to the VPC endpoints. Will be ignored if create\_vpc\_endpoints is false. | `list(string)` | `[]` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC id in which the EC2 instance is to be created. | `string` | n/a | yes |
 
 ## Outputs
@@ -61,5 +63,6 @@
 |------|-------------|
 | <a name="output_instance_id"></a> [instance\_id](#output\_instance\_id) | n/a |
 | <a name="output_instance_profile"></a> [instance\_profile](#output\_instance\_profile) | n/a |
+| <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | n/a |
 | <a name="output_ssm_parameter_ssh_key"></a> [ssm\_parameter\_ssh\_key](#output\_ssm\_parameter\_ssh\_key) | n/a |
 <!-- END_TF_DOCS -->
