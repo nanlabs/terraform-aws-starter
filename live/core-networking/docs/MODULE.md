@@ -15,7 +15,10 @@ No providers.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_bastion"></a> [bastion](#module\_bastion) | ../../modules/bastion | n/a |
+| <a name="module_ec2messages_vpce_sg"></a> [ec2messages\_vpce\_sg](#module\_ec2messages\_vpce\_sg) | terraform-aws-modules/security-group/aws | 4.17.1 |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
+| <a name="module_ssm_vpce_sg"></a> [ssm\_vpce\_sg](#module\_ssm\_vpce\_sg) | terraform-aws-modules/security-group/aws | 4.17.1 |
+| <a name="module_ssmmessages_vpce_sg"></a> [ssmmessages\_vpce\_sg](#module\_ssmmessages\_vpce\_sg) | terraform-aws-modules/security-group/aws | 4.17.1 |
 | <a name="module_vpc"></a> [vpc](#module\_vpc) | ../../modules/vpc | n/a |
 | <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | ../../modules/vpc-endpoints | n/a |
 
