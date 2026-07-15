@@ -29,6 +29,11 @@ jobs:
         with:
           node-version-file: ./tools/danger/.node-version
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Setup Danger Files
         run: |
           echo "Setting up Danger files..."
@@ -37,8 +42,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Danger JS Action
-        uses: danger/danger-js@12.3.3
+      - name: Danger JS
+        run: pnpm exec danger ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
