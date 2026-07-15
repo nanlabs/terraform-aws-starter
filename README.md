@@ -93,7 +93,7 @@ The `live` directory houses our active infrastructure configurations. These conf
 | Module                                                                | Description                                                                             |
 | :-------------------------------------------------------------------- | :-------------------------------------------------------------------------------------- |
 | [Terraform Backend Configuration](./live/terraform-backend/README.md) | Set up the Terraform backend with an S3 bucket and DynamoDB table for state management. |
-| [AWS IAM Management](./live/iam-management/README.md)                 | Manage IAM roles and policies.                                                          |
+| [AWS IAM Management](./live/aws-iam-management/README.md)             | Manage IAM roles and policies.                                                          |
 | [Core Networking](./live/core-networking/README.md)                   | Manage core networking components such as VPCs, subnets, and security groups.           |
 | [Services Platform](./live/services-platform/README.md)               | Manage services platform components, including EKS clusters.                            |
 | [Common Infrastructure](./live/common-infra/README.md)                | Manage common infrastructure components such as RDS instances and DocumentDB clusters.  |
@@ -114,7 +114,7 @@ Our custom Terraform modules are located in the `modules` directory. These modul
 | [RDS Instance](./modules/rds/README.md)              | Bootstrap an RDS Instance.                                    |
 | [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Bootstrap an RDS Aurora Cluster.                              |
 | [VPC](./modules/vpc/README.md)                       | Bootstrap a VPC for shared infrastructure.                    |
-| [VPC Endpoint](./modules/vpc-endpoint/README.md)     | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |
+| [VPC Endpoints](./modules/vpc-endpoints/README.md)   | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |
 
 In case you need to create a new module, you can use the [Terraform Module Template](./modules/__template__/README.md) as a starting point.
 
