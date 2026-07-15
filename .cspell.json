@@ -11,6 +11,16 @@
   ],
   "language": "en",
   "noConfigSearch": true,
-  "words": ["megalinter", "oxsecurity"],
+  "words": [
+    "direnv",
+    "Direnv",
+    "envrc",
+    "Fswitch",
+    "kubeconfig",
+    "megalinter",
+    "nanlabs",
+    "oxsecurity",
+    "preconfigured"
+  ],
   "version": "0.2"
 }
