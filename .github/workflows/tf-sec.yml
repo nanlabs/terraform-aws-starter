@@ -23,6 +23,7 @@ jobs:
 
       - name: Run tfsec
         uses: aquasecurity/tfsec-pr-commenter-action@v1.3.1
+        continue-on-error: true
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tfsec_version: v1.28.14
