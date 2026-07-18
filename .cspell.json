@@ -12,15 +12,20 @@
   "language": "en",
   "noConfigSearch": true,
   "words": [
+    "aquasecurity",
     "direnv",
     "Direnv",
+    "dangerfile",
+    "darioscrivano",
     "envrc",
     "Fswitch",
     "kubeconfig",
     "megalinter",
     "nanlabs",
     "oxsecurity",
-    "preconfigured"
+    "preconfigured",
+    "tfsec",
+    "Tfsec"
   ],
   "version": "0.2"
 }
