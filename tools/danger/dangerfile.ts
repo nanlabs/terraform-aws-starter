@@ -23,8 +23,20 @@ const checklistItems = [
   "I have checked my code and corrected any misspellings",
 ];
 
+const prBody = danger.github.pr.body ?? "";
+const releasePrTitle = /^(version packages|chore: version packages|chore\(release\):|chore: release\b)/i;
+
+const hasIssueReference = (text: string) => {
+  const cleaned = text
+    .replace(/```[\s\S]*?```/g, "")
+    .replace(/#ISSUE\b/gi, "");
+  const issueReference =
+    /\b(?:closes|fixes|resolves|refs|see|related to|part of)\s+(?:#\d+|https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/issues\/\d+)|(?<![#\w])#\d+\b/gim;
+  return issueReference.test(cleaned);
+};
+
 // No PR is too small to include a description of why you made a change
-if (!danger.github.pr.body) {
+if (!prBody) {
   const title = ":clipboard: Missing Summary";
   const idea =
     "Can you add a Summary? " +
@@ -40,11 +52,26 @@ if (!danger.github.pr.title) {
 }
 
 // Function to check if a section exists in the PR body
-const hasSection = (section: string) => danger.github.pr.body.includes(section);
+const hasSection = (section: string) => prBody.includes(section);
 
 // Function to check if a checklist item is checked in the PR body
 const isChecklistItemChecked = (item: string) =>
-  danger.github.pr.body.includes(`- [x] ${item}`);
+  prBody.includes(`- [x] ${item}`);
+
+const isIssueReferenceExempt =
+  danger.github.pr.user.login.endsWith("[bot]") ||
+  danger.github.pr.user.login.startsWith("app/") ||
+  releasePrTitle.test(danger.github.pr.title ?? "");
+
+if (
+  !isIssueReferenceExempt &&
+  !hasIssueReference(prBody) &&
+  !hasIssueReference(danger.github.pr.title ?? "")
+) {
+  fail(
+    "This PR does not reference an issue. Please link the related issue with `Closes #N` or `Refs #N` in the PR description. If no issue exists, open one first so maintainers can review the change context."
+  );
+}
 
 // Check for missing sections
 templateSections.forEach((section) => {
