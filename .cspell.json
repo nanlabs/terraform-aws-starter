@@ -11,6 +11,21 @@
   ],
   "language": "en",
   "noConfigSearch": true,
-  "words": ["megalinter", "oxsecurity"],
+  "words": [
+    "aquasecurity",
+    "direnv",
+    "Direnv",
+    "dangerfile",
+    "darioscrivano",
+    "envrc",
+    "Fswitch",
+    "kubeconfig",
+    "megalinter",
+    "nanlabs",
+    "oxsecurity",
+    "preconfigured",
+    "tfsec",
+    "Tfsec"
+  ],
   "version": "0.2"
 }
