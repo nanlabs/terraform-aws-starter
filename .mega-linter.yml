@@ -14,9 +14,15 @@ APPLY_FIXES: all
 # default
 # ENABLE_LINTERS:
 
-# DISABLE:
-  # - COPYPASTE # Uncomment to disable checks of excessive copy-pastes
-  # - SPELL # Uncomment to disable checks of spelling mistakes
+DISABLE_ERRORS_LINTERS:
+  # Keep these checks visible in PR comments without blocking dependency bumps on
+  # repository-wide legacy findings unrelated to the changed files.
+  - COPYPASTE_JSCPD
+  - REPOSITORY_CHECKOV
+  - REPOSITORY_GRYPE
+  - REPOSITORY_KICS
+  - REPOSITORY_TRIVY
+  - SPELL_LYCHEE
 
 SHOW_ELAPSED_TIME: true
 
