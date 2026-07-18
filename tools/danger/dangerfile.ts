@@ -25,6 +25,9 @@ const checklistItems = [
 
 const prBody = danger.github.pr.body ?? "";
 const releasePrTitle = /^(version packages|chore: version packages|chore\(release\):|chore: release\b)/i;
+const isBotPr =
+  danger.github.pr.user.login.endsWith("[bot]") ||
+  danger.github.pr.user.login.startsWith("app/");
 
 const hasIssueReference = (text: string) => {
   const cleaned = text
@@ -59,9 +62,7 @@ const isChecklistItemChecked = (item: string) =>
   prBody.includes(`- [x] ${item}`);
 
 const isIssueReferenceExempt =
-  danger.github.pr.user.login.endsWith("[bot]") ||
-  danger.github.pr.user.login.startsWith("app/") ||
-  releasePrTitle.test(danger.github.pr.title ?? "");
+  isBotPr || releasePrTitle.test(danger.github.pr.title ?? "");
 
 if (
   !isIssueReferenceExempt &&
@@ -73,23 +74,25 @@ if (
   );
 }
 
-// Check for missing sections
-templateSections.forEach((section) => {
-  if (!hasSection(section)) {
-    fail(
-      `:clipboard: Missing Section - Please include the section: <i>${section}</i> in your PR description.`
-    );
-  }
-});
+if (!isBotPr) {
+  // Check for missing sections
+  templateSections.forEach((section) => {
+    if (!hasSection(section)) {
+      fail(
+        `:clipboard: Missing Section - Please include the section: <i>${section}</i> in your PR description.`
+      );
+    }
+  });
 
-// Check for missing or unchecked checklist items
-checklistItems.forEach((item) => {
-  if (!isChecklistItemChecked(item)) {
-    warn(
-      `:clipboard: Unchecked Checklist Item - Please check the item: <i>${item}</i> in your PR description.`
-    );
-  }
-});
+  // Check for missing or unchecked checklist items
+  checklistItems.forEach((item) => {
+    if (!isChecklistItemChecked(item)) {
+      warn(
+        `:clipboard: Unchecked Checklist Item - Please check the item: <i>${item}</i> in your PR description.`
+      );
+    }
+  });
+}
 
 const touchedFiles = danger.git.created_files.concat(danger.git.modified_files);
 const allFiles = touchedFiles.concat(danger.git.deleted_files);
