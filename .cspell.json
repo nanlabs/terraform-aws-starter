@@ -12,6 +12,7 @@
   "language": "en",
   "noConfigSearch": true,
   "words": [
+    "aquasecurity",
     "direnv",
     "Direnv",
     "dangerfile",
@@ -21,7 +22,9 @@
     "megalinter",
     "nanlabs",
     "oxsecurity",
-    "preconfigured"
+    "preconfigured",
+    "tfsec",
+    "Tfsec"
   ],
   "version": "0.2"
 }
