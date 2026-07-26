@@ -1,0 +1,3 @@
+## .terraform folder
+.terraform/
+.terraform.lock.hcl
