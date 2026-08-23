@@ -1,7 +1,7 @@
 variable "Environment"{
-    description = "Deployment environment name"
+    description = "Environment name"
     type = string
-    default = "dev"
+    default = "testing"
     }
 
 #AWS region and VPC variables

@@ -4,7 +4,7 @@ An EC2 Instance Connect Endpoint (EICE) is an AWS-managed VPC service feature th
 It acts as an on-demand, serverless private bridge inside your subnets. When you request a connection via the AWS CLI, AWS establishes a secure WebSocket tunnel between your local machine and the endpoint inside your VPC, which then forwards the connection to your destination (like private RDS).
 
 
-# Key Aspect,Traditional EC2 Bastion Host,EC2 Instance Connect Endpoint (EICE)
+# Key Aspect:
 
 | Feature / Aspect | Traditional EC2 Bastion Host | EC2 Instance Connect Endpoint (EICE) |
 | :--- | :--- | :--- |
@@ -38,7 +38,7 @@ aws ec2-instance-connect open-tunnel `
 
 Leave this terminal process running in the background. It listens on 127.0.0.1:5432 and tunnels all incoming local traffic over WebSocket to your private RDS instance.
 
-Step 3: Connect using standard DB Clients / GUI Tools
+Step 3: Connect using standard DB Clients / GUI Tools <br>
 In a separate terminal or SQL client tool (such as DBeaver, PgAdmin, VS Code extensions, or psql), connect using:
 
 * Host: 127.0.0.1 (or localhost)
