@@ -43,13 +43,3 @@ resource "aws_security_group_rule" "rds_ingress_from_eic" {
   source_security_group_id = aws_security_group.eic_sg.id
   description              = "Allow access from EC2 Instance Connect Endpoint"
 }
-
-# Standard outbound egress for RDS
-resource "aws_security_group_rule" "rds_egress_all" {
-  type              = "egress"
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.rds_sg.id
-}

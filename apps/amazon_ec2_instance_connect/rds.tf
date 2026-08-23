@@ -22,6 +22,8 @@ resource "aws_db_instance" "rds" {
     backup_window                   = var.db_backup_window
     backup_retention_period         = var.db_backup_retention_period
     skip_final_snapshot             = var.enable_skip_final_snapshot
+    final_snapshot_identifier       = var.enable_skip_final_snapshot ? null : "${var.name_prefix}-final-snapshot"
+    deletion_protection             = var.deletion_protection
     publicly_accessible             = var.enable_public_access
 
     tags = merge(var.tags, {

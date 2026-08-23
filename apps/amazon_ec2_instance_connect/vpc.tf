@@ -17,8 +17,9 @@ resource "aws_vpc" "main" {
 locals {
     target_vpc_id = var.vpc_id != "" ? var.vpc_id : aws_vpc.main[0].id
 }
-#Subnets
+#Subnets only created if new vpc is created.
 resource "aws_subnet" "private_1" {
+    count                   = var.vpc_id == "" ? 1 : 0
     vpc_id                  = local.target_vpc_id
     cidr_block              = cidrsubnet(var.vpc_cidr, 8, 1)
     availability_zone       = data.aws_availability_zones.available.names[0]
@@ -29,6 +30,7 @@ resource "aws_subnet" "private_1" {
 }
 
 resource "aws_subnet" "private_2" {
+    count                   = var.vpc_id == "" ? 1 : 0
     vpc_id                  = local.target_vpc_id
     cidr_block              = cidrsubnet(var.vpc_cidr, 8, 2)
     availability_zone       = data.aws_availability_zones.available.names[1]
@@ -42,8 +44,12 @@ resource "aws_subnet" "private_2" {
 resource "aws_db_subnet_group" "created" {
     count  = var.db_subnet_group == "" ? 1 : 0
     name   = "${var.name}-subnet-group"
-    subnet_ids = [aws_subnet.private_1.id, 
-                    aws_subnet.private_2.id]
+
+    #use newly created subnets if vpc is created newly, else use existing subnets if vpc is provided.
+    subnet_ids = var.vpc_id == "" ? [
+                    aws_subnet.private_1.id, 
+                    aws_subnet.private_2.id
+                ] : []
                 
     tags = merge(var.tags, {
         Name = "${var.name}-subnet-group"
