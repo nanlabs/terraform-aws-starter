@@ -17,6 +17,7 @@
     "darioscrivano",
     "direnv",
     "Direnv",
+    "dunder",
     "envrc",
     "Fswitch",
     "gitbeaker",
@@ -43,6 +44,7 @@
     "Tfsec",
     "ulises",
     "undici",
+    "weakmap",
     "wrappy",
     "xcase",
     "xtend"

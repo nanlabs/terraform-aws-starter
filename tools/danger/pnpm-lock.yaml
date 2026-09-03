@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  qs: ^6.16.0
+
 importers:
   .:
     dependencies:
@@ -157,10 +160,17 @@ packages:
         integrity: sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==,
       }
 
-  call-bind@1.0.7:
+  call-bind-apply-helpers@1.0.2:
     resolution:
       {
-        integrity: sha512-GHTSNSYICQ7scH7sZ+M2rFopRoLh8t2bLSW6BbgrtLsahOIB5iyAVJf9GjWK3cYTDaMj4XdBpM1cA6pIS0Kv2w==,
+        integrity: sha512-Sp1ablJ0ivDkSzjcaJdxEunN5/XvksFJ2sMBFfq6x0ryhQV/2b/KwFe21cMpmHtPOSij8K99/wSfoEuTObmuMQ==,
+      }
+    engines: { node: ">= 0.4" }
+
+  call-bound@1.0.4:
+    resolution:
+      {
+        integrity: sha512-+ys997U96po4Kx/ABpBCqhA9EuxJaQWDQg7295H4hBphv3IZg0boBKuwYpt4YXp6MZ5AmZQnU/tyMTlRpaSejg==,
       }
     engines: { node: ">= 0.4" }
 
@@ -223,18 +233,18 @@ packages:
       supports-color:
         optional: true
 
-  define-data-property@1.1.4:
-    resolution:
-      {
-        integrity: sha512-rBMvIzlpA8v6E+SJZoo++HAYqsLrkg7MSfIinMPFhmkorw7X+dOXVJQs+QT69zGkzMyfDnIMN2Wid1+NbL3T+A==,
-      }
-    engines: { node: ">= 0.4" }
-
   deprecation@2.3.1:
     resolution:
       {
         integrity: sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==,
       }
+
+  dunder-proto@1.0.1:
+    resolution:
+      {
+        integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==,
+      }
+    engines: { node: ">= 0.4" }
 
   ecdsa-sig-formatter@1.0.11:
     resolution:
@@ -242,10 +252,10 @@ packages:
         integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==,
       }
 
-  es-define-property@1.0.0:
+  es-define-property@1.0.1:
     resolution:
       {
-        integrity: sha512-jxayLKShrEqqzJ0eumQbVhTYQM27CfT1T35+gCgDFoL82JLsXqTJ76zv6A0YLOgEnLUMvLzsDsGIrl8NFpT2gQ==,
+        integrity: sha512-e3nRfgfUZ4rNGL232gUgX06QNyyez04KdjFrF+LTRoOXmrOgFKDg4BCdsjW8EnT69eqdYGmRpJwiPVYNrCaW3g==,
       }
     engines: { node: ">= 0.4" }
 
@@ -253,6 +263,13 @@ packages:
     resolution:
       {
         integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==,
+      }
+    engines: { node: ">= 0.4" }
+
+  es-object-atoms@1.1.2:
+    resolution:
+      {
+        integrity: sha512-HWcBoN6NileqtSydK2FqHbS/LoDd2pqrnQHLyJzBj4kOp/ky2MWMN694xOfkK8/SnUsW2DH7EfyVlydKCsm1Zw==,
       }
     engines: { node: ">= 0.4" }
 
@@ -275,18 +292,26 @@ packages:
         integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==,
       }
 
-  get-intrinsic@1.2.4:
+  get-intrinsic@1.3.0:
     resolution:
       {
-        integrity: sha512-5uYhsJH8VJBTv7oslg4BznJYhDoRI6waYCxMmCdnTrcCrHA/fCFKoTFz2JKKE0HdDFUF7/oQuhzumXJK7paBRQ==,
+        integrity: sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==,
       }
     engines: { node: ">= 0.4" }
 
-  gopd@1.0.1:
+  get-proto@1.0.1:
     resolution:
       {
-        integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==,
+        integrity: sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==,
       }
+    engines: { node: ">= 0.4" }
+
+  gopd@1.2.0:
+    resolution:
+      {
+        integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==,
+      }
+    engines: { node: ">= 0.4" }
 
   has-flag@4.0.0:
     resolution:
@@ -302,23 +327,10 @@ packages:
       }
     engines: { node: ">=12" }
 
-  has-property-descriptors@1.0.2:
+  has-symbols@1.1.0:
     resolution:
       {
-        integrity: sha512-55JNKuIW+vq4Ke1BjOTjM2YctQIvCT7GFzHwmfZPGo5wnrgkid0YQtnAleFSqumZm4az3n2BS+erby5ipJdgrg==,
-      }
-
-  has-proto@1.0.3:
-    resolution:
-      {
-        integrity: sha512-SJ1amZAJUiZS+PhsVLf5tGydlaVB8EdFpaSO4gmiUKUOxk8qzn5AIy4ZeJUmh22znIdk/uMAUT2pl3FxzVUH+Q==,
-      }
-    engines: { node: ">= 0.4" }
-
-  has-symbols@1.0.3:
-    resolution:
-      {
-        integrity: sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==,
+        integrity: sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ==,
       }
     engines: { node: ">= 0.4" }
 
@@ -444,6 +456,13 @@ packages:
         integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==,
       }
 
+  math-intrinsics@1.1.0:
+    resolution:
+      {
+        integrity: sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g==,
+      }
+    engines: { node: ">= 0.4" }
+
   memfs-or-file-map-to-github-branch@1.3.0:
     resolution:
       {
@@ -481,10 +500,10 @@ packages:
         integrity: sha512-qN8v/s2PAJwGUtr1/hYTpNKlD6Y9rc4p8KSmJXyGdYGZsDGKXrGThikLFP9OCHFeLeEpQzPwiAtdIvBLqm//Hw==,
       }
 
-  object-inspect@1.13.2:
+  object-inspect@1.13.4:
     resolution:
       {
-        integrity: sha512-IRZSRuzJiynemAXPYtPe5BoI/RESNYR7TYm50MC5Mqbd3Jmw5y790sErYw3V6SryFJD64b74qQQs9wn5Bg/k3g==,
+        integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==,
       }
     engines: { node: ">= 0.4" }
 
@@ -540,10 +559,10 @@ packages:
       }
     hasBin: true
 
-  qs@6.13.0:
+  qs@6.16.0:
     resolution:
       {
-        integrity: sha512-+38qI9SOr8tfZ4QmJNplMUxqjbe7LKvvZgWdExBOmd+egZTtjLB67Gu0HRX3u/XOq7UU2Nx6nsjvS16Z9uwfpg==,
+        integrity: sha512-h6fhOIaRrID2CbEY2fqs+7t+UXZo+MLAnU5gRIq85uFtdiUPCdsApMlHhXogKVM4HM2DVbIjGNTTYH2OcmP1vA==,
       }
     engines: { node: ">=0.6" }
 
@@ -588,17 +607,31 @@ packages:
     engines: { node: ">=10" }
     hasBin: true
 
-  set-function-length@1.2.2:
+  side-channel-list@1.0.1:
     resolution:
       {
-        integrity: sha512-pgRc4hJ4/sNjWCSS9AmnS40x3bNMDTknHgL5UaMBTMyJnU90EgWh1Rz+MC9eFu4BuN/UwZjKQuY/1v3rM7HMfg==,
+        integrity: sha512-mjn/0bi/oUURjc5Xl7IaWi/OJJJumuoJFQJfDDyO46+hBWsfaVM65TBHq2eoZBhzl9EchxOijpkbRC8SVBQU0w==,
       }
     engines: { node: ">= 0.4" }
 
-  side-channel@1.0.6:
+  side-channel-map@1.0.1:
     resolution:
       {
-        integrity: sha512-fDW/EZ6Q9RiO8eFG8Hj+7u/oW+XrPTIChwCOM2+th2A6OblDtYYIpve9m+KvI9Z4C9qSEXlaGR6bTEYHReuglA==,
+        integrity: sha512-VCjCNfgMsby3tTdo02nbjtM/ewra6jPHmpThenkTYh8pG9ucZ/1P8So4u4FGBek/BjpOVsDCMoLA/iuBKIFXRA==,
+      }
+    engines: { node: ">= 0.4" }
+
+  side-channel-weakmap@1.0.2:
+    resolution:
+      {
+        integrity: sha512-WPS/HvHQTYnHisLo9McqBHOJk2FkHO/tlpvldyrnem4aeQp4hai3gythswg6p01oSoTl58rcpiFAjF2br2Ak2A==,
+      }
+    engines: { node: ">= 0.4" }
+
+  side-channel@1.1.1:
+    resolution:
+      {
+        integrity: sha512-6x6dK6zJdpTzF4sQeNYxwtvBzf6Eg4GtlesS94HOvTudUeyK2WXAaIfmDgsyslYrRBeFIlsi54AYsFGUuhmvrQ==,
       }
     engines: { node: ">= 0.4" }
 
@@ -674,12 +707,12 @@ snapshots:
   "@gitbeaker/core@38.12.1":
     dependencies:
       "@gitbeaker/requester-utils": 38.12.1
-      qs: 6.13.0
+      qs: 6.16.0
       xcase: 2.0.1
 
   "@gitbeaker/requester-utils@38.12.1":
     dependencies:
-      qs: 6.13.0
+      qs: 6.16.0
       xcase: 2.0.1
 
   "@gitbeaker/rest@38.12.1":
@@ -766,13 +799,15 @@ snapshots:
 
   buffer-equal-constant-time@1.0.1: {}
 
-  call-bind@1.0.7:
+  call-bind-apply-helpers@1.0.2:
     dependencies:
-      es-define-property: 1.0.0
       es-errors: 1.3.0
       function-bind: 1.1.2
-      get-intrinsic: 1.2.4
-      set-function-length: 1.2.2
+
+  call-bound@1.0.4:
+    dependencies:
+      call-bind-apply-helpers: 1.0.2
+      get-intrinsic: 1.3.0
 
   chalk@4.1.2:
     dependencies:
@@ -831,23 +866,25 @@ snapshots:
     dependencies:
       ms: 2.1.2
 
-  define-data-property@1.1.4:
-    dependencies:
-      es-define-property: 1.0.0
-      es-errors: 1.3.0
-      gopd: 1.0.1
-
   deprecation@2.3.1: {}
+
+  dunder-proto@1.0.1:
+    dependencies:
+      call-bind-apply-helpers: 1.0.2
+      es-errors: 1.3.0
+      gopd: 1.2.0
 
   ecdsa-sig-formatter@1.0.11:
     dependencies:
       safe-buffer: 5.2.1
 
-  es-define-property@1.0.0:
-    dependencies:
-      get-intrinsic: 1.2.4
+  es-define-property@1.0.1: {}
 
   es-errors@1.3.0: {}
+
+  es-object-atoms@1.1.2:
+    dependencies:
+      es-errors: 1.3.0
 
   fast-json-patch@3.1.1: {}
 
@@ -857,29 +894,31 @@ snapshots:
 
   function-bind@1.1.2: {}
 
-  get-intrinsic@1.2.4:
+  get-intrinsic@1.3.0:
     dependencies:
+      call-bind-apply-helpers: 1.0.2
+      es-define-property: 1.0.1
       es-errors: 1.3.0
+      es-object-atoms: 1.1.2
       function-bind: 1.1.2
-      has-proto: 1.0.3
-      has-symbols: 1.0.3
+      get-proto: 1.0.1
+      gopd: 1.2.0
+      has-symbols: 1.1.0
       hasown: 2.0.2
+      math-intrinsics: 1.1.0
 
-  gopd@1.0.1:
+  get-proto@1.0.1:
     dependencies:
-      get-intrinsic: 1.2.4
+      dunder-proto: 1.0.1
+      es-object-atoms: 1.1.2
+
+  gopd@1.2.0: {}
 
   has-flag@4.0.0: {}
 
   has-flag@5.0.1: {}
 
-  has-property-descriptors@1.0.2:
-    dependencies:
-      es-define-property: 1.0.0
-
-  has-proto@1.0.3: {}
-
-  has-symbols@1.0.3: {}
+  has-symbols@1.1.0: {}
 
   hasown@2.0.2:
     dependencies:
@@ -939,6 +978,8 @@ snapshots:
 
   lodash.once@4.1.1: {}
 
+  math-intrinsics@1.1.0: {}
+
   memfs-or-file-map-to-github-branch@1.3.0:
     dependencies:
       "@octokit/rest": 20.1.2
@@ -956,7 +997,7 @@ snapshots:
 
   node-cleanup@2.1.2: {}
 
-  object-inspect@1.13.2: {}
+  object-inspect@1.13.4: {}
 
   once@1.4.0:
     dependencies:
@@ -981,9 +1022,10 @@ snapshots:
       colors: 1.4.0
       minimist: 1.2.8
 
-  qs@6.13.0:
+  qs@6.16.0:
     dependencies:
-      side-channel: 1.0.6
+      es-define-property: 1.0.1
+      side-channel: 1.1.1
 
   readline-sync@1.4.10: {}
 
@@ -997,21 +1039,33 @@ snapshots:
 
   semver@7.6.3: {}
 
-  set-function-length@1.2.2:
+  side-channel-list@1.0.1:
     dependencies:
-      define-data-property: 1.1.4
       es-errors: 1.3.0
-      function-bind: 1.1.2
-      get-intrinsic: 1.2.4
-      gopd: 1.0.1
-      has-property-descriptors: 1.0.2
+      object-inspect: 1.13.4
 
-  side-channel@1.0.6:
+  side-channel-map@1.0.1:
     dependencies:
-      call-bind: 1.0.7
+      call-bound: 1.0.4
       es-errors: 1.3.0
-      get-intrinsic: 1.2.4
-      object-inspect: 1.13.2
+      get-intrinsic: 1.3.0
+      object-inspect: 1.13.4
+
+  side-channel-weakmap@1.0.2:
+    dependencies:
+      call-bound: 1.0.4
+      es-errors: 1.3.0
+      get-intrinsic: 1.3.0
+      object-inspect: 1.13.4
+      side-channel-map: 1.0.1
+
+  side-channel@1.1.1:
+    dependencies:
+      es-errors: 1.3.0
+      object-inspect: 1.13.4
+      side-channel-list: 1.0.1
+      side-channel-map: 1.0.1
+      side-channel-weakmap: 1.0.2
 
   supports-color@10.2.2: {}
 

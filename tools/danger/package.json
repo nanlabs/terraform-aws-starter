@@ -25,5 +25,10 @@
   },
   "devDependencies": {
     "typescript": "^5.5.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "qs": "^6.16.0"
+    }
   }
 }
