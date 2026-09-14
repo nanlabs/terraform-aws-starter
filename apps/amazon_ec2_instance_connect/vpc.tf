@@ -1,4 +1,3 @@
-#tfsec:ignore:aws-ec2-require-vpc-flow-logs-for-all-vpcs
 data "aws_availability_zones" "available" {
   state = "available"
 }

@@ -1,4 +1,5 @@
 aws_region                  = "us-west-1"
+
 vpc_id                      = ""
 name                        = "testing-db"
 db_name                     = "myappdb"

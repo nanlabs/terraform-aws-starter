@@ -50,6 +50,7 @@ In a separate terminal or SQL client tool (such as DBeaver, PgAdmin, VS Code ext
 psql -h 127.0.0.1 -p 5432 -U dbadmin -d myappdb
 ```
 
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -129,3 +130,5 @@ No modules.
 | <a name="output_rds_endpoint"></a> [rds\_endpoint](#output\_rds\_endpoint) | The connection endpoint of the RDS instance |
 | <a name="output_rds_port"></a> [rds\_port](#output\_rds\_port) | The database port |
 <!-- END_TF_DOCS -->
+=======
+
