@@ -1,5 +1,5 @@
 aws_region                  = "us-west-1"
-vpc_id                      = "" 
+vpc_id                      = ""
 name                        = "testing-db"
 db_name                     = "myappdb"
 db_master_username          = "dbadmin"
@@ -9,10 +9,10 @@ db_instance_class           = "db.t4g.small"
 db_engine                   = "postgres"
 db_engine_version           = "16.3"
 allocated_storage           = 20
-max_allocated_storage       = 100  
+max_allocated_storage       = 100
 enable_public_access        = false
 
 tags = {
-    Environment = "testing"
-    Project     = "backend"  
+  Environment = "testing"
+  Project     = "backend"
 }
