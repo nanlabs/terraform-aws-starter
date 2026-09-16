@@ -2,7 +2,7 @@ data "aws_availability_zones" "available" {
   state = "available"
 }
 
-#create VPC if var.vpc_id is empty 
+#create VPC if var.vpc_id is empty
 #tfsec:ignore:aws-ec2-require-vpc-flow-logs-for-all-vpcs
 resource "aws_vpc" "main" {
   count                = var.vpc_id == "" ? 1 : 0

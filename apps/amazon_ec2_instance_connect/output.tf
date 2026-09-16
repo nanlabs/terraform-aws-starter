@@ -8,7 +8,7 @@ output "rds_address" {
     value = aws_db_instance.rds.address
 }
 
-output "rds_port" { 
+output "rds_port" {
     description = "The database port"
     value = aws_db_instance.rds.port
 }
