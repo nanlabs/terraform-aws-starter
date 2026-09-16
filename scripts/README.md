@@ -8,14 +8,14 @@ This directory currently includes the following key scripts:
 
 1. **`connect-to-core-networking-bastion-host.sh`**:
 
-   - This script connects to an AWS Bastion host within a specified environment. You can use it to either establish a direct connection or create a tunnel through the bastion host to another target.
+    - This script connects to an AWS Bastion host within a specified environment. You can use it to either establish a direct connection or create a tunnel through the bastion host to another target.
 
 2. **`connect-to-services-platform-eks-cluster.sh`**:
 
-   - This script is specifically designed to create a tunnel through the bastion host directly to an EKS Cluster. This tunnel is crucial for securely interacting with the EKS Cluster using `kubectl` via a local port.
+    - This script is specifically designed to create a tunnel through the bastion host directly to an EKS Cluster. This tunnel is crucial for securely interacting with the EKS Cluster using `kubectl` via a local port.
 
 3. **`generate-services-platform-eks-kubeconfig.sh`**:
-   - This script generates a `kubeconfig` file tailored for the EKS Cluster in a specified environment, configured to work with a local tunnel. It also sets up an `.envrc` file in the root of the repository to automatically set the `KUBECONFIG` environment variable using `direnv`.
+    - This script generates a `kubeconfig` file tailored for the EKS Cluster in a specified environment, configured to work with a local tunnel. It also sets up an `.envrc` file in the root of the repository to automatically set the `KUBECONFIG` environment variable using `direnv`.
 
 ## Usage Instructions
 

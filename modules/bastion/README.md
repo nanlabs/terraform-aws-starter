@@ -66,79 +66,79 @@ Ensure the following prerequisites are met:
 
 1. **Install tools**
 
-   Follow [Prerequisites](#prerequisites) section to install AWS CLI and Session Manager plugin.
+    Follow [Prerequisites](#prerequisites) section to install AWS CLI and Session Manager plugin.
 
 2. **Configure SSH connection**
 
-   Follow [the documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html#ssh-connections-enable) to update the SSH configuration file to allow SSH connections through Session Manager. It allows running a proxy command that starts a Session Manager session and transfer all data through opened connection.
+    Follow [the documentation](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-getting-started-enable-ssh-connections.html#ssh-connections-enable) to update the SSH configuration file to allow SSH connections through Session Manager. It allows running a proxy command that starts a Session Manager session and transfer all data through opened connection.
 
 3. **Generate SSH keys**
 
-   Generate local SSH private and public keys. For example, you can use following command:
+    Generate local SSH private and public keys. For example, you can use following command:
 
-   ```shell
-   ssh-keygen -t rsa -f my_key
-   ```
+    ```shell
+    ssh-keygen -t rsa -f my_key
+    ```
 
-   It will generate private and public SSH key pair which are going to be used to connect to bastion host.
-   It is recommended to provide password to protect access to keys and store keys in secure location.
+    It will generate private and public SSH key pair which are going to be used to connect to bastion host.
+    It is recommended to provide password to protect access to keys and store keys in secure location.
 
 ### Connect to Bastion Host
 
 1. **Assume IAM Role**
 
-   Assume an IAM role that has permissions to authenticate, authorize, and connect to the EC2 instance.
+    Assume an IAM role that has permissions to authenticate, authorize, and connect to the EC2 instance.
 
 2. **Get instance id**
 
-   In order to connect to deployed bastion host you will need to obtain EC2 instance id. There are multiple ways you can do
-   that. For example you can get it using AWS console by navigating
-   to [EC2 dashboard](https://eu-central-1.console.aws.amazon.com/ec2/home) or through AWS CLI using:
+    In order to connect to deployed bastion host you will need to obtain EC2 instance id. There are multiple ways you can do
+    that. For example you can get it using AWS console by navigating
+    to [EC2 dashboard](https://eu-central-1.console.aws.amazon.com/ec2/home) or through AWS CLI using:
 
-   ```shell
-   aws ec2 describe-instances
-   ```
+    ```shell
+    aws ec2 describe-instances
+    ```
 
-   To further filter results you can use following command:
+    To further filter results you can use following command:
 
-   ```shell
-   aws ec2 describe-instances --filters 'Name=tag:Name,Values=$BASTION_HOST_TAG'  --output text --query 'Reservations[*].Instances[*].InstanceId' --output text
-   ```
+    ```shell
+    aws ec2 describe-instances --filters 'Name=tag:Name,Values=$BASTION_HOST_TAG'  --output text --query 'Reservations[*].Instances[*].InstanceId' --output text
+    ```
 
-   Replace `$BASTION_HOST_TAG` with tag used to mark bastion host.
-   Copy obtained EC2 instance id for later use.
+    Replace `$BASTION_HOST_TAG` with tag used to mark bastion host.
+    Copy obtained EC2 instance id for later use.
 
 3. **Send SSH keys**
 
-   In order to connect to the bastion host we first have to send SSH key to the host using EC2 Instance Connect.
-   Use following command replacing `$INSTANCE_ID` with EC2 instance id obtained in previous step and `$PUBLIC_KEY_FILE`
-   with path to your public key file (for example: `my_key.pub`).
+    In order to connect to the bastion host we first have to send SSH key to the host using EC2 Instance Connect.
+    Use following command replacing `$INSTANCE_ID` with EC2 instance id obtained in previous step and `$PUBLIC_KEY_FILE`
+    with path to your public key file (for example: `my_key.pub`).
 
-   **Be sure to use public key and NOT private key.**
+    **Be sure to use public key and NOT private key.**
 
-   ```shell
-   aws ec2-instance-connect send-ssh-public-key --instance-id $INSTANCE_ID --instance-os-user ubuntu --ssh-public-key file://$PUBLIC_KEY_FILE
-   ```
+    ```shell
+    aws ec2-instance-connect send-ssh-public-key --instance-id $INSTANCE_ID --instance-os-user ubuntu --ssh-public-key file://$PUBLIC_KEY_FILE
+    ```
 
-   You should receive message indicated successful upload of key. You have just uploaded temporary SSH key
-   to [EC2 instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) where it’s
-   going to remain for 60 seconds. After 60 seconds SSH key gets removed automatically, and you won’t be able to use it to
-   connect to the instance. You will see “Permission denied” error if you try. If this happens you can resend the key using
-   the same command.
+    You should receive message indicated successful upload of key. You have just uploaded temporary SSH key
+    to [EC2 instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) where it’s
+    going to remain for 60 seconds. After 60 seconds SSH key gets removed automatically, and you won’t be able to use it to
+    connect to the instance. You will see “Permission denied” error if you try. If this happens you can resend the key using
+    the same command.
 
-   This means that you have 60 seconds to initialize SSH connection after you upload keys. Follow next step to do so.
+    This means that you have 60 seconds to initialize SSH connection after you upload keys. Follow next step to do so.
 
 4. **Connect using SSH through Sessions Manager**
 
-   In this last step you will connect to your bastion host using SSH. Use following command replacing
-   `$PRIVATE_KEY_FILE` with path to your private key (for example: my_key) and `$INSTANCE_ID` with EC2 instance id obtained
-   in previous steps.
+    In this last step you will connect to your bastion host using SSH. Use following command replacing
+    `$PRIVATE_KEY_FILE` with path to your private key (for example: my_key) and `$INSTANCE_ID` with EC2 instance id obtained
+    in previous steps.
 
-   ```shell
-   ssh -i $PRIVATE_KEY_FILE ubuntu@$INSTANCE_ID
-   ```
+    ```shell
+    ssh -i $PRIVATE_KEY_FILE ubuntu@$INSTANCE_ID
+    ```
 
-   Confirm connection by typing yes. It will open SSH connection using previously configured Session Manager.
+    Confirm connection by typing yes. It will open SSH connection using previously configured Session Manager.
 
 You’re in!
 
@@ -260,4 +260,4 @@ Solution:
 
 The module documentation is generated with [terraform-docs](https://github.com/terraform-docs/terraform-docs) by running `terraform-docs md . > ./docs/MODULE.md` from the module directory.
 
-You can also view the latest version of the module documentation [here](./docs/MODULE.md).
+You can also view the latest version in the [module documentation](./docs/MODULE.md).
