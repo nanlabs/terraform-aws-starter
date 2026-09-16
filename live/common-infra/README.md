@@ -186,4 +186,4 @@ The module documentation is generated with [terraform-docs](https://github.com/t
 terraform-docs md . > ./docs/MODULE.md
 ```
 
-You can also view the latest version of the module documentation [here](./docs/MODULE.md).
+You can also view the latest version in the [module documentation](./docs/MODULE.md).
