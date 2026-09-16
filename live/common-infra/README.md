@@ -20,57 +20,57 @@
 
 1. **Change Directory:**
 
-   Navigate to the directory containing the Terraform configuration:
+    Navigate to the directory containing the Terraform configuration:
 
-   ```sh
-   cd live/common-infra
-   ```
+    ```sh
+    cd live/common-infra
+    ```
 
 2. **Create .envrc file:**
 
-   Create a new `.envrc` file in this directory by copying the `.envrc.example` file:
+    Create a new `.envrc` file in this directory by copying the `.envrc.example` file:
 
-   ```sh
-   cp .envrc.example .envrc
-   ```
+    ```sh
+    cp .envrc.example .envrc
+    ```
 
-   Then, update the `.envrc` file with the values for your environment!
+    Then, update the `.envrc` file with the values for your environment!
 
 3. **Load Environment Variables:**
 
-   Load the environment variables using `direnv`:
+    Load the environment variables using `direnv`:
 
-   ```sh
-   direnv allow
-   ```
+    ```sh
+    direnv allow
+    ```
 
 4. **Set Terraform Version:**
 
-   Ensure you are using the correct Terraform version:
+    Ensure you are using the correct Terraform version:
 
-   ```sh
-   tfswitch
-   ```
+    ```sh
+    tfswitch
+    ```
 
 5. **Initialize Terraform:**
 
-   Initialize the working directory with the required providers and modules:
+    Initialize the working directory with the required providers and modules:
 
-   ```sh
-   terraform init -backend-config="./configs/${ENVIRONMENT}-backend.tfvars"
-   ```
+    ```sh
+    terraform init -backend-config="./configs/${ENVIRONMENT}-backend.tfvars"
+    ```
 
 6. **Workspace Management:**
 
-   Select or create a new workspace tailored to your deployment environment:
+    Select or create a new workspace tailored to your deployment environment:
 
-   ```sh
-   # Select an existing workspace
-   terraform workspace select "${TF_WORKSPACE}"
+    ```sh
+    # Select an existing workspace
+    terraform workspace select "${TF_WORKSPACE}"
 
-   # Create a new workspace if it doesn't exist and select it
-   terraform workspace new "${TF_WORKSPACE}"
-   ```
+    # Create a new workspace if it doesn't exist and select it
+    terraform workspace new "${TF_WORKSPACE}"
+    ```
 
 ## Deploy
 
@@ -78,19 +78,19 @@
 
 1. **Plan Your Deployment:**
 
-   Review and verify the deployment plan:
+    Review and verify the deployment plan:
 
-   ```sh
-   terraform plan -var-file "./configs/${ENVIRONMENT}.tfvars" -out "${ENVIRONMENT}.tfplan"
-   ```
+    ```sh
+    terraform plan -var-file "./configs/${ENVIRONMENT}.tfvars" -out "${ENVIRONMENT}.tfplan"
+    ```
 
 2. **Execute the Plan:**
 
-   Apply the planned configuration to provision the infrastructure:
+    Apply the planned configuration to provision the infrastructure:
 
-   ```sh
-   terraform apply "${ENVIRONMENT}.tfplan"
-   ```
+    ```sh
+    terraform apply "${ENVIRONMENT}.tfplan"
+    ```
 
 ### Troubleshooting
 
