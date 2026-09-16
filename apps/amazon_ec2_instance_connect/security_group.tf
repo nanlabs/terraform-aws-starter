@@ -4,7 +4,6 @@ resource "aws_security_group" "eic_sg" {
   description = "Security group for EC2 Instance Connect Endpoint"
   vpc_id      = local.target_vpc_id
 
-
   tags = merge(var.tags, {
     Name = "${var.name}-eic-sg"
   })
@@ -15,7 +14,6 @@ resource "aws_security_group" "rds_sg" {
   name        = "${var.name}-rds-sg"
   description = "Security group for private RDS instance"
   vpc_id      = local.target_vpc_id
-
 
   tags = merge(var.tags, {
     Name = "${var.name}-rds-sg"
