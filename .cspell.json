@@ -13,6 +13,7 @@
   "noConfigSearch": true,
   "words": [
     "aquasecurity",
+    "cloudposse",
     "dangerfile",
     "darioscrivano",
     "direnv",
@@ -43,6 +44,7 @@
     "psql",
     "tfsec",
     "Tfsec",
+    "tfstate",
     "tfswitch",
     "tfvars",
     "ulises",
