@@ -19,57 +19,57 @@
 
 1. **Change Directory:**
 
-   Navigate to the directory containing the Terraform configuration:
+    Navigate to the directory containing the Terraform configuration:
 
-   ```sh
-   cd live/services-platform
-   ```
+    ```sh
+    cd live/services-platform
+    ```
 
 2. **Create .envrc file:**
 
-   Create a new `.envrc` file in this directory by copying the `.envrc.example` file:
+    Create a new `.envrc` file in this directory by copying the `.envrc.example` file:
 
-   ```sh
-   cp .envrc.example .envrc
-   ```
+    ```sh
+    cp .envrc.example .envrc
+    ```
 
-   Then, update the `.envrc` file with the values for your environment!
+    Then, update the `.envrc` file with the values for your environment!
 
 3. **Load Environment Variables:**
 
-   Load the environment variables using `direnv`:
+    Load the environment variables using `direnv`:
 
-   ```sh
-   direnv allow
-   ```
+    ```sh
+    direnv allow
+    ```
 
 4. **Set Terraform Version:**
 
-   Ensure you are using the correct Terraform version:
+    Ensure you are using the correct Terraform version:
 
-   ```sh
-   tfswitch
-   ```
+    ```sh
+    tfswitch
+    ```
 
 5. **Initialize Terraform:**
 
-   Initialize the working directory with the required providers and modules:
+    Initialize the working directory with the required providers and modules:
 
-   ```sh
-   terraform init -backend-config="./configs/${ENVIRONMENT}-backend.tfvars"
-   ```
+    ```sh
+    terraform init -backend-config="./configs/${ENVIRONMENT}-backend.tfvars"
+    ```
 
 6. **Workspace Management:**
 
-   Select or create a new workspace tailored to your deployment environment:
+    Select or create a new workspace tailored to your deployment environment:
 
-   ```sh
-   # Select an existing workspace
-   terraform workspace select "${TF_WORKSPACE}"
+    ```sh
+    # Select an existing workspace
+    terraform workspace select "${TF_WORKSPACE}"
 
-   # Create a new workspace if it doesn't exist and select it
-   terraform workspace new "${TF_WORKSPACE}"
-   ```
+    # Create a new workspace if it doesn't exist and select it
+    terraform workspace new "${TF_WORKSPACE}"
+    ```
 
 ## Deploy
 
@@ -77,19 +77,19 @@
 
 1. **Plan Your Deployment:**
 
-   Review and verify the deployment plan:
+    Review and verify the deployment plan:
 
-   ```sh
-   terraform plan -var-file "./configs/${ENVIRONMENT}.tfvars" -out "${ENVIRONMENT}.tfplan"
-   ```
+    ```sh
+    terraform plan -var-file "./configs/${ENVIRONMENT}.tfvars" -out "${ENVIRONMENT}.tfplan"
+    ```
 
 2. **Execute the Plan:**
 
-   Apply the planned configuration to provision the infrastructure:
+    Apply the planned configuration to provision the infrastructure:
 
-   ```sh
-   terraform apply "${ENVIRONMENT}.tfplan"
-   ```
+    ```sh
+    terraform apply "${ENVIRONMENT}.tfplan"
+    ```
 
 ## Post Deployment Steps
 
@@ -109,29 +109,29 @@ To access the EKS cluster, configure your `kubectl` to use the new cluster conte
 
 1. **Get the Cluster Name:**
 
-   Get the cluster name from the Terraform output:
+    Get the cluster name from the Terraform output:
 
-   ```sh
-   CLUSTER_NAME=$(terraform output -raw cluster_name)
+    ```sh
+    CLUSTER_NAME=$(terraform output -raw cluster_name)
 
-   echo "Cluster Name: ${CLUSTER_NAME}"
-   ```
+    echo "Cluster Name: ${CLUSTER_NAME}"
+    ```
 
 2. **Update the Kubeconfig in the Bastion Host:**
 
-   After connecting to the Bastion Host following the [Connection Steps](#connecting-to-the-bastion-host-using-session-manager), update the kubeconfig to use the new cluster context:
+    After connecting to the Bastion Host following the [Connection Steps](#connecting-to-the-bastion-host-using-session-manager), update the kubeconfig to use the new cluster context:
 
-   ```sh
-   aws eks --region us-west-2 update-kubeconfig --name <CLUSTER_NAME>
-   ```
+    ```sh
+    aws eks --region us-west-2 update-kubeconfig --name <CLUSTER_NAME>
+    ```
 
 3. **Test the cluster:**
 
-   Get the list of nodes:
+    Get the list of nodes:
 
-   ```sh
-   kubectl get nodes
-   ```
+    ```sh
+    kubectl get nodes
+    ```
 
 ## Destroy
 
@@ -149,4 +149,4 @@ The module documentation is generated with [terraform-docs](https://github.com/t
 terraform-docs md . > ./docs/MODULE.md
 ```
 
-You can also view the latest version of the module documentation [here](./docs/MODULE.md).
+You can also view the latest version in the [module documentation](./docs/MODULE.md).
