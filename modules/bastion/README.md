@@ -171,7 +171,7 @@ aws ssm terminate-session --session-id <session-id>
 Here's a complete example script to retrieve the Bastion instance ID, push the SSH public key, and start a Session Manager session:
 
 ```bash
-# Asume an IAM Role
+# Assume an IAM Role
 assume_role_output=$(aws sts assume-role --role-arn arn:aws:iam::<account-id>:role/<role-name> --role-session-name AWSCLI-Session)
 
 # Export credentials
