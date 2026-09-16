@@ -92,6 +92,14 @@
    terraform apply "${ENVIRONMENT}.tfplan"
    ```
 
+### Troubleshooting
+
+- `Error: Unsupported argument ... An argument named "name" is not expected here` on a
+  `configs/*.tfvars` file almost always means the file was passed with `-backend-config`
+  instead of `-var-file`. Backend configs only accept backend settings; stack variables
+  such as `name` belong to `-var-file "./configs/${ENVIRONMENT}.tfvars"`. See the
+  commands above and compare with the checked-in `configs/sandbox.tfvars` example.
+
 ## Post Deployment Steps
 
 After successfully deploying the infrastructure, follow these steps to test the deployment and ensure everything is working as expected:
