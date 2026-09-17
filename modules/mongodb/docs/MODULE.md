@@ -40,7 +40,7 @@ No modules.
 | <a name="input_backup_enabled"></a> [backup\_enabled](#input\_backup\_enabled) | Indicating if the cluster uses Cloud Backup for backups | `bool` | `true` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The cluster name | `string` | n/a | yes |
 | <a name="input_cluster_type"></a> [cluster\_type](#input\_cluster\_type) | The MongoDB Atlas cluster type - SHARDED/REPLICASET/GEOSHARDED | `string` | n/a | yes |
-| <a name="input_database_users"></a> [database\_users](#input\_database\_users) | An object that contains all the database users that should be created in the project | <pre>map(object({<br>    username = string<br>    password = string<br>    role = object({<br>      role_name     = string<br>      database_name = string<br>    })<br>  }))</pre> | `{}` | no |
+| <a name="input_database_users"></a> [database\_users](#input\_database\_users) | An object that contains all the database users that should be created in the project | <pre>map(object({<br/>    username = string<br/>    password = string<br/>    role = object({<br/>      role_name     = string<br/>      database_name = string<br/>    })<br/>  }))</pre> | `{}` | no |
 | <a name="input_disk_size_gb"></a> [disk\_size\_gb](#input\_disk\_size\_gb) | Capacity,in gigabytes,of the host’s root volume | `number` | `null` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | The Atlas instance-type name | `string` | n/a | yes |
 | <a name="input_mongodb_major_ver"></a> [mongodb\_major\_ver](#input\_mongodb\_major\_ver) | The MongoDB cluster major version | `number` | n/a | yes |
