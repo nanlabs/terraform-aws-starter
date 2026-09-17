@@ -7,7 +7,7 @@ variable "ecr_repositories" {
 
 module "ecr" {
   source  = "terraform-aws-modules/ecr/aws"
-  version = "2.3.0"
+  version = "3.2.0"
 
   for_each = var.ecr_repositories
 
