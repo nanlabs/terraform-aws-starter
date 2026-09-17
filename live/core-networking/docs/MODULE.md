@@ -16,7 +16,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_bastion"></a> [bastion](#module\_bastion) | ../../modules/bastion | n/a |
+| <a name="module_bastion"></a> [bastion](#module\_bastion) | git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-bastion | v1.18.0 |
 | <a name="module_ec2messages_vpce_sg"></a> [ec2messages\_vpce\_sg](#module\_ec2messages\_vpce\_sg) | terraform-aws-modules/security-group/aws | 4.17.1 |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_ssm_vpce_sg"></a> [ssm\_vpce\_sg](#module\_ssm\_vpce\_sg) | terraform-aws-modules/security-group/aws | 4.17.1 |
@@ -53,7 +53,7 @@
 | <a name="output_bastion_instance_profile"></a> [bastion\_instance\_profile](#output\_bastion\_instance\_profile) | n/a |
 | <a name="output_ssm_parameter_app_security_group"></a> [ssm\_parameter\_app\_security\_group](#output\_ssm\_parameter\_app\_security\_group) | name of the ssm parameter for the app security group |
 | <a name="output_ssm_parameter_app_subnets"></a> [ssm\_parameter\_app\_subnets](#output\_ssm\_parameter\_app\_subnets) | name of the ssm parameter for the app subnets |
-| <a name="output_ssm_parameter_bastion_ssh_key"></a> [ssm\_parameter\_bastion\_ssh\_key](#output\_ssm\_parameter\_bastion\_ssh\_key) | name of the ssm parameter for the bastion ssh key |
+| <a name="output_ssm_parameter_bastion_ssh_key"></a> [ssm\_parameter\_bastion\_ssh\_key](#output\_ssm\_parameter\_bastion\_ssh\_key) | name of the ssm parameter for the bastion ssh private key |
 | <a name="output_ssm_parameter_database_subnets"></a> [ssm\_parameter\_database\_subnets](#output\_ssm\_parameter\_database\_subnets) | name of the ssm parameter for the database subnets |
 | <a name="output_ssm_parameter_private_subnets"></a> [ssm\_parameter\_private\_subnets](#output\_ssm\_parameter\_private\_subnets) | name of the ssm parameter for the private subnets |
 | <a name="output_ssm_parameter_public_subnets"></a> [ssm\_parameter\_public\_subnets](#output\_ssm\_parameter\_public\_subnets) | name of the ssm parameter for the public subnets |
