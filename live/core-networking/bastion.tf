@@ -7,7 +7,7 @@ variable "enable_bastion" {
 module "bastion" {
   count = var.enable_bastion ? 1 : 0
 
-  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-bastion?ref=v1.18.0"
+  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-bastion?ref=v1.19.0"
 
   name             = "${module.label.id}-bastion"
   vpc_id           = module.vpc.vpc_id

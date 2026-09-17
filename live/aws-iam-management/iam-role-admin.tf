@@ -1,5 +1,5 @@
 module "admin_role" {
-  source             = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-iam-role?ref=v1.18.0"
+  source             = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-iam-role?ref=v1.19.0"
   name               = "${module.label.id}-AdminRole"
   policy_description = "Administrator access to all AWS resources"
   role_description   = "IAM role with full access permissions"

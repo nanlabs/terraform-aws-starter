@@ -106,7 +106,7 @@ locals {
 }
 
 module "eks_cluster" {
-  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-eks?ref=v1.18.0"
+  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-eks?ref=v1.19.0"
 
   region = var.region
   name   = module.label.id
