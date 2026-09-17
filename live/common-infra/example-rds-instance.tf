@@ -36,7 +36,7 @@ module "exampledb" {
   multi_az             = false
   db_subnet_group_name = data.aws_ssm_parameter.database_subnet_group.value
 
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  vpc_security_group_ids = [module.security_group.id]
 
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
@@ -79,23 +79,28 @@ module "exampledb" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 6.0"
 
   name        = "${module.label.id}-exampledb-security-group"
   description = "Security group for ${module.label.id}-exampledb"
   vpc_id      = data.aws_vpc.vpc.id
 
-  ingress_with_cidr_blocks = [
-    {
+  ingress_rules = {
+    postgres = {
       from_port   = 5432
       to_port     = 5432
-      protocol    = "tcp"
+      ip_protocol = "tcp"
       description = "RDS DB Instance access from within VPC"
-      cidr_blocks = data.aws_vpc.vpc.cidr_block
+      cidr_ipv4   = data.aws_vpc.vpc.cidr_block
     }
-  ]
+  }
 
-  egress_rules = ["all-all"]
+  egress_rules = {
+    all = {
+      ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+  }
 
   tags = merge(
     module.label.tags,
