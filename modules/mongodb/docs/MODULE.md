@@ -5,14 +5,14 @@
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 6.0 |
-| <a name="requirement_mongodbatlas"></a> [mongodbatlas](#requirement\_mongodbatlas) | 1.12.1 |
+| <a name="requirement_mongodbatlas"></a> [mongodbatlas](#requirement\_mongodbatlas) | 2.17.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | 6.65.0 |
-| <a name="provider_mongodbatlas"></a> [mongodbatlas](#provider\_mongodbatlas) | 1.12.1 |
+| <a name="provider_mongodbatlas"></a> [mongodbatlas](#provider\_mongodbatlas) | 2.17.0 |
 
 ## Modules
 
@@ -23,12 +23,12 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_vpc_peering_connection_accepter.peer](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_peering_connection_accepter) | resource |
-| [mongodbatlas_cluster.cluster](https://registry.terraform.io/providers/mongodb/mongodbatlas/1.12.1/docs/resources/cluster) | resource |
-| [mongodbatlas_database_user.user](https://registry.terraform.io/providers/mongodb/mongodbatlas/1.12.1/docs/resources/database_user) | resource |
-| [mongodbatlas_network_peering.mongo_peer](https://registry.terraform.io/providers/mongodb/mongodbatlas/1.12.1/docs/resources/network_peering) | resource |
-| [mongodbatlas_project.project](https://registry.terraform.io/providers/mongodb/mongodbatlas/1.12.1/docs/resources/project) | resource |
-| [mongodbatlas_project_ip_access_list.access_list](https://registry.terraform.io/providers/mongodb/mongodbatlas/1.12.1/docs/resources/project_ip_access_list) | resource |
-| [mongodbatlas_teams.team](https://registry.terraform.io/providers/mongodb/mongodbatlas/1.12.1/docs/resources/teams) | resource |
+| [mongodbatlas_cluster.cluster](https://registry.terraform.io/providers/mongodb/mongodbatlas/2.17.0/docs/resources/cluster) | resource |
+| [mongodbatlas_database_user.user](https://registry.terraform.io/providers/mongodb/mongodbatlas/2.17.0/docs/resources/database_user) | resource |
+| [mongodbatlas_network_peering.mongo_peer](https://registry.terraform.io/providers/mongodb/mongodbatlas/2.17.0/docs/resources/network_peering) | resource |
+| [mongodbatlas_project.project](https://registry.terraform.io/providers/mongodb/mongodbatlas/2.17.0/docs/resources/project) | resource |
+| [mongodbatlas_project_ip_access_list.access_list](https://registry.terraform.io/providers/mongodb/mongodbatlas/2.17.0/docs/resources/project_ip_access_list) | resource |
+| [mongodbatlas_teams.team](https://registry.terraform.io/providers/mongodb/mongodbatlas/2.17.0/docs/resources/teams) | resource |
 
 ## Inputs
 
