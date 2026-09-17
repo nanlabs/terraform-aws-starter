@@ -179,3 +179,9 @@ variable "additional_security_group_ids" {
   type        = list(string)
   default     = []
 }
+
+variable "deletion_protection" {
+  description = "Enable deletion protection for the RDS instance."
+  type        = bool
+  default     = false
+}
