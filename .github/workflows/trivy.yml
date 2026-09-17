@@ -35,7 +35,16 @@ jobs:
           scan-ref: .
           skip-dirs: .terraform,*/.terraform/*
           severity: HIGH,CRITICAL
-          # Report-only until Fase 1 replaces the legacy upstream pins that
-          # carry these findings (eks-cluster 4.2.0, sg v4/v5, rds 6.1.1).
-          # Flip to "1" in the release-ready phase once counts are clean.
+          # Report-only by design: the remaining HIGH/CRITICAL findings live
+          # in pinned upstream modules or are deliberate reference-arch
+          # tradeoffs. Accepted-risk register (reviewed 2026-09-17):
+          # - EKS public endpoint + 0.0.0.0/0 CIDRs (CRITICAL x2): the
+          #   reference stack ships no VPN; users harden per environment.
+          # - App SG egress 0.0.0.0/0 (CRITICAL): correct for NAT'd private
+          #   subnets (library aws-vpc default).
+          # - tfstate S3 bucket without CMK (HIGH): SSE-S3 accepted for the
+          #   bootstrap backend (cloudposse/tfstate-backend default).
+          # Everything fixable in first-party code is fixed (private example
+          # RDS, EKS envelope encryption on, VPC-scoped DB egress). Flip to
+          # "1" only together with a posture change above, never silently.
           exit-code: "0"

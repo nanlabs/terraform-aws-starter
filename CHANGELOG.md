@@ -55,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed `apps/amazon_ec2_instance_connect` (missing resource instance keys, undeclared `deletion_protection`, `name_prefix` → `name`; floors raised to TF `>= 1.11` / AWS `>= 6.0`) and extended the Validation workflow with an apps matrix so `apps/*` is validated like `live/*` and `modules/*`
 - README: new `Starter Kit vs Shared Library` section (bidirectional reference to the library, STARTER_COMPATIBILITY and PR nanlabs/terraform-aws-modules#72); corrected CI docs (Trivy instead of tfsec)
 - `live/services-platform`: `ecr/aws` 2.3.0 → 3.2.0 (breaking changes limited to provider MSV and new filters; interface used unchanged)
+- Hardening from the Trivy register: example RDS is now private (`publicly_accessible = false`, was inherited `true`), EKS envelope encryption on by default, example DB SG egress scoped to the VPC CIDR; residual findings (EKS public endpoint, app-SG egress, state-bucket CMK) recorded as accepted reference-arch tradeoffs in `trivy.yml`
 
 
 ## [0.1.0] - 2026-09-17

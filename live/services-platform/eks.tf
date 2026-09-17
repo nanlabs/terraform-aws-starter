@@ -61,7 +61,7 @@ variable "cluster_log_retention_period" {
 variable "cluster_encryption_config_enabled" {
   description = "Enable cluster encryption configuration"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "cluster_encryption_config_kms_key_id" {
