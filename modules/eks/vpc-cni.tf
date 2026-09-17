@@ -39,7 +39,7 @@ resource "aws_iam_role_policy_attachment" "vpc_cni" {
 
 module "vpc_cni_eks_iam_role" {
   source  = "cloudposse/eks-iam-role/aws"
-  version = "2.2.0"
+  version = "2.2.1"
 
   eks_cluster_oidc_issuer_url = module.eks_cluster.eks_cluster_identity_oidc_issuer
 
