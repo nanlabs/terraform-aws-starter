@@ -26,6 +26,10 @@ data "aws_ssm_parameter" "public_subnets" {
   name = "${var.core_networking_ssm_parameter_prefix}/public_subnets"
 }
 
+data "aws_ssm_parameter" "database_subnet_group" {
+  name = "${var.core_networking_ssm_parameter_prefix}/database_subnet_group"
+}
+
 data "aws_security_group" "default" {
   vpc_id = local.vpc_id
 

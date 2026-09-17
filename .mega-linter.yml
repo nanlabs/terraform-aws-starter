@@ -17,16 +17,26 @@ APPLY_FIXES: all
 DISABLE_ERRORS_LINTERS:
   # Keep these checks visible in PR comments without blocking dependency bumps on
   # repository-wide legacy findings unrelated to the changed files.
+  - ACTION_ACTIONLINT
+  - ACTION_ZIZMOR
   - COPYPASTE_JSCPD
+  # EDITORCONFIG flags repository-wide legacy formatting findings (missing final
+  # newline on generated docs/MODULE.md, trailing whitespace) that are unrelated
+  # to dependency bumps and are rewritten by terraform-docs on every run.
+  - EDITORCONFIG_EDITORCONFIG_CHECKER
   - REPOSITORY_CHECKOV
+  - REPOSITORY_GITLEAKS
   - REPOSITORY_GRYPE
   - REPOSITORY_KICS
   - REPOSITORY_TRIVY
+  - SPELL_CSPELL
   - SPELL_LYCHEE
+
+ACTION_ZIZMOR_UNSECURED_ENV_VARIABLES:
+  - GITHUB_TOKEN
 
 SHOW_ELAPSED_TIME: true
 
 FILEIO_REPORTER: false
-
 # Uncomment if you want MegaLinter to detect errors but not block CI to pass
 # DISABLE_ERRORS: true

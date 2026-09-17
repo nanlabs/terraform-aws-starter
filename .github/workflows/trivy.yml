@@ -1,0 +1,41 @@
+name: Trivy Security Scan
+
+# Replaces the deprecated tfsec PR commenter (see issue #38)
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  trivy-config:
+    name: Trivy Config Scan (HIGH/CRITICAL)
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Run Trivy config scan
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          scan-type: config
+          scan-ref: .
+          skip-dirs: .terraform,*/.terraform/*
+          severity: HIGH,CRITICAL
+          # Report-only until Fase 1 replaces the legacy upstream pins that
+          # carry these findings (eks-cluster 4.2.0, sg v4/v5, rds 6.1.1).
+          # Flip to "1" in the release-ready phase once counts are clean.
+          exit-code: "0"

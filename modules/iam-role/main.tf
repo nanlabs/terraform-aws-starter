@@ -46,7 +46,7 @@ resource "aws_iam_policy" "default" {
   count       = var.policy_document_count > 0 ? 1 : 0
   name        = var.policy_name != "" && var.policy_name != null ? var.policy_name : var.name
   description = var.policy_description
-  policy      = join("", data.aws_iam_policy_document.default.*.json)
+  policy      = join("", data.aws_iam_policy_document.default[*].json)
   path        = var.path
   tags = merge(var.tags, {
     "Name" = var.policy_name != "" && var.policy_name != null ? var.policy_name : var.name
@@ -55,18 +55,18 @@ resource "aws_iam_policy" "default" {
 
 resource "aws_iam_role_policy_attachment" "default" {
   count      = var.policy_document_count > 0 ? 1 : 0
-  role       = join("", aws_iam_role.default.*.name)
-  policy_arn = join("", aws_iam_policy.default.*.arn)
+  role       = join("", aws_iam_role.default[*].name)
+  policy_arn = join("", aws_iam_policy.default[*].arn)
 }
 
 resource "aws_iam_role_policy_attachment" "managed" {
   for_each   = var.managed_policy_arns
-  role       = join("", aws_iam_role.default.*.name)
+  role       = join("", aws_iam_role.default[*].name)
   policy_arn = each.key
 }
 
 resource "aws_iam_instance_profile" "default" {
   count = var.instance_profile_enabled ? 1 : 0
   name  = var.name
-  role  = join("", aws_iam_role.default.*.name)
+  role  = join("", aws_iam_role.default[*].name)
 }

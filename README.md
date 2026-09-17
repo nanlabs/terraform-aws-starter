@@ -124,9 +124,9 @@ For reference, you can also check the [Terraform Registry](https://registry.terr
 
 In addition to infrastructure provisioning, we have included a few apps and services to help you get started. These are located in the `apps` directory and provide useful examples of how to use the infrastructure we have provisioned.
 
-| Service                                                         | Description                                                                               |
-| :-------------------------------------------------------------- | :---------------------------------------------------------------------------------------- |
-| [Start and Stop EC2 Instance](./apps/start-stop-ec2-instances/) | A Serverless Framework-based project to start and stop EC2 instances based on a schedule. |
+| Service | Description |
+| :------ | :---------- |
+| EC2 start/stop on a schedule | Schedule EC2 start/stop with EventBridge Scheduler invoking the EC2 API directly (`startInstances` / `stopInstances` universal targets) through a least-privilege IAM role scoped to the instance ARNs. No Lambda functions or application deploy tooling required — everything is declared in Terraform. |
 
 ## Infra Tools and Scripts
 

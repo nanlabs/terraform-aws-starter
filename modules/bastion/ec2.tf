@@ -12,7 +12,7 @@ data "template_file" "user_data" {
 // EC2 instance for the server - tune instance_type to fit your performance and budget requirements
 module "bastion" {
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 3.0"
+  version = "6.4.0"
 
   name = var.name
 
@@ -29,11 +29,9 @@ module "bastion" {
 
   tags = var.tags
 
-  root_block_device = [
-    {
-      encrypted   = true
-      volume_type = var.root_volume_type
-      volume_size = var.root_volume_size
-    },
-  ]
+  root_block_device = {
+    encrypted   = true
+    volume_type = var.root_volume_type
+    volume_size = var.root_volume_size
+  }
 }

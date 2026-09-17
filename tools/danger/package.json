@@ -24,11 +24,12 @@
     "danger": "^13.0.10"
   },
   "devDependencies": {
-    "typescript": "^5.5.4"
+    "typescript": "^5.9.3"
   },
   "pnpm": {
     "overrides": {
-      "qs": "^6.16.0"
+      "qs": "^6.16.0",
+      "undici": "^6.28.0"
     }
   }
 }
