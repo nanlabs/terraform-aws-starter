@@ -105,7 +105,7 @@ Our custom Terraform modules are located in the `modules` directory. These modul
 | Module                                               | Description                                                   |
 | :--------------------------------------------------- | :------------------------------------------------------------ |
 | [Amplify App](./modules/amplify-app/README.md)       | Bootstrap an Amplify app.                                     |
-| [Bastion](./modules/bastion/README.md)               | Bootstrap a bastion host.                                     |
+| [Bastion](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-bastion) | Bastion host, consumed from the shared library (`aws-bastion` v1.18.0+). |
 | [DocumentDB Cluster](./modules/docdb/README.md)      | Bootstrap a DocumentDB cluster.                               |
 | [EKS](./modules/eks/README.md)                       | Bootstrap an EKS cluster.                                     |
 | [AWS IAM Role](./modules/iam-role/README.md)         | Bootstrap an AWS IAM role.                                    |
