@@ -48,7 +48,7 @@ module "exampledb" {
   skip_final_snapshot     = true
   deletion_protection     = false
 
-  publicly_accessible = true
+  publicly_accessible = false
 
   performance_insights_enabled          = true
   performance_insights_retention_period = 7
@@ -95,10 +95,11 @@ module "security_group" {
     }
   }
 
+  # Egress scoped to the VPC: an RDS instance needs no internet egress.
   egress_rules = {
-    all = {
+    vpc = {
       ip_protocol = "-1"
-      cidr_ipv4   = "0.0.0.0/0"
+      cidr_ipv4   = data.aws_vpc.vpc.cidr_block
     }
   }
 
