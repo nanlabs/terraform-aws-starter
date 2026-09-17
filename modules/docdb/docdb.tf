@@ -22,7 +22,7 @@ resource "aws_docdb_cluster" "this" {
 resource "aws_docdb_cluster_instance" "this" {
   count              = var.cluster_size
   identifier         = "${var.name}-${var.db_name}-${count.index + 1}"
-  cluster_identifier = join("", aws_docdb_cluster.this.*.id)
+  cluster_identifier = join("", aws_docdb_cluster.this[*].id)
   apply_immediately  = var.apply_immediately
   instance_class     = var.instance_class
   tags               = var.tags

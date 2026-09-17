@@ -27,9 +27,9 @@ resource "aws_secretsmanager_secret_version" "secret" {
 {
   "username": "${local.username}",
   "password": "${local.password}",
-  "engine": "${aws_docdb_cluster.this.*.engine}",
-  "host": "${aws_docdb_cluster.this.*.endpoint}",
-  "port": "${aws_docdb_cluster.this.*.port}",
+  "engine": "${aws_docdb_cluster.this[*].engine}",
+  "host": "${aws_docdb_cluster.this[*].endpoint}",
+  "port": "${aws_docdb_cluster.this[*].port}",
   "dbname" : "${var.db_name}"
 }
 EOF
