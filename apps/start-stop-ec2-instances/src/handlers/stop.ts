@@ -1,22 +1,28 @@
+import {
+  DescribeInstanceStatusCommand,
+  EC2Client,
+  StopInstancesCommand,
+} from "@aws-sdk/client-ec2";
 import { ScheduledHandler } from "aws-lambda";
-import { EC2 } from "aws-sdk";
 import axios from "axios";
 
 export const handler: ScheduledHandler = async (event) => {
-  const ec2 = new EC2({ region: event.region });
-
   const instanceId = process.env.EC2_INSTANCE_ID;
 
   if (!instanceId) {
     throw new Error("EC2_INSTANCE_ID is not defined");
   }
 
+  const ec2 = new EC2Client({
+    region: (event as { region?: string }).region,
+  });
+
   // check if instance is running. If yes, stop it
-  const instanceStatus = await ec2
-    .describeInstanceStatus({
+  const instanceStatus = await ec2.send(
+    new DescribeInstanceStatusCommand({
       InstanceIds: [instanceId],
     })
-    .promise();
+  );
 
   if (
     instanceStatus?.InstanceStatuses?.length === 0 ||
@@ -27,13 +33,8 @@ export const handler: ScheduledHandler = async (event) => {
     return;
   }
 
-  const result = await ec2
-    .stopInstances({ InstanceIds: [instanceId] })
-    .promise();
-  if (result.$response.error) {
-    throw result.$response.error;
-  }
-
+  // SDK v3 throws on API errors, no $response envelope to inspect
+  await ec2.send(new StopInstancesCommand({ InstanceIds: [instanceId] }));
   console.log("Instance stopped");
 
   // send it to Slack
@@ -45,7 +46,7 @@ export const handler: ScheduledHandler = async (event) => {
     return;
   }
 
-  // use fetch to send a POST request to Slack webhook
+  // use axios to send a POST request to Slack webhook
   await axios.post(slackWebhookUrl, {
     text: `${messagePrefix} Instance stopped`,
   });
