@@ -31,7 +31,7 @@ jobs:
           node-version-file: ./tools/danger/.node-version
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 10.17.1
 
