@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [0.12.0] - 2026-09-17
+
+
+
 ## [0.11.0] - 2026-09-17
 
 
@@ -76,7 +80,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `live/common-infra`: added missing `database_subnet_group` SSM lookup, fixed `aws_vpc` reference in RDS example
 - Repository-wide `terraform fmt` clean
 
-[Unreleased]: https://github.com/nanlabs/terraform-aws-modules/compare/v0.11.0...HEAD
+[Unreleased]: https://github.com/nanlabs/terraform-aws-modules/compare/v0.12.0...HEAD
+[0.12.0]: https://github.com/nanlabs/terraform-aws-modules/releases/tag/v0.12.0
 [0.11.0]: https://github.com/nanlabs/terraform-aws-modules/releases/tag/v0.11.0
 [0.10.0]: https://github.com/nanlabs/terraform-aws-modules/releases/tag/v0.10.0
 [0.9.0]: https://github.com/nanlabs/terraform-aws-modules/releases/tag/v0.9.0
