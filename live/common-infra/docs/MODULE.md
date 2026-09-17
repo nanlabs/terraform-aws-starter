@@ -16,7 +16,7 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_exampledb"></a> [exampledb](#module\_exampledb) | ../../modules/rds | n/a |
+| <a name="module_exampledb"></a> [exampledb](#module\_exampledb) | git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-rds | v1.18.0 |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_security_group"></a> [security\_group](#module\_security\_group) | terraform-aws-modules/security-group/aws | ~> 4.0 |
 

@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed local `modules/bastion` (superseded by the shared library)
 - Removed unreferenced local modules superseded by the shared library: `modules/docdb` (→ `aws-docdb`), `modules/msk` (→ `aws-msk`), `modules/rds-aurora` (→ `aws-rds-aurora`), `modules/mongodb` (→ `mongodb-atlas-cluster`), `modules/amplify-app` (→ `aws-amplify-app`); README module table now points at the library
 - `live/aws-iam-management`: consume `nanlabs/terraform-aws-modules//modules/aws-iam-role?ref=v1.18.0` instead of local `modules/iam-role` (verified byte-identical: same resources, variables and outputs, state adopted in place); removed the local module
+- `live/common-infra`: example DB consumes `nanlabs/terraform-aws-modules//modules/aws-rds?ref=v1.18.0` instead of local `modules/rds` (upstream `rds/aws` 6.1.1 → 7.2.1, managed master password so no `password_wo` needed); same engine/storage/backup/monitoring settings passed explicitly, `example_db_instance_address` keeps the bare hostname contract; removed the local module (including its dead `vpc_id` variable)
 
 
 ## [0.1.0] - 2026-09-17
