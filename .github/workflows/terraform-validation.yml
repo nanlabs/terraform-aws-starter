@@ -25,6 +25,9 @@ jobs:
       live-changed: ${{ steps.changes.outputs.live-changed }}
       live-list: ${{ steps.changes.outputs.live-list }}
       live-list-json: ${{ steps.changes.outputs.live-list-json }}
+      apps-changed: ${{ steps.changes.outputs.apps-changed }}
+      apps-list: ${{ steps.changes.outputs.apps-list }}
+      apps-list-json: ${{ steps.changes.outputs.apps-list-json }}
       any-tf-changed: ${{ steps.changes.outputs.any-tf-changed }}
     steps:
       - name: Checkout
@@ -70,6 +73,9 @@ jobs:
           LIVE_CHANGED="false"
           LIVE_LIST=""
           LIVE_JSON=""
+          APPS_CHANGED="false"
+          APPS_LIST=""
+          APPS_JSON=""
 
           for file in $CHANGED_FILES; do
             if [[ $file == modules/* ]]; then
@@ -104,6 +110,22 @@ jobs:
                   ;;
               esac
             fi
+            if [[ $file == apps/* ]]; then
+              APPS_CHANGED="true"
+              APPS_NAME=$(echo $file | cut -d'/' -f2)
+              case " $APPS_LIST " in
+                *" $APPS_NAME "*) ;;
+                *)
+                  if [[ -z "$APPS_LIST" ]]; then
+                    APPS_LIST="$APPS_NAME"
+                    APPS_JSON="\"$APPS_NAME\""
+                  else
+                    APPS_LIST="$APPS_LIST $APPS_NAME"
+                    APPS_JSON="$APPS_JSON,\"$APPS_NAME\""
+                  fi
+                  ;;
+              esac
+            fi
           done
 
           echo "modules-changed=$MODULES_CHANGED" >> $GITHUB_OUTPUT
@@ -112,9 +134,13 @@ jobs:
           echo "live-changed=$LIVE_CHANGED" >> $GITHUB_OUTPUT
           echo "live-list=$LIVE_LIST" >> $GITHUB_OUTPUT
           echo "live-list-json=[$LIVE_JSON]" >> $GITHUB_OUTPUT
+          echo "apps-changed=$APPS_CHANGED" >> $GITHUB_OUTPUT
+          echo "apps-list=$APPS_LIST" >> $GITHUB_OUTPUT
+          echo "apps-list-json=[$APPS_JSON]" >> $GITHUB_OUTPUT
 
           echo "Modules changed: $MODULES_CHANGED ($MODULES_LIST)"
           echo "Live stacks changed: $LIVE_CHANGED ($LIVE_LIST)"
+          echo "Apps changed: $APPS_CHANGED ($APPS_LIST)"
           echo "Any TF files changed: $ANY_TF_CHANGED"
 
   terraform-fmt:
@@ -255,11 +281,51 @@ jobs:
 
           echo "✅ Live stack ${{ matrix.stack }} validation completed successfully!"
 
+  validate-apps:
+    name: Validate Changed Apps
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.apps-changed == 'true'
+    strategy:
+      matrix:
+        app: ${{ fromJson(needs.detect-changes.outputs.apps-list-json) }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.12.1"
+
+      - name: Validate App - ${{ matrix.app }}
+        run: |
+          APPS_PATH="apps/${{ matrix.app }}"
+          echo "🔍 Validating app: ${{ matrix.app }}"
+
+          if [[ ! -d "$APPS_PATH" ]]; then
+            echo "❌ App directory not found: $APPS_PATH"
+            exit 1
+          fi
+
+          cd "$APPS_PATH"
+
+          echo "📋 Initializing Terraform..."
+          terraform init -backend=false
+
+          echo "✅ Running terraform validate..."
+          terraform validate
+
+          echo "✅ App ${{ matrix.app }} validation completed successfully!"
+
   terraform-validation-summary:
     name: Terraform Validation Summary
     runs-on: ubuntu-latest
-    needs: [detect-changes, terraform-fmt, validate-modules, validate-live]
-    if: always() && (needs.detect-changes.outputs.any-tf-changed == 'true' || needs.detect-changes.outputs.modules-changed == 'true' || needs.detect-changes.outputs.live-changed == 'true')
+    needs: [detect-changes, terraform-fmt, validate-modules, validate-live, validate-apps]
+    if: always() && (needs.detect-changes.outputs.any-tf-changed == 'true' || needs.detect-changes.outputs.modules-changed == 'true' || needs.detect-changes.outputs.live-changed == 'true' || needs.detect-changes.outputs.apps-changed == 'true')
     steps:
       - name: Validation Summary
         run: |
@@ -292,9 +358,18 @@ jobs:
             echo "⏭️ **Live Stack Validation**: Skipped (no live stacks changed)" >> $GITHUB_STEP_SUMMARY
           fi
 
+          if [[ "${{ needs.validate-apps.result }}" == "success" ]]; then
+            echo "✅ **App Validation**: Passed" >> $GITHUB_STEP_SUMMARY
+            echo "   - Validated apps: ${{ needs.detect-changes.outputs.apps-list }}" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.validate-apps.result }}" == "failure" ]]; then
+            echo "❌ **App Validation**: Failed" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.validate-apps.result }}" == "skipped" ]]; then
+            echo "⏭️ **App Validation**: Skipped (no apps changed)" >> $GITHUB_STEP_SUMMARY
+          fi
+
       - name: Check Overall Status
         run: |
-          if [[ "${{ needs.terraform-fmt.result }}" == "failure" || "${{ needs.validate-modules.result }}" == "failure" || "${{ needs.validate-live.result }}" == "failure" ]]; then
+          if [[ "${{ needs.terraform-fmt.result }}" == "failure" || "${{ needs.validate-modules.result }}" == "failure" || "${{ needs.validate-live.result }}" == "failure" || "${{ needs.validate-apps.result }}" == "failure" ]]; then
             echo "❌ One or more validation steps failed!"
             exit 1
           fi

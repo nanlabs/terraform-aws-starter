@@ -47,8 +47,8 @@ resource "aws_db_subnet_group" "created" {
 
   #use newly created subnets if vpc is created newly, else use existing subnets if vpc is provided.
   subnet_ids = var.vpc_id == "" ? [
-    aws_subnet.private_1.id,
-    aws_subnet.private_2.id
+    aws_subnet.private_1[0].id,
+    aws_subnet.private_2[0].id
   ] : []
 
   tags = merge(var.tags, {
