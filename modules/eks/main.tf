@@ -73,7 +73,7 @@ module "eks_cluster" {
 
 module "eks_node_groups" {
   source  = "cloudposse/eks-node-group/aws"
-  version = "3.0.1"
+  version = "3.4.0"
 
   for_each = { for idx, node_group in var.node_groups : idx => node_group }
 
