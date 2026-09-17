@@ -1,9 +1,5 @@
 resource "aws_iam_role" "bastion_host_iam_role" {
   name = "${var.name}-bastion-host-iam-role"
-  managed_policy_arns = [
-    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
-    "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
-  ]
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",
     "Statement" : [
@@ -22,6 +18,16 @@ resource "aws_iam_role" "bastion_host_iam_role" {
 resource "aws_iam_instance_profile" "bastion_instance_profile" {
   name = "${var.name}-bastion-instance-profile"
   role = aws_iam_role.bastion_host_iam_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "bastion_host_managed" {
+  for_each = toset([
+    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+    "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
+  ])
+
+  role       = aws_iam_role.bastion_host_iam_role.name
+  policy_arn = each.value
 }
 
 resource "aws_iam_role_policy" "bastion_host_iam_role" {

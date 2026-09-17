@@ -51,7 +51,7 @@ module "security_group" {
       to_port     = 5432
       protocol    = "tcp"
       description = "RDS DB Instance access from within VPC"
-      cidr_blocks = data.aws_vpc.main.cidr_block
+      cidr_blocks = data.aws_vpc.vpc.cidr_block
     }
   ]
 

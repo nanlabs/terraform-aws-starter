@@ -1,0 +1,299 @@
+name: Terraform Validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  detect-changes:
+    name: Detect Changes
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
+    outputs:
+      modules-changed: ${{ steps.changes.outputs.modules-changed }}
+      modules-list: ${{ steps.changes.outputs.modules-list }}
+      modules-list-json: ${{ steps.changes.outputs.modules-list-json }}
+      live-changed: ${{ steps.changes.outputs.live-changed }}
+      live-list: ${{ steps.changes.outputs.live-list }}
+      live-list-json: ${{ steps.changes.outputs.live-list-json }}
+      any-tf-changed: ${{ steps.changes.outputs.any-tf-changed }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Detect changed files
+        id: changes
+        run: |
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            # For push events, compare with previous commit
+            if [[ "${{ github.sha }}" == "$(git rev-parse HEAD)" ]]; then
+              # Use the previous commit
+              BASE_SHA=$(git rev-parse HEAD~1)
+            else
+              BASE_SHA=${{ github.event.before }}
+            fi
+            CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD)
+          else
+            # For pull requests, compare with base branch
+            CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+          fi
+
+          echo "Changed files:"
+          echo "$CHANGED_FILES"
+
+          # Check if any .tf files changed
+          ANY_TF_CHANGED="false"
+          if echo "$CHANGED_FILES" | grep -q '\.tf$\|\.hcl$'; then
+            ANY_TF_CHANGED="true"
+          fi
+          echo "any-tf-changed=$ANY_TF_CHANGED" >> $GITHUB_OUTPUT
+
+          # Extract changed modules and live stacks (names are [a-z0-9-],
+          # safe to quote directly into JSON)
+          MODULES_CHANGED="false"
+          MODULES_LIST=""
+          MODULES_JSON=""
+          LIVE_CHANGED="false"
+          LIVE_LIST=""
+          LIVE_JSON=""
+
+          for file in $CHANGED_FILES; do
+            if [[ $file == modules/* ]]; then
+              MODULES_CHANGED="true"
+              MODULE_NAME=$(echo $file | cut -d'/' -f2)
+              case " $MODULES_LIST " in
+                *" $MODULE_NAME "*) ;;
+                *)
+                  if [[ -z "$MODULES_LIST" ]]; then
+                    MODULES_LIST="$MODULE_NAME"
+                    MODULES_JSON="\"$MODULE_NAME\""
+                  else
+                    MODULES_LIST="$MODULES_LIST $MODULE_NAME"
+                    MODULES_JSON="$MODULES_JSON,\"$MODULE_NAME\""
+                  fi
+                  ;;
+              esac
+            fi
+            if [[ $file == live/* ]]; then
+              LIVE_CHANGED="true"
+              LIVE_NAME=$(echo $file | cut -d'/' -f2)
+              case " $LIVE_LIST " in
+                *" $LIVE_NAME "*) ;;
+                *)
+                  if [[ -z "$LIVE_LIST" ]]; then
+                    LIVE_LIST="$LIVE_NAME"
+                    LIVE_JSON="\"$LIVE_NAME\""
+                  else
+                    LIVE_LIST="$LIVE_LIST $LIVE_NAME"
+                    LIVE_JSON="$LIVE_JSON,\"$LIVE_NAME\""
+                  fi
+                  ;;
+              esac
+            fi
+          done
+
+          echo "modules-changed=$MODULES_CHANGED" >> $GITHUB_OUTPUT
+          echo "modules-list=$MODULES_LIST" >> $GITHUB_OUTPUT
+          echo "modules-list-json=[$MODULES_JSON]" >> $GITHUB_OUTPUT
+          echo "live-changed=$LIVE_CHANGED" >> $GITHUB_OUTPUT
+          echo "live-list=$LIVE_LIST" >> $GITHUB_OUTPUT
+          echo "live-list-json=[$LIVE_JSON]" >> $GITHUB_OUTPUT
+
+          echo "Modules changed: $MODULES_CHANGED ($MODULES_LIST)"
+          echo "Live stacks changed: $LIVE_CHANGED ($LIVE_LIST)"
+          echo "Any TF files changed: $ANY_TF_CHANGED"
+
+  terraform-fmt:
+    name: Terraform Format Check
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.any-tf-changed == 'true'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.12.1"
+
+      - name: Terraform Format Check
+        run: |
+          echo "🔍 Running terraform fmt check from repository root..."
+          terraform fmt -check -recursive -diff .
+          if [[ $? -ne 0 ]]; then
+            echo "❌ Terraform formatting issues found!"
+            echo "💡 Run 'terraform fmt -recursive' to fix formatting issues."
+            exit 1
+          fi
+          echo "✅ All Terraform files are properly formatted!"
+
+  validate-modules:
+    name: Validate Changed Modules
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.modules-changed == 'true'
+    strategy:
+      matrix:
+        module: ${{ fromJson(needs.detect-changes.outputs.modules-list-json) }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.12.1"
+
+      - name: Validate Module - ${{ matrix.module }}
+        run: |
+          MODULE_PATH="modules/${{ matrix.module }}"
+          echo "🔍 Validating module: ${{ matrix.module }}"
+
+          if [[ ! -d "$MODULE_PATH" ]]; then
+            echo "❌ Module directory not found: $MODULE_PATH"
+            exit 1
+          fi
+
+          cd "$MODULE_PATH"
+
+          echo "📋 Initializing Terraform..."
+          terraform init -backend=false
+
+          echo "✅ Running terraform validate..."
+          terraform validate
+
+          echo "✅ Module ${{ matrix.module }} validation completed successfully!"
+
+      - name: Validate Module Examples - ${{ matrix.module }}
+        run: |
+          MODULE_PATH="modules/${{ matrix.module }}"
+          EXAMPLES_PATH="$MODULE_PATH/examples"
+
+          if [[ -d "$EXAMPLES_PATH" ]]; then
+            echo "🔍 Found examples directory for module: ${{ matrix.module }}"
+
+            for example_dir in "$EXAMPLES_PATH"/*; do
+              if [[ -d "$example_dir" && -f "$example_dir/main.tf" ]]; then
+                example_name=$(basename "$example_dir")
+                echo "📋 Validating example: $example_name"
+
+                cd "$example_dir"
+
+                echo "📋 Initializing Terraform for example: $example_name"
+                terraform init -backend=false
+
+                echo "✅ Validating example: $example_name"
+                terraform validate
+
+                echo "✅ Example $example_name validation completed!"
+
+                # Return to repo root for next iteration
+                cd - > /dev/null
+              fi
+            done
+          else
+            echo "ℹ️ No examples directory found for module: ${{ matrix.module }}"
+          fi
+
+  validate-live:
+    name: Validate Changed Live Stacks
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    if: needs.detect-changes.outputs.live-changed == 'true'
+    strategy:
+      matrix:
+        stack: ${{ fromJson(needs.detect-changes.outputs.live-list-json) }}
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.12.1"
+
+      - name: Validate Live Stack - ${{ matrix.stack }}
+        run: |
+          LIVE_PATH="live/${{ matrix.stack }}"
+          echo "🔍 Validating live stack: ${{ matrix.stack }}"
+
+          if [[ ! -d "$LIVE_PATH" ]]; then
+            echo "❌ Live stack directory not found: $LIVE_PATH"
+            exit 1
+          fi
+
+          cd "$LIVE_PATH"
+
+          echo "📋 Initializing Terraform..."
+          terraform init -backend=false
+
+          echo "✅ Running terraform validate..."
+          terraform validate
+
+          echo "✅ Live stack ${{ matrix.stack }} validation completed successfully!"
+
+  terraform-validation-summary:
+    name: Terraform Validation Summary
+    runs-on: ubuntu-latest
+    needs: [detect-changes, terraform-fmt, validate-modules, validate-live]
+    if: always() && (needs.detect-changes.outputs.any-tf-changed == 'true' || needs.detect-changes.outputs.modules-changed == 'true' || needs.detect-changes.outputs.live-changed == 'true')
+    steps:
+      - name: Validation Summary
+        run: |
+          echo "# 📊 Terraform Validation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "${{ needs.terraform-fmt.result }}" == "success" ]]; then
+            echo "✅ **Terraform Format Check**: Passed" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.terraform-fmt.result }}" == "failure" ]]; then
+            echo "❌ **Terraform Format Check**: Failed" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.terraform-fmt.result }}" == "skipped" ]]; then
+            echo "⏭️ **Terraform Format Check**: Skipped (no Terraform files changed)" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.validate-modules.result }}" == "success" ]]; then
+            echo "✅ **Module Validation**: Passed" >> $GITHUB_STEP_SUMMARY
+            echo "   - Validated modules: ${{ needs.detect-changes.outputs.modules-list }}" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.validate-modules.result }}" == "failure" ]]; then
+            echo "❌ **Module Validation**: Failed" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.validate-modules.result }}" == "skipped" ]]; then
+            echo "⏭️ **Module Validation**: Skipped (no modules changed)" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          if [[ "${{ needs.validate-live.result }}" == "success" ]]; then
+            echo "✅ **Live Stack Validation**: Passed" >> $GITHUB_STEP_SUMMARY
+            echo "   - Validated stacks: ${{ needs.detect-changes.outputs.live-list }}" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.validate-live.result }}" == "failure" ]]; then
+            echo "❌ **Live Stack Validation**: Failed" >> $GITHUB_STEP_SUMMARY
+          elif [[ "${{ needs.validate-live.result }}" == "skipped" ]]; then
+            echo "⏭️ **Live Stack Validation**: Skipped (no live stacks changed)" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Check Overall Status
+        run: |
+          if [[ "${{ needs.terraform-fmt.result }}" == "failure" || "${{ needs.validate-modules.result }}" == "failure" || "${{ needs.validate-live.result }}" == "failure" ]]; then
+            echo "❌ One or more validation steps failed!"
+            exit 1
+          fi
+          echo "✅ All validation steps passed!"
