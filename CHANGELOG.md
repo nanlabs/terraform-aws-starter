@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Consume shared library `v1.19.0` across all pinned callers (vpc, bastion, rds, eks, iam-role)
 
 
 ## [0.12.0] - 2026-09-17

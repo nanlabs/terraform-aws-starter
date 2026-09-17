@@ -41,7 +41,7 @@ locals {
 data "aws_availability_zones" "available" {}
 
 module "vpc" {
-  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-vpc?ref=v1.18.0"
+  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-vpc?ref=v1.19.0"
 
   name = module.label.id
   cidr = var.vpc_cidr_block

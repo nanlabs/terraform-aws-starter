@@ -11,7 +11,7 @@ variable "example_db_master_username" {
 }
 
 module "exampledb" {
-  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-rds?ref=v1.18.0"
+  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-rds?ref=v1.19.0"
 
   name = "${module.label.id}-exampledb"
 
