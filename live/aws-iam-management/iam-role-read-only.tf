@@ -1,5 +1,5 @@
 module "read_only_role" {
-  source             = "../../modules/iam-role"
+  source             = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-iam-role?ref=v1.18.0"
   name               = "${module.label.id}-ReadOnlyRole"
   policy_description = "Read-only access to all AWS resources"
   role_description   = "IAM role with read-only access permissions"

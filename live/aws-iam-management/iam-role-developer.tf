@@ -1,5 +1,5 @@
 module "developer_role" {
-  source             = "../../modules/iam-role"
+  source             = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-iam-role?ref=v1.18.0"
   name               = "${module.label.id}-DeveloperRole"
   policy_description = "Developer access to specific AWS resources"
   role_description   = "IAM role with permissions to manage resources needed for development"

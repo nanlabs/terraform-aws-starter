@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `live/core-networking`: consume `nanlabs/terraform-aws-modules//modules/aws-bastion?ref=v1.18.0` instead of local `modules/bastion`; instance, key pair, AMI, user-data and SG paths unchanged (adopted in place), SSH key material preserved. Deltas when enabled: root volume `gp2` → `gp3`, three per-endpoint SGs consolidated into one, SSM key param `/{name}/bastion_ssh` → `/{name}/ssh_private_key`
 - Removed local `modules/bastion` (superseded by the shared library)
 - Removed unreferenced local modules superseded by the shared library: `modules/docdb` (→ `aws-docdb`), `modules/msk` (→ `aws-msk`), `modules/rds-aurora` (→ `aws-rds-aurora`), `modules/mongodb` (→ `mongodb-atlas-cluster`), `modules/amplify-app` (→ `aws-amplify-app`); README module table now points at the library
+- `live/aws-iam-management`: consume `nanlabs/terraform-aws-modules//modules/aws-iam-role?ref=v1.18.0` instead of local `modules/iam-role` (verified byte-identical: same resources, variables and outputs, state adopted in place); removed the local module
 
 
 ## [0.1.0] - 2026-09-17
