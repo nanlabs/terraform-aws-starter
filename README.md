@@ -111,7 +111,7 @@ Our custom Terraform modules are located in the `modules` directory. These modul
 | [AWS IAM Role](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-iam-role) | AWS IAM role, consumed from the shared library (`aws-iam-role` v1.18.0+). |
 | [MongoDB Atlas Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/mongodb-atlas-cluster) | MongoDB Atlas cluster, consumed from the shared library (`mongodb-atlas-cluster`). |
 | [MSK Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-msk) | MSK cluster, consumed from the shared library (`aws-msk`). |
-| [RDS Instance](./modules/rds/README.md)              | Bootstrap an RDS Instance.                                    |
+| [RDS Instance](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-rds) | RDS instance, consumed from the shared library (`aws-rds` v1.18.0+). |
 | [RDS Aurora Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-rds-aurora) | RDS Aurora cluster, consumed from the shared library (`aws-rds-aurora`). |
 | [VPC](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-vpc) | VPC for shared infrastructure, consumed from the shared library (`aws-vpc` v1.18.0+). |
 | [VPC Endpoints](./modules/vpc-endpoints/README.md)   | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |

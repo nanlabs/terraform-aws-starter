@@ -11,23 +11,63 @@ variable "example_db_master_username" {
 }
 
 module "exampledb" {
-  source = "../../modules/rds"
+  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-rds?ref=v1.18.0"
 
   name = "${module.label.id}-exampledb"
 
-  vpc_id                 = data.aws_ssm_parameter.vpc_id.value
-  db_subnet_group        = data.aws_ssm_parameter.database_subnet_group.value
-  vpc_security_group_ids = [module.security_group.security_group_id]
+  # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+  engine               = "postgres"
+  engine_version       = "16.3"
+  family               = "postgres16"
+  major_engine_version = "16"
+  instance_class       = "db.t4g.small"
 
-  db_name            = var.example_db_name
-  db_master_username = var.example_db_master_username
-  db_port            = 5432
-
-  db_instance_class = "db.t4g.small"
-
+  storage_encrypted = true
   allocated_storage = 20
 
+  # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
+  # "Error creating DB Instance: InvalidParameterValue: MasterUsername
+  # user cannot be used as it is a reserved word used by the engine"
+  db_name                     = var.example_db_name
+  username                    = var.example_db_master_username
   manage_master_user_password = true
+  port                        = 5432
+
+  multi_az             = false
+  db_subnet_group_name = data.aws_ssm_parameter.database_subnet_group.value
+
+  vpc_security_group_ids = [module.security_group.security_group_id]
+
+  maintenance_window = "Mon:00:00-Mon:03:00"
+  backup_window      = "03:00-06:00"
+
+  enabled_cloudwatch_logs_exports = ["postgresql", "upgrade"]
+  create_cloudwatch_log_group     = true
+
+  backup_retention_period = 1
+  skip_final_snapshot     = true
+  deletion_protection     = false
+
+  publicly_accessible = true
+
+  performance_insights_enabled          = true
+  performance_insights_retention_period = 7
+  create_monitoring_role                = true
+  monitoring_interval                   = 60
+  monitoring_role_name                  = "monitoring"
+  monitoring_role_use_name_prefix       = true
+  monitoring_role_description           = "Monitoring role for ${module.label.id}-exampledb"
+
+  parameters = [
+    {
+      name  = "autovacuum"
+      value = "1"
+    },
+    {
+      name  = "client_encoding"
+      value = "utf8"
+    }
+  ]
 
   tags = merge(
     module.label.tags,
@@ -67,7 +107,9 @@ module "security_group" {
 
 output "example_db_instance_address" {
   description = "The address of the RDS instance"
-  value       = module.exampledb.db_instance_address
+  # The library exposes the full endpoint (host:port); keep exposing the
+  # bare hostname like the former local wrapper did.
+  value = split(":", module.exampledb.db_instance_endpoint)[0]
 }
 
 output "example_db_instance_port" {
