@@ -113,7 +113,7 @@ Our custom Terraform modules are located in the `modules` directory. These modul
 | [MSK Cluster](./modules/msk/README.md)               | Bootstrap an MSK cluster.                                     |
 | [RDS Instance](./modules/rds/README.md)              | Bootstrap an RDS Instance.                                    |
 | [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Bootstrap an RDS Aurora Cluster.                              |
-| [VPC](./modules/vpc/README.md)                       | Bootstrap a VPC for shared infrastructure.                    |
+| [VPC](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-vpc) | VPC for shared infrastructure, consumed from the shared library (`aws-vpc` v1.18.0+). |
 | [VPC Endpoints](./modules/vpc-endpoints/README.md)   | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |
 
 In case you need to create a new module, you can use the [Terraform Module Template](./modules/__template__/README.md) as a starting point.
