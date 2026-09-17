@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `live/core-networking`: consume `nanlabs/terraform-aws-modules//modules/aws-vpc?ref=v1.18.0` instead of the local `modules/vpc` wrapper (upstream `vpc/aws` 5.0.0 → 6.7.2, app SG `security-group` v4 → v6); same subnet CIDRs and SSM parameter names, state adopted in place (VPC/SSM paths unchanged, app SG via the library's `moved` block)
 - Removed local `modules/vpc` (superseded by the shared library); `modules/vpc-endpoints` stays local
+- `live/core-networking`: consume `nanlabs/terraform-aws-modules//modules/aws-bastion?ref=v1.18.0` instead of local `modules/bastion`; instance, key pair, AMI, user-data and SG paths unchanged (adopted in place), SSH key material preserved. Deltas when enabled: root volume `gp2` → `gp3`, three per-endpoint SGs consolidated into one, SSM key param `/{name}/bastion_ssh` → `/{name}/ssh_private_key`
+- Removed local `modules/bastion` (superseded by the shared library)
 
 
 ## [0.1.0] - 2026-09-17
