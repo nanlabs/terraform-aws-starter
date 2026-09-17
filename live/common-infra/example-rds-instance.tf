@@ -39,7 +39,7 @@ module "exampledb" {
 
 module "security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 6.0"
 
   name        = "${module.label.id}-exampledb-security-group"
   description = "Security group for ${module.label.id}-exampledb"
