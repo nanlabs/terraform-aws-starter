@@ -49,13 +49,21 @@ We have preconfigured GitHub Actions workflows that provide linting, security ch
 - Pull Request validation with [Danger](https://danger.systems/js), markdown linting, and more! ✅
 - Linter validation with [Mega-Linter](https://github.com/oxsecurity/megalinter)! 📝
 - Terraform Format validation with [Terraform Fmt](https://www.terraform.io/docs/commands/fmt.html). 🔄
-- Terraform Security validation with [Terraform Security](https://github.com/aquasecurity/tfsec). 🔒
+- Terraform Security validation with [Trivy](https://github.com/aquasecurity/trivy). 🔒
 - Terraform Docs update with [terraform-docs](https://terraform-docs.io/). 📝
 - TODOs to GitHub Issues with [TODOs to Issues](https://github.com/alstr/todo-to-issue-action). 📌
 
 By using the Terraform AWS Starter Kit, you can expedite the initial setup of your AWS infrastructure while incorporating proven best practices. It empowers you to focus on building and deploying your applications while providing a solid foundation for scalability, security, and maintainability.
 
 We welcome contributions and feedback to improve this starter kit further, making it a valuable resource for the community.
+
+## Starter Kit vs Shared Library
+
+This repo is a **starter kit**: opinionated, deployable stacks under `live/` that show how the pieces fit together. Reusable building blocks live in the public [terraform-aws-modules](https://github.com/nanlabs/terraform-aws-modules) library, which the stacks consume via pinned `?ref=` sources (see [STARTER_COMPATIBILITY](https://github.com/nanlabs/terraform-aws-modules/blob/main/docs/STARTER_COMPATIBILITY.md) and [PR #72](https://github.com/nanlabs/terraform-aws-modules/pull/72)).
+
+- Start from this repo when you need a working reference architecture to deploy and adapt.
+- Consume the library directly when you need individual modules in your own stacks.
+- The only module kept local here is `modules/vpc-endpoints`, which encodes starter-specific endpoint topology.
 
 ## Prerequisites
 

@@ -49,6 +49,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `live/services-platform`: consume `nanlabs/terraform-aws-modules//modules/aws-eks?ref=v1.18.0` instead of local `modules/eks` (cluster 4.2.0 → 4.15.0, node groups 3.0.1 → 3.4.0; upstream inventories diffed, existing resources only gain opt-in additions); stack keeps the `node_groups` list interface and converts to the library map with numeric keys preserving state addresses; removed the local module
 - Inline `security-group` 4.x → `~> 6.0` with structured rules (`live/common-infra` example DB SG, `live/core-networking` endpoint SGs); output refs updated (`security_group_id` → `id`). The v6 fixed names replace the v4 name-prefix SGs on next apply (stateless, no data loss)
 - Fixed `apps/amazon_ec2_instance_connect` (missing resource instance keys, undeclared `deletion_protection`, `name_prefix` → `name`; floors raised to TF `>= 1.11` / AWS `>= 6.0`) and extended the Validation workflow with an apps matrix so `apps/*` is validated like `live/*` and `modules/*`
+- README: new `Starter Kit vs Shared Library` section (bidirectional reference to the library, STARTER_COMPATIBILITY and PR nanlabs/terraform-aws-modules#72); corrected CI docs (Trivy instead of tfsec)
+- `live/services-platform`: `ecr/aws` 2.3.0 → 3.2.0 (breaking changes limited to provider MSV and new filters; interface used unchanged)
 
 
 ## [0.1.0] - 2026-09-17
