@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
+### Changed
+- `live/core-networking`: consume `nanlabs/terraform-aws-modules//modules/aws-vpc?ref=v1.18.0` instead of the local `modules/vpc` wrapper (upstream `vpc/aws` 5.0.0 → 6.7.2, app SG `security-group` v4 → v6); same subnet CIDRs and SSM parameter names, state adopted in place (VPC/SSM paths unchanged, app SG via the library's `moved` block)
+- Removed local `modules/vpc` (superseded by the shared library); `modules/vpc-endpoints` stays local
 
 ## [0.1.0] - 2026-09-17
 ### Added

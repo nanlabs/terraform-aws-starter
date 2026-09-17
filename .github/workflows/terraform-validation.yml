@@ -44,10 +44,12 @@ jobs:
             else
               BASE_SHA=${{ github.event.before }}
             fi
-            CHANGED_FILES=$(git diff --name-only $BASE_SHA HEAD)
+            # Exclude deleted files: a removed module/stack has nothing to validate
+            CHANGED_FILES=$(git diff --name-only --diff-filter=ACMR $BASE_SHA HEAD)
           else
             # For pull requests, compare with base branch
-            CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
+            # Exclude deleted files: a removed module/stack has nothing to validate
+            CHANGED_FILES=$(git diff --name-only --diff-filter=ACMR ${{ github.event.pull_request.base.sha }} ${{ github.sha }})
           fi
 
           echo "Changed files:"

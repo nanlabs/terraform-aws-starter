@@ -9,6 +9,12 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "azs_count" {
+  description = "Number of Availability Zones (and of public/private/database subnet sets) for the VPC"
+  type        = number
+  default     = 3
+}
+
 locals {
   # The usage of the specific kubernetes.io/cluster/* resource tags below are required
   # for EKS and Kubernetes to discover and manage networking resources
@@ -22,17 +28,41 @@ locals {
   private_subnets_additional_tags = {
     "kubernetes.io/role/internal-elb" : 1
   }
+
+  # Same topology the former local modules/vpc wrapper computed: /24 splits
+  # of the VPC CIDR, one public + one private (app) + one database subnet
+  # per AZ. Kept in the stack so the migrated network keeps its CIDRs.
+  azs              = slice(data.aws_availability_zones.available.names, 0, var.azs_count)
+  public_subnets   = [for k, v in local.azs : cidrsubnet(var.vpc_cidr_block, 8, k)]
+  private_subnets  = [for k, v in local.azs : cidrsubnet(var.vpc_cidr_block, 8, k + length(local.azs))]
+  database_subnets = [for k, v in local.azs : cidrsubnet(var.vpc_cidr_block, 8, k + 2 * length(local.azs))]
 }
 
+data "aws_availability_zones" "available" {}
+
 module "vpc" {
-  source              = "../../modules/vpc"
-  name                = module.label.id
-  vpc_cidr_block      = var.vpc_cidr_block
-  enable_nat_gateway  = true
-  single_nat_gateway  = true
-  tags                = local.tags
+  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-vpc?ref=v1.18.0"
+
+  name = module.label.id
+  cidr = var.vpc_cidr_block
+
+  azs              = local.azs
+  public_subnets   = local.public_subnets
+  private_subnets  = local.private_subnets
+  database_subnets = local.database_subnets
+
+  enable_nat_gateway = true
+  single_nat_gateway = true
+
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+
+  create_database_subnet_group = true
+
   public_subnet_tags  = local.public_subnets_additional_tags
   private_subnet_tags = local.private_subnets_additional_tags
+
+  tags = local.tags
 }
 
 output "ssm_parameter_vpc_id" {

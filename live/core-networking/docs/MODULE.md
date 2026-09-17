@@ -8,7 +8,9 @@
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.65.0 |
 
 ## Modules
 
@@ -19,17 +21,20 @@ No providers.
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_ssm_vpce_sg"></a> [ssm\_vpce\_sg](#module\_ssm\_vpce\_sg) | terraform-aws-modules/security-group/aws | 4.17.1 |
 | <a name="module_ssmmessages_vpce_sg"></a> [ssmmessages\_vpce\_sg](#module\_ssmmessages\_vpce\_sg) | terraform-aws-modules/security-group/aws | 4.17.1 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | ../../modules/vpc | n/a |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-vpc | v1.18.0 |
 | <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | ../../modules/vpc-endpoints | n/a |
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_availability_zones.available](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_azs_count"></a> [azs\_count](#input\_azs\_count) | Number of Availability Zones (and of public/private/database subnet sets) for the VPC | `number` | `3` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name of the EKS cluster | `string` | n/a | yes |
 | <a name="input_enable_bastion"></a> [enable\_bastion](#input\_enable\_bastion) | Enable bastion host | `bool` | `false` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | Environment, e.g. 'prod', 'staging', 'dev', 'pre-prod', 'UAT' | `string` | `"development"` | no |
