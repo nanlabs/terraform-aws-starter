@@ -106,7 +106,7 @@ locals {
 }
 
 module "eks_cluster" {
-  source = "../../modules/eks"
+  source = "git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-eks?ref=v1.18.0"
 
   region = var.region
   name   = module.label.id
@@ -147,7 +147,9 @@ module "eks_cluster" {
   addons            = local.addons
   addons_depends_on = []
 
-  node_groups = var.node_groups
+  # The library takes a map of node groups; the stack keeps the list
+  # interface and converts (numeric keys preserve existing state addresses).
+  node_groups = { for idx, node_group in var.node_groups : idx => node_group }
 
   tags = module.label.tags
 }
