@@ -24,7 +24,7 @@
     "danger": "^13.0.10"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   },
   "pnpm": {
     "overrides": {
