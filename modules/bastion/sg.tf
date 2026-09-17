@@ -1,6 +1,6 @@
 module "ec2_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "4.17.1"
+  version = "6.0.0"
 
   name        = "${var.name}-ec2"
   description = "Allow traffic on all ports and ip ranges"
@@ -13,7 +13,7 @@ module "ec2_security_group" {
 
 module "ssm_vpce_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "4.17.1"
+  version = "6.0.0"
 
   count = var.create_vpc_endpoints ? 1 : 0
 
@@ -34,7 +34,7 @@ module "ssm_vpce_sg" {
 
 module "ec2messages_vpce_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "4.17.1"
+  version = "6.0.0"
 
   count = var.create_vpc_endpoints ? 1 : 0
 
@@ -55,7 +55,7 @@ module "ec2messages_vpce_sg" {
 
 module "ssmmessages_vpce_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "4.17.1"
+  version = "6.0.0"
 
   count = var.create_vpc_endpoints ? 1 : 0
 
