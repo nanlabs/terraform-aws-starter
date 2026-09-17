@@ -28,7 +28,7 @@ The starter kit implements security groups for the bastion host and database ins
 
 ### Database Provisioning 🗃️
 
-We have included configurations to provision an RDS PostgreSQL instance, RDS Aurora cluster, MSK cluster, MongoDB Atlas cluster, and more. These configurations enable you to set up and manage your databases with ease, ensuring optimal performance and reliability for your applications.
+We have included configurations to provision an RDS PostgreSQL instance and more. These configurations enable you to set up and manage your databases with ease, ensuring optimal performance and reliability for your applications. Additional data modules (Aurora, MSK, MongoDB Atlas, DocumentDB, Amplify) are consumed from the shared library (see the table below).
 
 ### Kubernetes Cluster Provisioning 🚢
 
@@ -96,7 +96,7 @@ The `live` directory houses our active infrastructure configurations. These conf
 | [AWS IAM Management](./live/aws-iam-management/README.md)             | Manage IAM roles and policies.                                                          |
 | [Core Networking](./live/core-networking/README.md)                   | Manage core networking components such as VPCs, subnets, and security groups.           |
 | [Services Platform](./live/services-platform/README.md)               | Manage services platform components, including EKS clusters.                            |
-| [Common Infrastructure](./live/common-infra/README.md)                | Manage common infrastructure components such as RDS instances and DocumentDB clusters.  |
+| [Common Infrastructure](./live/common-infra/README.md)                | Manage common infrastructure components such as RDS instances.  |
 
 ## Terraform Modules
 
@@ -104,15 +104,15 @@ Our custom Terraform modules are located in the `modules` directory. These modul
 
 | Module                                               | Description                                                   |
 | :--------------------------------------------------- | :------------------------------------------------------------ |
-| [Amplify App](./modules/amplify-app/README.md)       | Bootstrap an Amplify app.                                     |
+| [Amplify App](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-amplify-app) | Amplify app, consumed from the shared library (`aws-amplify-app`). |
 | [Bastion](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-bastion) | Bastion host, consumed from the shared library (`aws-bastion` v1.18.0+). |
-| [DocumentDB Cluster](./modules/docdb/README.md)      | Bootstrap a DocumentDB cluster.                               |
+| [DocumentDB Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-docdb) | DocumentDB cluster, consumed from the shared library (`aws-docdb`). |
 | [EKS](./modules/eks/README.md)                       | Bootstrap an EKS cluster.                                     |
 | [AWS IAM Role](./modules/iam-role/README.md)         | Bootstrap an AWS IAM role.                                    |
-| [MongoDB Atlas Cluster](./modules/mongodb/README.md) | Bootstrap a MongoDB Atlas cluster.                            |
-| [MSK Cluster](./modules/msk/README.md)               | Bootstrap an MSK cluster.                                     |
+| [MongoDB Atlas Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/mongodb-atlas-cluster) | MongoDB Atlas cluster, consumed from the shared library (`mongodb-atlas-cluster`). |
+| [MSK Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-msk) | MSK cluster, consumed from the shared library (`aws-msk`). |
 | [RDS Instance](./modules/rds/README.md)              | Bootstrap an RDS Instance.                                    |
-| [RDS Aurora Cluster](./modules/rds-aurora/README.md) | Bootstrap an RDS Aurora Cluster.                              |
+| [RDS Aurora Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-rds-aurora) | RDS Aurora cluster, consumed from the shared library (`aws-rds-aurora`). |
 | [VPC](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-vpc) | VPC for shared infrastructure, consumed from the shared library (`aws-vpc` v1.18.0+). |
 | [VPC Endpoints](./modules/vpc-endpoints/README.md)   | Bootstrap VPC endpoints for S3, DynamoDB, and other services. |
 
