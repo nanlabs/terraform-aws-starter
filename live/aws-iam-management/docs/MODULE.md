@@ -16,10 +16,10 @@
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_admin_role"></a> [admin\_role](#module\_admin\_role) | ../../modules/iam-role | n/a |
-| <a name="module_developer_role"></a> [developer\_role](#module\_developer\_role) | ../../modules/iam-role | n/a |
+| <a name="module_admin_role"></a> [admin\_role](#module\_admin\_role) | git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-iam-role | v1.18.0 |
+| <a name="module_developer_role"></a> [developer\_role](#module\_developer\_role) | git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-iam-role | v1.18.0 |
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
-| <a name="module_read_only_role"></a> [read\_only\_role](#module\_read\_only\_role) | ../../modules/iam-role | n/a |
+| <a name="module_read_only_role"></a> [read\_only\_role](#module\_read\_only\_role) | git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-iam-role | v1.18.0 |
 
 ## Resources
 
