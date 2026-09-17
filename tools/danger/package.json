@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/nanlabs/terraform-aws-starter#readme",
   "dependencies": {
-    "danger": "^13.0.10"
+    "danger": "^14.0.7"
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   },
   "pnpm": {
     "overrides": {

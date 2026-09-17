@@ -26,7 +26,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.ref || github.ref }}
 
       - name: Render terraform docs inside modules
-        uses: terraform-docs/gh-actions@v1.2.0
+        uses: terraform-docs/gh-actions@v1.4.1
         with:
           working-dir: modules/*,live/*
           output-file: docs/MODULE.md
