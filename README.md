@@ -108,7 +108,7 @@ Our custom Terraform modules are located in the `modules` directory. These modul
 | [Bastion](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-bastion) | Bastion host, consumed from the shared library (`aws-bastion` v1.18.0+). |
 | [DocumentDB Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-docdb) | DocumentDB cluster, consumed from the shared library (`aws-docdb`). |
 | [EKS](./modules/eks/README.md)                       | Bootstrap an EKS cluster.                                     |
-| [AWS IAM Role](./modules/iam-role/README.md)         | Bootstrap an AWS IAM role.                                    |
+| [AWS IAM Role](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-iam-role) | AWS IAM role, consumed from the shared library (`aws-iam-role` v1.18.0+). |
 | [MongoDB Atlas Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/mongodb-atlas-cluster) | MongoDB Atlas cluster, consumed from the shared library (`mongodb-atlas-cluster`). |
 | [MSK Cluster](https://github.com/nanlabs/terraform-aws-modules/tree/main/modules/aws-msk) | MSK cluster, consumed from the shared library (`aws-msk`). |
 | [RDS Instance](./modules/rds/README.md)              | Bootstrap an RDS Instance.                                    |
