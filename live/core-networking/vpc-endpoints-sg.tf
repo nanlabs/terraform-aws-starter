@@ -19,7 +19,7 @@ locals {
 
 module "ssm_vpce_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "4.17.1"
+  version = "6.0.0"
 
   name        = "${module.label.id}-vpc-ssm-vpce-security-group"
   description = "Security group for SSM VPC endpoint"
@@ -32,7 +32,7 @@ module "ssm_vpce_sg" {
 
 module "ec2messages_vpce_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "4.17.1"
+  version = "6.0.0"
 
   name        = "${module.label.id}-vpc-ec2messages-vpce-security-group"
   description = "Security group for EC2 Messages VPC endpoint"
@@ -45,7 +45,7 @@ module "ec2messages_vpce_sg" {
 
 module "ssmmessages_vpce_sg" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "4.17.1"
+  version = "6.0.0"
 
   name        = "${module.label.id}-vpc-ssmmessages-vpce-security-group"
   description = "Security group for SSM Messages VPC endpoint"
