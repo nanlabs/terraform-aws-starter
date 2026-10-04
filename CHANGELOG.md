@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [0.15.0] - 2026-10-04
+
+
+
 ## [0.14.0] - 2026-09-17
 ### Changed
 - Consume shared library `v1.19.0` across all pinned callers (vpc, bastion, rds, eks, iam-role)
@@ -92,7 +96,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `live/common-infra`: added missing `database_subnet_group` SSM lookup, fixed `aws_vpc` reference in RDS example
 - Repository-wide `terraform fmt` clean
 
-[Unreleased]: https://github.com/nanlabs/terraform-aws-modules/compare/v0.14.0...HEAD
+[Unreleased]: https://github.com/nanlabs/terraform-aws-modules/compare/v0.15.0...HEAD
+[0.15.0]: https://github.com/nanlabs/terraform-aws-modules/releases/tag/v0.15.0
 [0.14.0]: https://github.com/nanlabs/terraform-aws-modules/releases/tag/v0.14.0
 [0.13.0]: https://github.com/nanlabs/terraform-aws-modules/releases/tag/v0.13.0
 [0.12.0]: https://github.com/nanlabs/terraform-aws-modules/releases/tag/v0.12.0
