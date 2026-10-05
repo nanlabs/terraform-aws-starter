@@ -46,7 +46,7 @@ Our starter kit leverages AWS Systems Manager (SSM) Parameter Store to store and
 
 We have preconfigured GitHub Actions workflows that provide linting, security checks, and more for your Terraform code. This integration enables automated checks and validation, ensuring adherence to coding standards and identifying potential security vulnerabilities early in the development process.
 
-- Pull Request validation with [Danger](https://danger.systems/js), markdown linting, and more! ✅
+- Pull Request title, description, checklist, and diff validation! ✅
 - Linter validation with [Mega-Linter](https://github.com/oxsecurity/megalinter)! 📝
 - Terraform Format validation with [Terraform Fmt](https://www.terraform.io/docs/commands/fmt.html). 🔄
 - Terraform Security validation with [Trivy](https://github.com/aquasecurity/trivy). 🔒
