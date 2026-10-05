@@ -11,7 +11,7 @@ on:
 
 jobs:
   pr-review:
-    name: Danger JS
+    name: Pull request validation
 
     if: github.event_name != 'pull_request' || !github.event.pull_request.draft
 
@@ -28,23 +28,9 @@ jobs:
 
       - uses: actions/setup-node@v7
         with:
-          node-version-file: ./tools/danger/.node-version
+          node-version: 20
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 10.17.1
-
-      - name: Setup Danger Files
-        run: |
-          echo "Setting up Danger files..."
-          mv tools/danger/* .
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Danger JS
-        run: pnpm exec danger ci
+      - name: Validate pull request
+        run: node .github/scripts/pr-validation.mjs
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
