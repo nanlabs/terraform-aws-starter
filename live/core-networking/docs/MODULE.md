@@ -21,7 +21,7 @@
 | <a name="module_label"></a> [label](#module\_label) | cloudposse/label/null | 0.25.0 |
 | <a name="module_ssm_vpce_sg"></a> [ssm\_vpce\_sg](#module\_ssm\_vpce\_sg) | terraform-aws-modules/security-group/aws | ~> 6.0 |
 | <a name="module_ssmmessages_vpce_sg"></a> [ssmmessages\_vpce\_sg](#module\_ssmmessages\_vpce\_sg) | terraform-aws-modules/security-group/aws | ~> 6.0 |
-| <a name="module_vpc"></a> [vpc](#module\_vpc) | git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-vpc | v1.19.0 |
+| <a name="module_vpc"></a> [vpc](#module\_vpc) | git::https://github.com/nanlabs/terraform-aws-modules.git//modules/aws-vpc | v1.20.0 |
 | <a name="module_vpc_endpoints"></a> [vpc\_endpoints](#module\_vpc\_endpoints) | ../../modules/vpc-endpoints | n/a |
 
 ## Resources
